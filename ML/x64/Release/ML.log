@@ -1,0 +1,9 @@
+﻿  matrix_add.cpp
+     Creating library C:\Users\Acer\Desktop\ML\x64\Release\ML.lib and object C:\Users\Acer\Desktop\ML\x64\Release\ML.exp
+LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+  Generating code
+  7 of 10 functions (70.0%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  ML.vcxproj -> C:\Users\Acer\Desktop\ML\x64\Release\ML.exe
