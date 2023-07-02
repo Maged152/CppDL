@@ -35,20 +35,20 @@ namespace qlm
 	template<typename Duration>
 	struct Timer
 	{
-	public:
+	private:
 		time_point start_time, end_time;
 		Duration duration;
 	public:
-		void start()
+		void Start()
 		{
 			start_time = std::chrono::high_resolution_clock::now();
 		}
-		void end()
+		void End()
 		{
 			end_time = std::chrono::high_resolution_clock::now();
 			duration = std::chrono::duration_cast<Duration>(end_time - start_time);
 		}
-		float duration()
+		float Duration()
 		{
 			return duration.count();
 		}
