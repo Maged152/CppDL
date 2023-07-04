@@ -1,6 +1,8 @@
 #pragma once
 
 #include <limits>
+#include "types.h"
+
 namespace qlm
 {
     class Matrix {
@@ -84,6 +86,6 @@ namespace qlm
 
         }
     public:
-        void MatrixAdd(const Matrix& src, Matrix& dst);
+        Status MatrixAdd(const Matrix& src, Matrix& dst, float utilization = 0.5f);
     };
 }

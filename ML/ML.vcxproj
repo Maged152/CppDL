@@ -84,12 +84,15 @@
     <ClCompile Include="test\source\matrix\matrix_add.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\config.h" />
     <ClInclude Include="include\matrix.h" />
     <ClInclude Include="include\panda.h" />
     <ClInclude Include="include\shakhbat_ml.h" />
+    <ClInclude Include="include\types.h" />
     <ClInclude Include="include\vector.h" />
     <ClInclude Include="test\include\console_color.h" />
     <ClInclude Include="test\include\matrix\matrix_add.h" />
+    <ClInclude Include="test\include\test_utils.h" />
     <ClInclude Include="test\test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

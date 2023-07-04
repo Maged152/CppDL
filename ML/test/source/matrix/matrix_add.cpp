@@ -1,12 +1,24 @@
 #include "../../include/matrix/matrix_add.h"
-#include "../../include/console_color.h"
-#include "matrix.h"
+#include "../../include/test_utils.h"
+#include "shakhbat_ml.h"
 #include <iostream>
 #include <windows.h>
 
 using namespace test;
 using namespace qlm;
 using namespace std;
+
+void TestMatrixAdd(const Matrix& src1, const Matrix& src2, Matrix& dst)
+{
+	for (int i = 0; i < src1.Width(); i++)
+	{
+		for (int j = 0; j < src1.Height(); j++)
+		{
+			float res = src1.Get(i, j) + src2.Get(i, j);
+			dst.Set(i, j, res);
+		}
+	}
+}
 
 void Test_MatrixAdd(vector<int> mat_width, vector<int> mat_height, float threshold, float min, float max)
 {
@@ -39,25 +51,35 @@ void Test_MatrixAdd(vector<int> mat_width, vector<int> mat_height, float thresho
 			int width = mat_width[w];
 			int height = mat_height[h];
 
+			Timer<usec> ref;
+			Timer<usec> opt;
+
 			Matrix src1{w, h};
 			Matrix src2{w, h};
 
 			Matrix dst_ref{w, h};
-			Matrix dst{w, h};
+			Matrix dst_opt{w, h};
 			// random initialization
 			
-			// matrix addition
-			for (int i = 0; i < src1.Width(); i++)
-			{
-				for (int j = 0; j < src1.Height(); j++)
-				{
-					float res = src1.Get(i, j) + src2.Get(i, j);
-					dst_ref.Set(i, j, res);
-				}
-			}
-			// call add matrix function
-
+			// test matrix addition
+			ref.Start();
+			TestMatrixAdd(src1, src2, dst_ref);
+			ref.End();
+			// add matrix function
+			opt.Start();
+			src1.MatrixAdd(src2, dst_ref, 1.0f);
+			opt.End();
 			// compare the results
+			bool res = TestCompare(dst_ref, dst_opt, threshold);
+
+			if (res)
+			{
+
+			}
+			else
+			{
+
+			}
 		}
 	}
 }
