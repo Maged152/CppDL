@@ -51,6 +51,9 @@ void Test_MatrixAdd(vector<int> mat_width, vector<int> mat_height, float thresho
 			int width = mat_width[w];
 			int height = mat_height[h];
 
+			SetConsoleTextAttribute(col, CONSOLE_COLOR_GREEN);
+			cout << "W  : " << width << "\n" << "H  : " << height << "\n";
+
 			Timer<usec> ref;
 			Timer<usec> opt;
 
@@ -60,25 +63,44 @@ void Test_MatrixAdd(vector<int> mat_width, vector<int> mat_height, float thresho
 			Matrix dst_ref{w, h};
 			Matrix dst_opt{w, h};
 			// random initialization
-			
+			src1.RandomInit(min, max);
+			src2.RandomInit(min, max);
 			// test matrix addition
 			ref.Start();
 			TestMatrixAdd(src1, src2, dst_ref);
 			ref.End();
 			// add matrix function
 			opt.Start();
-			src1.MatrixAdd(src2, dst_ref, 1.0f);
+			auto status = src1.MatrixAdd(src2, dst_ref, 1.0f);
 			opt.End();
 			// compare the results
 			bool res = TestCompare(dst_ref, dst_opt, threshold);
 
-			if (res)
+			if (res && status == Status::SUCCESS)
 			{
+				// print output information
+				SetConsoleTextAttribute(col, CONSOLE_COLOR_GREEN);
+				cout << "opt code time  : " << opt.Duration() << " usec\n";
+				SetConsoleTextAttribute(col, CONSOLE_COLOR_YELLOW);
+				cout << "test code time  : " << ref.Duration() << " usec\n";
 
+				if (opt.Duration() > ref.Duration())
+				{
+					SetConsoleTextAttribute(col, CONSOLE_COLOR_GREEN);
+					cout << "opt code is faster by  : " << (opt.Duration() / ref.Duration()) * 100<< " usec\n";
+				}
+				{
+					SetConsoleTextAttribute(col, CONSOLE_COLOR_RED);
+					cout << "opt code is slower by  : " << (ref.Duration() / opt.Duration()) * 100 << " usec\n";
+				}
+
+				SetConsoleTextAttribute(col, CONSOLE_COLOR_GREEN);
+				cout << "STATUS  : " << "PASSED\n";
 			}
 			else
 			{
-
+				SetConsoleTextAttribute(col, CONSOLE_COLOR_LIGHT_RED);
+				cout << "STATUS  : " << "FAILED\n";
 			}
 		}
 	}
