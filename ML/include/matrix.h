@@ -78,14 +78,12 @@ namespace qlm
         {
             return height;
         }
-        // random initialization
-
-        // print matrix
-        void Print()
-        {
-
-        }
     public:
+        // print matrix
+        void Print();
+        // random initialization
+        void RandomInit(const float min_value, const float max_value);
+        // matrix addition
         Status MatrixAdd(const Matrix& src, Matrix& dst, float utilization = 0.5f);
     };
 }

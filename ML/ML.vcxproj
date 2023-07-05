@@ -80,6 +80,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="run.cpp" />
+    <ClCompile Include="source\matrix\Matrix.cpp" />
     <ClCompile Include="source\matrix\MatrixAdd.cpp" />
     <ClCompile Include="test\source\matrix\matrix_add.cpp" />
   </ItemGroup>
@@ -90,7 +91,6 @@
     <ClInclude Include="include\shakhbat_ml.h" />
     <ClInclude Include="include\types.h" />
     <ClInclude Include="include\vector.h" />
-    <ClInclude Include="test\include\console_color.h" />
     <ClInclude Include="test\include\matrix\matrix_add.h" />
     <ClInclude Include="test\include\test_utils.h" />
     <ClInclude Include="test\test.h" />

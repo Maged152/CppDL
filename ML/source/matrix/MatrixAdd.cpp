@@ -1,6 +1,5 @@
 #include "matrix.h"
 #include "config.h"
-#include <cassert>
 
 namespace qlm
 {
