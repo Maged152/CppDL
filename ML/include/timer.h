@@ -10,34 +10,12 @@ namespace qlm
 	using usec = std::chrono::microseconds;
 	using nsec = std::chrono::nanoseconds;
 
-	template<typename T>
-	const char* GetType()
-	{
-		if constexpr (std::is_same<T, sec>::value)
-		{
-			return " sec\n";
-		}
-		else if constexpr (std::is_same<T, msec>::value)
-		{
-			return " msec\n";
-		}
-		else if constexpr (std::is_same<T, usec>::value)
-		{
-			return " usec\n";
-		}
-		else
-		{
-			return " nsec";
-		}	
-	}
-
-
-	template<typename Duration>
+	template<typename Duration_t>
 	struct Timer
 	{
 	private:
 		time_point start_time, end_time;
-		Duration duration;
+		Duration_t duration;
 	public:
 		void Start()
 		{
@@ -46,7 +24,7 @@ namespace qlm
 		void End()
 		{
 			end_time = std::chrono::high_resolution_clock::now();
-			duration = std::chrono::duration_cast<Duration>(end_time - start_time);
+			duration = std::chrono::duration_cast<Duration_t>(end_time - start_time);
 		}
 		float Duration()
 		{
