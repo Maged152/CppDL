@@ -1,4 +1,4 @@
-#include "../../include/matrix/matrix_add.h"
+#include "../../include/matrix/Test_MatrixAdd.h"
 #include "../../include/test_utils.h"
 #include "shakhbat_ml.h"
 #include <iostream>
@@ -20,7 +20,7 @@ void TestMatrixAdd(const Matrix& src1, const Matrix& src2, Matrix& dst)
 	}
 }
 
-void Test_MatrixAdd(vector<int> mat_width, vector<int> mat_height, float threshold, float min, float max)
+void test::Test_MatrixAdd(std::vector<int>& mat_width, std::vector<int>& mat_height, float threshold, float min, float max)
 {
 	HANDLE col;
 	col = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -52,16 +52,16 @@ void Test_MatrixAdd(vector<int> mat_width, vector<int> mat_height, float thresho
 			int height = mat_height[h];
 
 			SetConsoleTextAttribute(col, CONSOLE_COLOR_GREEN);
-			cout << "W  : " << width << "\n" << "H  : " << height << "\n";
+			cout << "Width  : " << width << "\n" << "Height  : " << height << "\n";
 
 			Timer<usec> ref;
 			Timer<usec> opt;
 
-			Matrix src1{w, h};
-			Matrix src2{w, h};
+			Matrix src1{width, height};
+			Matrix src2{width, height};
 
-			Matrix dst_ref{w, h};
-			Matrix dst_opt{w, h};
+			Matrix dst_ref{width, height};
+			Matrix dst_opt{width, height};
 			// random initialization
 			src1.RandomInit(min, max);
 			src2.RandomInit(min, max);
@@ -84,14 +84,15 @@ void Test_MatrixAdd(vector<int> mat_width, vector<int> mat_height, float thresho
 				SetConsoleTextAttribute(col, CONSOLE_COLOR_YELLOW);
 				cout << "test code time  : " << ref.Duration() << " usec\n";
 
-				if (opt.Duration() > ref.Duration())
+				if (opt.Duration() < ref.Duration())
 				{
 					SetConsoleTextAttribute(col, CONSOLE_COLOR_GREEN);
-					cout << "opt code is faster by  : " << (opt.Duration() / ref.Duration()) * 100<< " usec\n";
+					cout << "opt code is faster by  : " << (opt.Duration() / ref.Duration()) * 100<< " %\n";
 				}
+				else
 				{
 					SetConsoleTextAttribute(col, CONSOLE_COLOR_RED);
-					cout << "opt code is slower by  : " << (ref.Duration() / opt.Duration()) * 100 << " usec\n";
+					cout << "opt code is slower by  : " << (ref.Duration() / opt.Duration()) * 100 << " %\n";
 				}
 
 				SetConsoleTextAttribute(col, CONSOLE_COLOR_GREEN);
