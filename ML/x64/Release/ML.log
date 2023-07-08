@@ -1,9 +1,15 @@
-﻿  matrix_add.cpp
-     Creating library C:\Users\Acer\Desktop\ML\x64\Release\ML.lib and object C:\Users\Acer\Desktop\ML\x64\Release\ML.exp
-LINK : warning LNK4098: defaultlib 'LIBCMT' conflicts with use of other libs; use /NODEFAULTLIB:library
+﻿  Test_MatrixAdd.cpp
+C:\Users\Acer\Desktop\CppML\ML\include\timer.h(31,25): warning C4244: 'return': conversion from '_Rep' to 'float', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+C:\Users\Acer\Desktop\CppML\ML\include\timer.h(30): message : while compiling class template member function 'float qlm::Timer<qlm::usec>::Duration(void)'
+C:\Users\Acer\Desktop\CppML\ML\test\source\matrix\Test_MatrixAdd.cpp(83): message : see reference to function template instantiation 'float qlm::Timer<qlm::usec>::Duration(void)' being compiled
+C:\Users\Acer\Desktop\CppML\ML\test\source\matrix\Test_MatrixAdd.cpp(57): message : see reference to class template instantiation 'qlm::Timer<qlm::usec>' being compiled
   Generating code
-  7 of 10 functions (70.0%) were compiled, the rest were copied from previous compilation.
+  2 of 192 functions ( 1.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
-    1 functions had inline decision re-evaluated but remain unchanged
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  ML.vcxproj -> C:\Users\Acer\Desktop\ML\x64\Release\ML.exe
+  ML.vcxproj -> C:\Users\Acer\Desktop\CppML\x64\Release\ML.exe

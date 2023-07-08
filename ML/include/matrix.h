@@ -8,29 +8,30 @@ namespace qlm
     class Matrix {
     private:
         float* data;
-        int width;
-        int height;
+        int columns;
+        int rows;
 
     public:
         // Default constructor
-        Matrix() : data(nullptr), width(0), height(0)
+        Matrix() : data(nullptr), columns(0), rows(0)
         {}
         // Parameterized constructor
-        Matrix(int w, int h) : width(w), height(h) 
+        Matrix(int r, int c) : columns(c), rows(r) 
         {
-            data = new float[width * height];
+            data = new float[columns * rows];
         }
         // Copy constructor
-        Matrix(const Matrix& other) : width(other.width), height(other.height) 
+        Matrix(const Matrix& other) : columns(other.columns), rows(other.rows) 
         {
-            data = new float[width * height];
-            for (int i = 0; i < width * height; ++i) {
+            data = new float[columns * rows];
+            for (int i = 0; i < columns * rows; ++i) {
                 data[i] = other.data[i];
             }
         }
         // Destructor
         ~Matrix() 
         {
+            rows = columns = 0;
             if (data != nullptr)
                 delete[] data;
         }
@@ -38,14 +39,14 @@ namespace qlm
         // Setter for individual element
         void Set(int row, int col, float value) 
         {
-            if (row >= 0 && row < height && col >= 0 && col < width) 
+            if (row >= 0 && row < rows && col >= 0 && col < columns)
             {
-                data[row * width + col] = value;
+                data[row * columns + col] = value;
             }
         }
 
         void Set(int i, float value) {
-            if (i >= 0 && i < width * height)
+            if (i >= 0 && i < columns * rows)
             {
                 data[i] = value;
             }
@@ -53,30 +54,30 @@ namespace qlm
         // Getter for individual element
         float Get(int row, int col) const 
         {
-            if (row >= 0 && row < height && col >= 0 && col < width) 
+            if (row >= 0 && row < rows && col >= 0 && col < columns)
             {
-                return data[row * width + col];
+                return data[row * columns + col];
             }
             return std::numeric_limits<float>::signaling_NaN();
         }
 
         float Get(int i) const
         {
-            if (i >= 0 && i < width * height)
+            if (i >= 0 && i < columns * rows)
             {
                 return data[i];
             }
             return std::numeric_limits<float>::signaling_NaN();
         }
-        // Getter for width
-        int Width() const 
+        // Getter for columns
+        int Coulmns() const
         {
-            return width;
+            return columns;
         }
-        // Getter for height
-        int Height() const
+        // Getter for rows
+        int Rows() const
         {
-            return height;
+            return rows;
         }
     public:
         // print matrix

@@ -11,7 +11,7 @@ namespace qlm
 		std::mt19937 gen(rd());
 		std::uniform_real_distribution<float> dis(min_value, max_value);
 
-		for (int i = 0; i < height * width; i++)
+		for (int i = 0; i < columns * rows; i++)
 		{
 			this->Set(i, dis(gen));
 		}
@@ -19,13 +19,13 @@ namespace qlm
 
 	void Matrix::Print()
 	{
-		for (int i = 0; i < width; i++)
+		for (int r = 0; r < rows; r++)
 		{
 			int number_digits = 5;
 
-			for (int j = 0; j < height; j++)
+			for (int c = 0; c < columns; c++)
 			{
-				float element = this->Get(i, j);
+				float element = this->Get(r, c);
 
 				if (element != 0)
 				{
