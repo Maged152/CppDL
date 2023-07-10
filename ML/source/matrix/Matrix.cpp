@@ -2,9 +2,16 @@
 #include <random>
 #include <iostream>
 #include <iomanip>
+#include <functional>
 
 namespace qlm
 {
+	// matrix element wise operations
+	Status Matrix::MatrixAdd(const Matrix& src, Matrix& dst, float utilization)
+	{
+		return this->MatrixElemWiseOp<std::plus<float>>(src, dst, utilization);
+	}
+
 	void Matrix::RandomInit(const float min_value, const float max_value)
 	{
 		std::random_device rd;

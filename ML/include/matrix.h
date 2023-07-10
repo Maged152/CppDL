@@ -10,6 +10,9 @@ namespace qlm
         float* data;
         int columns;
         int rows;
+    private:
+        template<typename op>
+        Status MatrixElemWiseOp(const Matrix& src, Matrix& dst, float utilization = 0.5f);
 
     public:
         // Default constructor
