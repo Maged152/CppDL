@@ -23,7 +23,7 @@
 namespace test
 {
 	// compare
-	bool TestCompare(const qlm::Matrix& mat1, const qlm::Matrix& mat2, const float threshold)
+	inline bool TestCompare(const qlm::Matrix& mat1, const qlm::Matrix& mat2, const float threshold)
 	{
 		for (int i = 0; i < mat1.Rows() * mat1.Coulmns(); i++)
 		{
