@@ -56,5 +56,8 @@ namespace qlm
 	}
 
 
-	template Status Matrix::MatrixElemWiseOp<std::plus<float>>(const Matrix& , Matrix& , float );
+	template Status Matrix::MatrixElemWiseOp<std::plus<float>>(const Matrix&, Matrix&, float );
+	template Status Matrix::MatrixElemWiseOp<std::minus<float>>(const Matrix&, Matrix&, float);
+	template Status Matrix::MatrixElemWiseOp<std::multiplies<float>>(const Matrix&, Matrix&, float);
+	template Status Matrix::MatrixElemWiseOp<std::divides<float>>(const Matrix&, Matrix&, float);
 }

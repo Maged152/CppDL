@@ -89,5 +89,11 @@ namespace qlm
         void RandomInit(const float min_value, const float max_value);
         // matrix addition
         Status MatrixAdd(const Matrix& src, Matrix& dst, float utilization = 0.5f);
+        // matrix subtraction
+        Status MatrixSub(const Matrix& src, Matrix& dst, float utilization = 0.5f);
+        // matrix element wise multiplication
+        Status MatrixElementMul(const Matrix& src, Matrix& dst, float utilization = 0.5f);
+        // matrix element wise division
+        Status MatrixElementDiv(const Matrix& src, Matrix& dst, float utilization = 0.5f);
     };
 }

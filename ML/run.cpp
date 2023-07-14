@@ -5,7 +5,7 @@
 
 int main()
 {
-	std::vector<int>w {10, 50, 200, 1000};
-	std::vector<int>h { 10, 50, 200, 2000 };
-	test::Test_MatrixAdd(w, h);
+	std::vector<int>w {10, 50, 200, 2000};
+	std::vector<int>h { 10, 50, 200, 2000};
+	test::Test_MatrixElementDiv(w, h, 2);
 }

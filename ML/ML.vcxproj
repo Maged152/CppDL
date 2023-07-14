@@ -81,8 +81,11 @@
   <ItemGroup>
     <ClCompile Include="run.cpp" />
     <ClCompile Include="source\matrix\Matrix.cpp" />
-    <ClCompile Include="source\matrix\MatrixAdd.cpp" />
+    <ClCompile Include="source\matrix\MatrixElemWiseOp.cpp" />
     <ClCompile Include="test\source\matrix\Test_MatrixAdd.cpp" />
+    <ClCompile Include="test\source\matrix\Test_MatrixElementDiv.cpp" />
+    <ClCompile Include="test\source\matrix\Test_MatrixElementMul.cpp" />
+    <ClCompile Include="test\source\matrix\Test_MatrixSub.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\config.h" />
@@ -91,7 +94,7 @@
     <ClInclude Include="include\shakhbat_ml.h" />
     <ClInclude Include="include\types.h" />
     <ClInclude Include="include\vector.h" />
-    <ClInclude Include="test\include\matrix\Test_MatrixAdd.h" />
+    <ClInclude Include="test\include\matrix\Test_Matrix.h" />
     <ClInclude Include="test\include\test_utils.h" />
     <ClInclude Include="test\test.h" />
   </ItemGroup>

@@ -1,2 +1,13 @@
 ﻿  run.cpp
+  MatrixAdd.cpp
+  Test_MatrixAdd.cpp
+C:\Users\Acer\Desktop\CppML\ML\include\timer.h(31,25): warning C4244: 'return': conversion from '_Rep' to 'float', possible loss of data
+          with
+          [
+              _Rep=__int64
+          ]
+C:\Users\Acer\Desktop\CppML\ML\include\timer.h(30): message : while compiling class template member function 'float qlm::Timer<qlm::usec>::Duration(void)'
+C:\Users\Acer\Desktop\CppML\ML\test\source\matrix\Test_MatrixAdd.cpp(83): message : see reference to function template instantiation 'float qlm::Timer<qlm::usec>::Duration(void)' being compiled
+C:\Users\Acer\Desktop\CppML\ML\test\source\matrix\Test_MatrixAdd.cpp(57): message : see reference to class template instantiation 'qlm::Timer<qlm::usec>' being compiled
+  Generating Code...
   ML.vcxproj -> C:\Users\Acer\Desktop\CppML\x64\Debug\ML.exe
