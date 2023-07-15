@@ -71,7 +71,7 @@ void test::Test_MatrixElementDiv(std::vector<int>& mat_rows, std::vector<int>& m
 			ref.End();
 			// add matrix function
 			opt.Start();
-			auto status = src1.MatrixElementDiv(src2, dst_opt, utilization);
+			auto status = src1.Div(src2, dst_opt, utilization);
 			opt.End();
 			// compare the results
 			bool res = TestCompare(dst_ref, dst_opt, threshold);
@@ -91,7 +91,7 @@ void test::Test_MatrixElementDiv(std::vector<int>& mat_rows, std::vector<int>& m
 				}
 				else
 				{
-					SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_RED);
+					SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_LIGHT_YELLOW);
 					cout << "opt code is slower by  : " << ((opt.Duration() - ref.Duration()) / ref.Duration()) * 100 << " %\n";
 				}
 

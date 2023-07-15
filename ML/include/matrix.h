@@ -87,13 +87,22 @@ namespace qlm
         void Print();
         // random initialization
         void RandomInit(const float min_value, const float max_value);
+        // transpose
+    public:
+        // matrix-matrix operations
         // matrix addition
-        Status MatrixAdd(const Matrix& src, Matrix& dst, float utilization = 0.5f);
+        Status Add(const Matrix& src, Matrix& dst, float utilization = 0.5f);
         // matrix subtraction
-        Status MatrixSub(const Matrix& src, Matrix& dst, float utilization = 0.5f);
+        Status Sub(const Matrix& src, Matrix& dst, float utilization = 0.5f);
         // matrix element wise multiplication
-        Status MatrixElementMul(const Matrix& src, Matrix& dst, float utilization = 0.5f);
+        Status Mul(const Matrix& src, Matrix& dst, float utilization = 0.5f);
         // matrix element wise division
-        Status MatrixElementDiv(const Matrix& src, Matrix& dst, float utilization = 0.5f);
+        Status Div(const Matrix& src, Matrix& dst, float utilization = 0.5f);
+        // matrix multiplication
+        Status Dot(const Matrix& src, Matrix& dst, float utilization = 0.5f);
+    public:
+        // matrix-vector operations
+    public:
+        // matrix-scalar operations
     };
 }

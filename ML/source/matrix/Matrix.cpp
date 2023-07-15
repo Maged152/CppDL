@@ -7,19 +7,19 @@
 namespace qlm
 {
 	// matrix element wise operations +,-,*,/
-	Status Matrix::MatrixAdd(const Matrix& src, Matrix& dst, float utilization)
+	Status Matrix::Add(const Matrix& src, Matrix& dst, float utilization)
 	{
 		return this->MatrixElemWiseOp<std::plus<float>>(src, dst, utilization);
 	}
-	Status Matrix::MatrixSub(const Matrix& src, Matrix& dst, float utilization)
+	Status Matrix::Sub(const Matrix& src, Matrix& dst, float utilization)
 	{
 		return this->MatrixElemWiseOp<std::minus<float>>(src, dst, utilization);
 	}
-	Status Matrix::MatrixElementMul(const Matrix& src, Matrix& dst, float utilization)
+	Status Matrix::Mul(const Matrix& src, Matrix& dst, float utilization)
 	{
 		return this->MatrixElemWiseOp<std::multiplies<float>>(src, dst, utilization);
 	}
-	Status Matrix::MatrixElementDiv(const Matrix& src, Matrix& dst, float utilization)
+	Status Matrix::Div(const Matrix& src, Matrix& dst, float utilization)
 	{
 		return this->MatrixElemWiseOp<std::divides<float>>(src, dst, utilization);
 	}
