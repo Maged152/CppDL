@@ -32,4 +32,11 @@ namespace test
 		float threshold = 0.001f,
 		float min = 0.0f,
 		float max = 1.0f);
+	// matrix multiplication
+	void Test_MatrixDot(std::vector<int>& mat_width,
+		std::vector<int>& mat_height,
+		float utilization = 0.5f,
+		float threshold = 0.001f,
+		float min = 0.0f,
+		float max = 1.0f);
 }

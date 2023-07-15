@@ -81,11 +81,13 @@
   <ItemGroup>
     <ClCompile Include="run.cpp" />
     <ClCompile Include="source\matrix\Matrix.cpp" />
+    <ClCompile Include="source\matrix\MatrixDot.cpp" />
     <ClCompile Include="source\matrix\MatrixElemWiseOp.cpp" />
-    <ClCompile Include="test\source\matrix\Test_MatrixAdd.cpp" />
-    <ClCompile Include="test\source\matrix\Test_MatrixElementDiv.cpp" />
-    <ClCompile Include="test\source\matrix\Test_MatrixElementMul.cpp" />
-    <ClCompile Include="test\source\matrix\Test_MatrixSub.cpp" />
+    <ClCompile Include="test\source\matrix_matrix\Test_MatrixAdd.cpp" />
+    <ClCompile Include="test\source\matrix_matrix\Test_MatrixDot.cpp" />
+    <ClCompile Include="test\source\matrix_matrix\Test_MatrixElementDiv.cpp" />
+    <ClCompile Include="test\source\matrix_matrix\Test_MatrixElementMul.cpp" />
+    <ClCompile Include="test\source\matrix_matrix\Test_MatrixSub.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\config.h" />
