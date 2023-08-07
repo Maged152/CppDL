@@ -47,7 +47,6 @@ namespace qlm
                 data[row * columns + col] = value;
             }
         }
-
         void Set(int i, float value) {
             if (i >= 0 && i < columns * rows)
             {
@@ -63,7 +62,6 @@ namespace qlm
             }
             return std::numeric_limits<float>::signaling_NaN();
         }
-
         float Get(int i) const
         {
             if (i >= 0 && i < columns * rows)

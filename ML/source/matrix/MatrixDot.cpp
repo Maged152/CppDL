@@ -13,28 +13,35 @@ namespace qlm
 			return Status::INVALID_UTILIZATION;
 		}
 
-		if (src.Coulmns() != dst.Coulmns() || src.Rows() != dst.Rows() || src.Coulmns() != this->Coulmns() || src.Rows() != this->Rows())
+		if (this->Coulmns() != src.Rows() || this->Rows() != dst.Rows() || src.Coulmns() != dst.Coulmns())
 		{
 			return Status::INVALID_DIMENTIONS;
 		}
 
-		const unsigned int num_used_threads = utilization > 1.0f ? static_cast<unsigned int>(utilization) : static_cast<unsigned int>(utilization * num_threads);
-		const unsigned int total_length = rows * columns;
+		unsigned int num_used_threads = utilization > 1.0f ? static_cast<unsigned int>(utilization) : static_cast<unsigned int>(utilization * num_threads);
+		const unsigned int total_rows = rows;
+		num_used_threads = total_rows < num_used_threads ? total_rows : num_used_threads;
 
-		auto add_mat = [](const float* __restrict  src1, const float* __restrict  src2, float* __restrict  dst, const unsigned int size)
+		auto dot_mat = [](const int num_rows, const float* const __restrict  p_row, 
+			             const float* const __restrict  p_mat, const int in_r, const int in_c,
+			             float* __restrict  p_dst)
 		{
 #pragma loop( ivdep )
 #pragma omp simd
-			for (unsigned int i = 0; i < size; i++)
+			for (int row = 0; row < num_rows; row++)
 			{
-				//dst[i] = op()(src1[i], src2[i]);
+				const int idx = row * in_r;
+				float sum = 0;
+				for (int col = 0; col < in_r; col++)
+				{
+					sum += p_row[idx + col] * p_mat[];
+				}
 			}
 		};
 		// divide the matrix among the threads
-		const unsigned int thread_length = total_length / num_used_threads;
-		const unsigned int thread_tail_length = total_length % num_used_threads;
-		const unsigned int first_thread_length = thread_length + thread_tail_length;
-		//std::vector<std::thread> threads(num_used_threads);
+		const unsigned int rows_per_thread = total_rows / num_used_threads;
+		const unsigned int thread_tail = total_rows % num_used_threads;
+		const unsigned int first_thread_length = rows_per_thread + thread_tail ;
 		std::vector<std::future<void>> futures(num_used_threads);
 		// launch the threads
 		futures[0] = std::async(std::launch::async, add_mat, data, src.data, dst.data, first_thread_length);
