@@ -25,7 +25,7 @@ namespace test
 	// compare
 	inline bool TestCompare(const qlm::Matrix& mat1, const qlm::Matrix& mat2, const float threshold)
 	{
-		for (int i = 0; i < mat1.Rows() * mat1.Coulmns(); i++)
+		for (int i = 0; i < mat1.Rows() * mat1.Columns(); i++)
 		{
 			if (std::abs(mat1.Get(i) - mat2.Get(i)) > threshold)
 			{

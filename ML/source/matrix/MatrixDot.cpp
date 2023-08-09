@@ -13,7 +13,7 @@ namespace qlm
 			return Status::INVALID_UTILIZATION;
 		}
 
-		if (this->Coulmns() != src.Rows() || this->Rows() != dst.Rows() || src.Coulmns() != dst.Coulmns())
+		if (this->Columns() != src.Rows() || this->Rows() != dst.Rows() || src.Columns() != dst.Columns())
 		{
 			return Status::INVALID_DIMENTIONS;
 		}
@@ -22,19 +22,22 @@ namespace qlm
 		const unsigned int total_rows = rows;
 		num_used_threads = total_rows < num_used_threads ? total_rows : num_used_threads;
 
-		auto dot_mat = [](const int num_rows, const float* const __restrict  p_row, 
-			             const float* const __restrict  p_mat, const int in_r, const int in_c,
-			             float* __restrict  p_dst)
+		auto dot_mat = [](const int num_rows, const int start_r, const float* const __restrict  p_src1, 
+			             const float* const __restrict  p_src2, const int in_r, const int in_c,
+			             float* __restrict  const p_dst)
 		{
-#pragma loop( ivdep )
-#pragma omp simd
-			for (int row = 0; row < num_rows; row++)
+			for (int r = start_r; r < num_rows + start_r; r++)
 			{
-				const int idx = row * in_r;
-				float sum = 0;
-				for (int col = 0; col < in_r; col++)
+				for (int c = 0; c < in_c; c++)
 				{
-					sum += p_row[idx + col] * p_mat[];
+					float sum = 0;
+					#pragma omp simd reduction(+:sum)
+					for (int e = 0; e < in_r; e++)
+					{
+						sum += p_src1[r * in_r + e] * p_src2[e * in_c + c];
+						
+					}
+					p_dst[r * in_c + c] =  sum;
 				}
 			}
 		};
@@ -44,13 +47,18 @@ namespace qlm
 		const unsigned int first_thread_length = rows_per_thread + thread_tail ;
 		std::vector<std::future<void>> futures(num_used_threads);
 		// launch the threads
-		futures[0] = std::async(std::launch::async, add_mat, data, src.data, dst.data, first_thread_length);
-		int next_idx = first_thread_length;
+		int next_row = 0;
 
-		for (unsigned int i = 1; i < num_used_threads; i++)
+		for (unsigned int i = 0; i < thread_tail; i++)
 		{
-			futures[i] = std::async(std::launch::async, add_mat, &data[next_idx], &src.data[next_idx], &dst.data[next_idx], thread_length);
-			next_idx += thread_length;
+			futures[i] = std::async(std::launch::async, dot_mat, rows_per_thread + 1, next_row, data, src.data, src.rows, src.columns, dst.data);
+			next_row += rows_per_thread + 1;
+		}
+
+		for (unsigned int i = thread_tail; i < num_used_threads; i++)
+		{
+			futures[i] = std::async(std::launch::async, dot_mat, rows_per_thread, next_row, data, src.data, src.rows, src.columns, dst.data);
+			next_row += rows_per_thread;
 		}
 		// wait for the threads to finish
 		for (unsigned int i = 0; i < num_used_threads; i++)

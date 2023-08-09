@@ -71,7 +71,7 @@ namespace qlm
             return std::numeric_limits<float>::signaling_NaN();
         }
         // Getter for columns
-        int Coulmns() const
+        int Columns() const
         {
             return columns;
         }

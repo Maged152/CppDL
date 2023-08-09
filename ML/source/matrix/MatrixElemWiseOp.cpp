@@ -14,7 +14,7 @@ namespace qlm
 			return Status::INVALID_UTILIZATION;
 		}
 
-		if (src.Coulmns() != dst.Coulmns() || src.Rows() != dst.Rows() || src.Coulmns() != this->Coulmns() || src.Rows() != this->Rows())
+		if (src.Columns() != dst.Columns() || src.Rows() != dst.Rows() || src.Columns() != this->Columns() || src.Rows() != this->Rows())
 		{
 			return Status::INVALID_DIMENTIONS;
 		}

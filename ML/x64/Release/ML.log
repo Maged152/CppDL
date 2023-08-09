@@ -1,7 +1,7 @@
-﻿  run.cpp
+﻿  MatrixDot.cpp
   Generating code
-  10 of 951 functions ( 1.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    2 functions had inline decision re-evaluated but remain unchanged
+  463 of 1241 functions (37.3%) were compiled, the rest were copied from previous compilation.
+    69 functions were new in current compilation
+    115 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
   ML.vcxproj -> C:\Users\Acer\Desktop\CppML\x64\Release\ML.exe

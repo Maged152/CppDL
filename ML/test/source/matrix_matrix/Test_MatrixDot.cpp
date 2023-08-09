@@ -12,13 +12,16 @@ void TestMatrixDot(const Matrix& src1, const Matrix& src2, Matrix& dst)
 {
 	for (int r = 0; r < src1.Rows(); r++)
 	{
-		for (int c = 0; c < src2.Coulmns(); c++)
+		for (int c = 0; c < src2.Columns(); c++)
 		{
-			for (int e = 0; e < src1.Coulmns(); e++)
+			float sum = 0.0f; // Initialize a variable to store the sum of products
+
+			for (int e = 0; e < src1.Columns(); e++)
 			{
-				float res = src1.Get(r, e) * src2.Get(e, c);
-				dst.Set(r, c, res);
+				sum += src1.Get(r, e) * src2.Get(e, c);
 			}
+
+			dst.Set(r, c, sum); // Set the result in the destination matrix
 		}
 	}
 }
