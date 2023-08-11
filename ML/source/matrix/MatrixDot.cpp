@@ -49,18 +49,22 @@ namespace qlm
 		// launch the threads
 		int next_row = 0;
 
+		#pragma omp unroll full
 		for (unsigned int i = 0; i < thread_tail; i++)
 		{
 			futures[i] = std::async(std::launch::async, dot_mat, rows_per_thread + 1, next_row, data, src.data, src.rows, src.columns, dst.data);
 			next_row += rows_per_thread + 1;
 		}
 
+		#pragma omp unroll full
 		for (unsigned int i = thread_tail; i < num_used_threads; i++)
 		{
 			futures[i] = std::async(std::launch::async, dot_mat, rows_per_thread, next_row, data, src.data, src.rows, src.columns, dst.data);
 			next_row += rows_per_thread;
 		}
+
 		// wait for the threads to finish
+		#pragma omp unroll full
 		for (unsigned int i = 0; i < num_used_threads; i++)
 		{
 			futures[i].wait();
