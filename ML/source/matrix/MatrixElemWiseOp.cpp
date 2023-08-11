@@ -34,14 +34,17 @@ namespace qlm
 		// divide the matrix among the threads
 		const unsigned int thread_length = total_length / num_used_threads;
 		const unsigned int thread_tail_length = total_length % num_used_threads;
-		const unsigned int first_thread_length = thread_length + thread_tail_length;
-		//std::vector<std::thread> threads(num_used_threads);
 		std::vector<std::future<void>> futures(num_used_threads);
 		// launch the threads
-		futures[0] = std::async(std::launch::async, add_mat, data, src.data, dst.data, first_thread_length);
-		int next_idx = first_thread_length;
+		int next_idx = 0;
 
-		for (unsigned int i = 1; i < num_used_threads; i++)
+		for (unsigned int i = 0; i < thread_tail_length; i++)
+		{
+			futures[i] = std::async(std::launch::async, add_mat, &data[next_idx], &src.data[next_idx], &dst.data[next_idx], thread_length + 1);
+			next_idx += thread_length + 1;
+		}
+
+		for (unsigned int i = thread_tail_length; i < num_used_threads; i++)
 		{
 			futures[i] = std::async(std::launch::async, add_mat, &data[next_idx], &src.data[next_idx], &dst.data[next_idx], thread_length);
 			next_idx += thread_length;
