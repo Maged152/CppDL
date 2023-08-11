@@ -14,6 +14,9 @@ namespace qlm
         template<typename op>
         Status MatrixElemWiseOp(const Matrix& src, Matrix& dst, float utilization = 0.5f);
 
+        template<typename op>
+        Status MatrixElemWiseOp(const float src, Matrix& dst, float utilization = 0.5f);
+
     public:
         // Default constructor
         Matrix() : data(nullptr), columns(0), rows(0)
@@ -98,9 +101,21 @@ namespace qlm
         Status Div(const Matrix& src, Matrix& dst, float utilization = 0.5f);
         // matrix multiplication
         Status Dot(const Matrix& src, Matrix& dst, float utilization = 0.5f);
+        // matrix transpose
+        Status Transpose(Matrix& dst, float utilization = 0.5f);
     public:
         // matrix-vector operations
     public:
         // matrix-scalar operations
+        // addition
+        Status Add(const float src, Matrix& dst, float utilization = 0.5f);
+        // subtraction
+        Status Sub(const float src, Matrix& dst, float utilization = 0.5f);
+        // element wise multiplication
+        Status Mul(const float src, Matrix& dst, float utilization = 0.5f);
+        // element wise division
+        Status Div(const float src, Matrix& dst, float utilization = 0.5f);
+        // multiplication
+        Status Dot(const float src, Matrix& dst, float utilization = 0.5f);
     };
 }
