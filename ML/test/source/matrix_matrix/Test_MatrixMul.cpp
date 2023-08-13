@@ -20,7 +20,7 @@ void TestMatrixMul(const Matrix& src1, const Matrix& src2, Matrix& dst)
 	}
 }
 
-void test::Test_MatrixElementMul(std::vector<int>& mat_rows, std::vector<int>& mat_cols, float utilization, float threshold, float min, float max)
+void test::Test_MatrixMul(std::vector<int>& mat_rows, std::vector<int>& mat_cols, float utilization, float threshold, float min, float max)
 {
 	HANDLE col_handle;
 	col_handle = GetStdHandle(STD_OUTPUT_HANDLE);

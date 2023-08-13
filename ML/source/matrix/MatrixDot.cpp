@@ -44,7 +44,6 @@ namespace qlm
 		// divide the matrix among the threads
 		const unsigned int rows_per_thread = total_rows / num_used_threads;
 		const unsigned int thread_tail = total_rows % num_used_threads;
-		const unsigned int first_thread_length = rows_per_thread + thread_tail ;
 		std::vector<std::future<void>> futures(num_used_threads);
 		// launch the threads
 		int next_row = 0;
