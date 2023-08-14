@@ -1,6 +1,9 @@
 #pragma once
 #include "shakhbat_ml.h"
 #include <cmath>
+#include <iostream>
+#include <random>
+#include <windows.h>
 
 #define CONSOLE_COLOR_BLACK 0
 #define CONSOLE_COLOR_BLUE 1
@@ -34,5 +37,36 @@ namespace test
 		}
 
 		return true;
+	}
+
+	inline void PrintTestResults(bool res, qlm::Status status, const qlm::Timer<qlm::usec>& ref, const qlm::Timer<qlm::usec>& opt, const HANDLE& col_handle)
+	{
+		if (res && status == qlm::Status::SUCCESS)
+		{
+			// print output information
+			SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
+			std::cout << "opt code time  : " << opt.Duration() << " usec\n";
+			SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_YELLOW);
+			std::cout << "test code time  : " << ref.Duration() << " usec\n";
+
+			if (opt.Duration() < ref.Duration())
+			{
+				SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
+				std::cout << "opt code is faster by  : " << ((ref.Duration() - opt.Duration()) / opt.Duration()) * 100 << " %\n";
+			}
+			else
+			{
+				SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_LIGHT_YELLOW);
+				std::cout << "opt code is slower by  : " << ((opt.Duration() - ref.Duration()) / ref.Duration()) * 100 << " %\n";
+			}
+
+			SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
+			std::cout << "STATUS  : " << "PASSED\n";
+		}
+		else
+		{
+			SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_LIGHT_RED);
+			std::cout << "STATUS  : " << "FAILED\n";
+		}
 	}
 }

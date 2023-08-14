@@ -11,18 +11,43 @@ namespace qlm
 	{
 		return this->MatrixElemWiseOp<std::plus<float>>(src, dst, utilization);
 	}
+
 	Status Matrix::Sub(const Matrix& src, Matrix& dst, float utilization)
 	{
 		return this->MatrixElemWiseOp<std::minus<float>>(src, dst, utilization);
 	}
+
 	Status Matrix::Mul(const Matrix& src, Matrix& dst, float utilization)
 	{
 		return this->MatrixElemWiseOp<std::multiplies<float>>(src, dst, utilization);
 	}
+
 	Status Matrix::Div(const Matrix& src, Matrix& dst, float utilization)
 	{
 		return this->MatrixElemWiseOp<std::divides<float>>(src, dst, utilization);
 	}
+
+	// matrix scalar wise operations +,-,*,/
+	Status Matrix::Add(const float src, Matrix& dst, float utilization)
+	{
+		return this->MatrixElemOp<std::plus<float>>(src, dst, utilization);
+	}
+
+	Status Matrix::Sub(const float src, Matrix& dst, float utilization)
+	{
+		return this->MatrixElemOp<std::minus<float>>(src, dst, utilization);
+	}
+
+	Status Matrix::Mul(const float src, Matrix& dst, float utilization)
+	{
+		return this->MatrixElemOp<std::multiplies<float>>(src, dst, utilization);
+	}
+
+	Status Matrix::Div(const float src, Matrix& dst, float utilization)
+	{
+		return this->MatrixElemOp<std::divides<float>>(src, dst, utilization);
+	}
+
 
 	void Matrix::RandomInit(const float min_value, const float max_value)
 	{

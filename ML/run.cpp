@@ -7,8 +7,7 @@ int main()
 {
 	std::vector<int>w {10, 50, 200, 2000};
 	std::vector<int>h { 10, 50, 200, 2000};
-	test::Test_MatrixTranspose(w, h, 1);
-
+	test::Test_MatrixScalarAdd(w, h, 0.5);
 	/*qlm::Matrix m1{ 3, 2 };
 	qlm::Matrix m2{ 2, 3 };
 	qlm::Matrix m3{ 3, 3 };*/

@@ -48,6 +48,33 @@ namespace test
 		float max = 1.0f);
 	////////////////////////////////////////////////////////////////
 	// Matrix - Scalar
+	void Test_MatrixScalarAdd(std::vector<int>& mat_width,
+		std::vector<int>& mat_height,
+		float utilization = 0.5f,
+		float threshold = 0.001f,
+		float min = 0.0f,
+		float max = 1.0f);
+	// sub
+	void Test_MatrixScalarSub(std::vector<int>& mat_width,
+		std::vector<int>& mat_height,
+		float utilization = 0.5f,
+		float threshold = 0.001f,
+		float min = 0.0f,
+		float max = 1.0f);
+	// mul
+	void Test_MatrixScalarMul(std::vector<int>& mat_width,
+		std::vector<int>& mat_height,
+		float utilization = 0.5f,
+		float threshold = 0.001f,
+		float min = 0.0f,
+		float max = 1.0f);
+	// div
+	void Test_MatrixScalarDiv(std::vector<int>& mat_width,
+		std::vector<int>& mat_height,
+		float utilization = 0.5f,
+		float threshold = 0.001f,
+		float min = 0.0f,
+		float max = 1.0f);
 	////////////////////////////////////////////////////////////////
 	// Matrix - Vector
 }

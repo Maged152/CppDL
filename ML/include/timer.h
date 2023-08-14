@@ -26,7 +26,7 @@ namespace qlm
 			end_time = std::chrono::high_resolution_clock::now();
 			duration = std::chrono::duration_cast<Duration_t>(end_time - start_time);
 		}
-		float Duration()
+		float Duration() const
 		{
 			return duration.count();
 		}

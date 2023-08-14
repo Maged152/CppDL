@@ -82,12 +82,19 @@
     <ClCompile Include="run.cpp" />
     <ClCompile Include="source\matrix\Matrix.cpp" />
     <ClCompile Include="source\matrix\MatrixDot.cpp" />
+    <ClCompile Include="source\matrix\MatrixElemOp.cpp" />
     <ClCompile Include="source\matrix\MatrixElemWiseOp.cpp" />
+    <ClCompile Include="source\matrix\MatrixTranspose.cpp" />
     <ClCompile Include="test\source\matrix_matrix\Test_MatrixAdd.cpp" />
     <ClCompile Include="test\source\matrix_matrix\Test_MatrixDot.cpp" />
-    <ClCompile Include="test\source\matrix_matrix\Test_MatrixElementDiv.cpp" />
-    <ClCompile Include="test\source\matrix_matrix\Test_MatrixElementMul.cpp" />
+    <ClCompile Include="test\source\matrix_matrix\Test_MatrixDiv.cpp" />
+    <ClCompile Include="test\source\matrix_matrix\Test_MatrixMul.cpp" />
+    <ClCompile Include="test\source\matrix_matrix\Test_MatrixScalarAdd.cpp" />
+    <ClCompile Include="test\source\matrix_matrix\Test_MatrixScalarDiv.cpp" />
+    <ClCompile Include="test\source\matrix_matrix\Test_MatrixScalarMul.cpp" />
+    <ClCompile Include="test\source\matrix_matrix\Test_MatrixScalarSub.cpp" />
     <ClCompile Include="test\source\matrix_matrix\Test_MatrixSub.cpp" />
+    <ClCompile Include="test\source\matrix_matrix\Test_MatrixTranspose.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\config.h" />
