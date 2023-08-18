@@ -1,23 +1,23 @@
-#include "../../include/matrix/Test_Matrix.h"
+#include "../../include/Test_Matrix.h"
 #include "../../include/test_utils.h"
 
 using namespace test;
 using namespace qlm;
 using namespace std;
 
-void TestMatrixAdd(const Matrix& src1, const float val, Matrix& dst)
+void TestMatrixDiv(const Matrix& src1, const float val, Matrix& dst)
 {
 	for (int r = 0; r < src1.Rows(); r++)
 	{
 		for (int c = 0; c < src1.Columns(); c++)
 		{
-			float res = src1.Get(r, c) + val;
+			float res = src1.Get(r, c) / val;
 			dst.Set(r, c, res);
 		}
 	}
 }
 
-void test::Test_MatrixScalarAdd(std::vector<int>& mat_rows, std::vector<int>& mat_cols, float utilization, float threshold, float min, float max)
+void test::Test_MatrixScalarDiv(std::vector<int>& mat_rows, std::vector<int>& mat_cols, float utilization, float threshold, float min, float max)
 {
 	HANDLE col_handle;
 	col_handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -37,7 +37,7 @@ void test::Test_MatrixScalarAdd(std::vector<int>& mat_rows, std::vector<int>& ma
 	}
 
 	SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_BLUE);
-	cout << "Matrix scalar addition test\n";
+	cout << "Matrix scalar sub test\n";
 	cout << "Number of test cases = " << mat_rows.size() * mat_cols.size() << "\n";
 
 	// add two matrix
@@ -67,17 +67,17 @@ void test::Test_MatrixScalarAdd(std::vector<int>& mat_rows, std::vector<int>& ma
 			const float val = dis(gen);
 			// test matrix addition
 			ref.Start();
-			TestMatrixAdd(src1, val, dst_ref);
+			TestMatrixDiv(src1, val, dst_ref);
 			ref.End();
 			// add matrix function
 			opt.Start();
-			auto status = src1.Add(val, dst_opt, utilization);
+			auto status = src1.Div(val, dst_opt, utilization);
 			opt.End();
 			// compare the results
 			bool res = TestCompare(dst_ref, dst_opt, threshold);
 
 			PrintTestResults(res, status, ref, opt, col_handle);
-		
+
 		}
 	}
 	SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_WHITE);

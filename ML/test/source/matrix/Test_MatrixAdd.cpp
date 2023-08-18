@@ -1,4 +1,4 @@
-#include "../../include/matrix/Test_Matrix.h"
+#include "../../include/Test_Matrix.h"
 #include "../../include/test_utils.h"
 #include "shakhbat_ml.h"
 #include <iostream>
@@ -8,19 +8,19 @@ using namespace test;
 using namespace qlm;
 using namespace std;
 
-void TestMatrixAdd(const Matrix& src, Matrix& dst)
+void TestMatrixAdd(const Matrix& src1, const Matrix& src2, Matrix& dst)
 {
-	for (int r = 0; r < src.Rows(); r++)
+	for (int r = 0; r < src1.Rows(); r++)
 	{
-		for (int c = 0; c < src.Columns(); c++)
+		for (int c = 0; c < src1.Columns(); c++)
 		{
-			float res = src.Get(r, c);
-			dst.Set(c, r, res);
+			float res = src1.Get(r, c) + src2.Get(r, c);
+			dst.Set(r, c, res);
 		}
 	}
 }
 
-void test::Test_MatrixTranspose(std::vector<int>& mat_rows, std::vector<int>& mat_cols, float utilization, float threshold, float min, float max)
+void test::Test_MatrixAdd(std::vector<int>& mat_rows, std::vector<int>& mat_cols, float utilization, float threshold, float min, float max)
 {
 	HANDLE col_handle;
 	col_handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -40,10 +40,10 @@ void test::Test_MatrixTranspose(std::vector<int>& mat_rows, std::vector<int>& ma
 	}
 
 	SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_BLUE);
-	cout << "Matrix transpose test\n";
+	cout << "Matrix addition test\n";
 	cout << "Number of test cases = " << mat_rows.size() * mat_cols.size() << "\n";
 
-
+	// add two matrix
 	for (int r = 0; r < mat_rows.size(); r++)
 	{
 		for (int c = 0; c < mat_cols.size(); c++)
@@ -57,19 +57,21 @@ void test::Test_MatrixTranspose(std::vector<int>& mat_rows, std::vector<int>& ma
 			Timer<usec> ref;
 			Timer<usec> opt;
 
-			Matrix src{ row, col };
+			Matrix src1{row, col};
+			Matrix src2{row, col};
 
-			Matrix dst_ref{ col, row };
-			Matrix dst_opt{ col, row };
+			Matrix dst_ref{row, col};
+			Matrix dst_opt{row, col};
 			// random initialization
-			src.RandomInit(min, max);
+			src1.RandomInit(min, max);
+			src2.RandomInit(min, max);
 			// test matrix addition
 			ref.Start();
-			TestMatrixAdd(src, dst_ref);
+			TestMatrixAdd(src1, src2, dst_ref);
 			ref.End();
 			// add matrix function
 			opt.Start();
-			auto status = src.Transpose(dst_opt, utilization);
+			auto status = src1.Add(src2, dst_opt, utilization);
 			opt.End();
 			// compare the results
 			bool res = TestCompare(dst_ref, dst_opt, threshold);
@@ -85,7 +87,7 @@ void test::Test_MatrixTranspose(std::vector<int>& mat_rows, std::vector<int>& ma
 				if (opt.Duration() < ref.Duration())
 				{
 					SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
-					cout << "opt code is faster by  : " << ((ref.Duration() - opt.Duration()) / opt.Duration()) * 100 << " %\n";
+					cout << "opt code is faster by  : " << ((ref.Duration() - opt.Duration()) / opt.Duration()) * 100<< " %\n";
 				}
 				else
 				{

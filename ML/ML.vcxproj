@@ -85,16 +85,24 @@
     <ClCompile Include="source\matrix\MatrixElemOp.cpp" />
     <ClCompile Include="source\matrix\MatrixElemWiseOp.cpp" />
     <ClCompile Include="source\matrix\MatrixTranspose.cpp" />
-    <ClCompile Include="test\source\matrix_matrix\Test_MatrixAdd.cpp" />
-    <ClCompile Include="test\source\matrix_matrix\Test_MatrixDot.cpp" />
-    <ClCompile Include="test\source\matrix_matrix\Test_MatrixDiv.cpp" />
-    <ClCompile Include="test\source\matrix_matrix\Test_MatrixMul.cpp" />
-    <ClCompile Include="test\source\matrix_matrix\Test_MatrixScalarAdd.cpp" />
-    <ClCompile Include="test\source\matrix_matrix\Test_MatrixScalarDiv.cpp" />
-    <ClCompile Include="test\source\matrix_matrix\Test_MatrixScalarMul.cpp" />
-    <ClCompile Include="test\source\matrix_matrix\Test_MatrixScalarSub.cpp" />
-    <ClCompile Include="test\source\matrix_matrix\Test_MatrixSub.cpp" />
-    <ClCompile Include="test\source\matrix_matrix\Test_MatrixTranspose.cpp" />
+    <ClCompile Include="test\source\matrix\Test_MatrixAdd.cpp" />
+    <ClCompile Include="test\source\matrix\Test_MatrixDot.cpp" />
+    <ClCompile Include="test\source\matrix\Test_MatrixDiv.cpp" />
+    <ClCompile Include="test\source\matrix\Test_MatrixMul.cpp" />
+    <ClCompile Include="test\source\matrix\Test_MatrixScalarAdd.cpp" />
+    <ClCompile Include="test\source\matrix\Test_MatrixScalarDiv.cpp" />
+    <ClCompile Include="test\source\matrix\Test_MatrixScalarMul.cpp" />
+    <ClCompile Include="test\source\matrix\Test_MatrixScalarSub.cpp" />
+    <ClCompile Include="test\source\matrix\Test_MatrixSub.cpp" />
+    <ClCompile Include="test\source\matrix\Test_MatrixTranspose.cpp" />
+    <ClCompile Include="test\source\vector\Test_VectorAdd.cpp" />
+    <ClCompile Include="test\source\vector\Test_VectorDiv.cpp" />
+    <ClCompile Include="test\source\vector\Test_VectorMul.cpp" />
+    <ClCompile Include="test\source\vector\Test_VectorScalarAdd.cpp" />
+    <ClCompile Include="test\source\vector\Test_VectorScalarDiv.cpp" />
+    <ClCompile Include="test\source\vector\Test_VectorScalarMul.cpp" />
+    <ClCompile Include="test\source\vector\Test_VectorScalarSub.cpp" />
+    <ClCompile Include="test\source\vector\Test_VectorSub.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\config.h" />
@@ -103,8 +111,9 @@
     <ClInclude Include="include\shakhbat_ml.h" />
     <ClInclude Include="include\types.h" />
     <ClInclude Include="include\vector.h" />
-    <ClInclude Include="test\include\matrix\Test_Matrix.h" />
+    <ClInclude Include="test\include\Test_Matrix.h" />
     <ClInclude Include="test\include\test_utils.h" />
+    <ClInclude Include="test\include\Test_Vector.h" />
     <ClInclude Include="test\test.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

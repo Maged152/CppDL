@@ -1,4 +1,4 @@
-#include "../../include/matrix/Test_Matrix.h"
+#include "../../include/Test_Matrix.h"
 #include "../../include/test_utils.h"
 
 using namespace test;

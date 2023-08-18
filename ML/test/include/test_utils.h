@@ -38,6 +38,18 @@ namespace test
 
 		return true;
 	}
+	inline bool TestCompare(const qlm::Vector& vec1, const qlm::Vector& vec2, const float threshold)
+	{
+		for (int i = 0; i < vec1.Length(); i++)
+		{
+			if (std::abs(vec1.Get(i) - vec2.Get(i)) > threshold)
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
 
 	inline void PrintTestResults(bool res, qlm::Status status, const qlm::Timer<qlm::usec>& ref, const qlm::Timer<qlm::usec>& opt, const HANDLE& col_handle)
 	{

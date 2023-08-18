@@ -89,7 +89,6 @@ namespace qlm
         void Print();
         // random initialization
         void RandomInit(const float min_value, const float max_value);
-        // transpose
     public:
         // matrix-matrix operations
         // matrix addition
@@ -116,7 +115,5 @@ namespace qlm
         Status Mul(const float src, Matrix& dst, float utilization = 0.5f);
         // element wise division
         Status Div(const float src, Matrix& dst, float utilization = 0.5f);
-        // multiplication
-        Status Dot(const float src, Matrix& dst, float utilization = 0.5f);
     };
 }

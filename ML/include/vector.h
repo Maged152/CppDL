@@ -8,6 +8,13 @@ namespace qlm
         float* data;
         int len;
 
+    private:
+        template<typename op>
+        Status VectorElemWiseOp(const Vector& src, Vector& dst, float utilization = 0.5f);
+
+        template<typename op>
+        Status VectorElemOp(const float src, Vector& dst, float utilization = 0.5f);
+
     public:
         // Default constructor
         Vector() : data(nullptr), len(0)
@@ -33,7 +40,6 @@ namespace qlm
         }
     public:
         // Setter for individual element
-  
         void Set(int i, float value) {
             if (i >= 0 && i < len)
             {
@@ -54,8 +60,30 @@ namespace qlm
         {
             return len;
         }
-        // random initialization
     public:
-        void VectorAdd(const Vector& src, Vector& dst);
+        // print matrix
+        void Print();
+        // random initialization
+        void RandomInit(const float min_value, const float max_value);
+    public:
+        // vector-vector operations
+        // vector addition
+        Status Add(const Vector& src, Vector& dst, float utilization = 0.5f);
+        // vector subtraction
+        Status Sub(const Vector& src, Vector& dst, float utilization = 0.5f);
+        // vector multiplication
+        Status Mul(const Vector& src, Vector& dst, float utilization = 0.5f);
+        // vector division
+        Status Div(const Vector& src, Vector& dst, float utilization = 0.5f);
+    public:
+        // Vector-scalar operations
+        // addition
+        Status Add(const float src, Vector& dst, float utilization = 0.5f);
+        // subtraction
+        Status Sub(const float src, Vector& dst, float utilization = 0.5f);
+        // multiplication
+        Status Mul(const float src, Vector& dst, float utilization = 0.5f);
+        // division
+        Status Div(const float src, Vector& dst, float utilization = 0.5f);
     };
 }

@@ -12,7 +12,7 @@ namespace test
 		float min = 0.0f,
 		float max = 1.0f);
 	// sub
-	void Test_Matrixsub(std::vector<int>& mat_width,
+	void Test_MatrixSub(std::vector<int>& mat_width,
 		std::vector<int>& mat_height,
 		float utilization = 0.5f,
 		float threshold = 0.001f,

@@ -1,4 +1,4 @@
-#include "../../include/matrix/Test_Matrix.h"
+#include "../../include/Test_Matrix.h"
 #include "../../include/test_utils.h"
 #include "shakhbat_ml.h"
 #include <iostream>
@@ -8,19 +8,19 @@ using namespace test;
 using namespace qlm;
 using namespace std;
 
-void TestMatrixMul(const Matrix& src1, const Matrix& src2, Matrix& dst)
+void TestMatrixSub(const Matrix& src1, const Matrix& src2, Matrix& dst)
 {
 	for (int r = 0; r < src1.Rows(); r++)
 	{
 		for (int c = 0; c < src1.Columns(); c++)
 		{
-			float res = src1.Get(r, c) * src2.Get(r, c);
+			float res = src1.Get(r, c) - src2.Get(r, c);
 			dst.Set(r, c, res);
 		}
 	}
 }
 
-void test::Test_MatrixMul(std::vector<int>& mat_rows, std::vector<int>& mat_cols, float utilization, float threshold, float min, float max)
+void test::Test_MatrixSub(std::vector<int>& mat_rows, std::vector<int>& mat_cols, float utilization, float threshold, float min, float max)
 {
 	HANDLE col_handle;
 	col_handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -40,7 +40,7 @@ void test::Test_MatrixMul(std::vector<int>& mat_rows, std::vector<int>& mat_cols
 	}
 
 	SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_BLUE);
-	cout << "Matrix element wise multilpication test\n";
+	cout << "Matrix subtraction test\n";
 	cout << "Number of test cases = " << mat_rows.size() * mat_cols.size() << "\n";
 
 	// add two matrix
@@ -67,11 +67,11 @@ void test::Test_MatrixMul(std::vector<int>& mat_rows, std::vector<int>& mat_cols
 			src2.RandomInit(min, max);
 			// test matrix addition
 			ref.Start();
-			TestMatrixMul(src1, src2, dst_ref);
+			TestMatrixSub(src1, src2, dst_ref);
 			ref.End();
 			// add matrix function
 			opt.Start();
-			auto status = src1.Mul(src2, dst_opt, utilization);
+			auto status = src1.Sub(src2, dst_opt, utilization);
 			opt.End();
 			// compare the results
 			bool res = TestCompare(dst_ref, dst_opt, threshold);
