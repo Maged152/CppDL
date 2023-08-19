@@ -40,6 +40,8 @@ void test::Test_VectorScalarSub(std::vector<int>& vec_len, float utilization, fl
 	cout << "Vector scalar Sub test\n";
 	cout << "Number of test cases = " << vec_len.size() << "\n";
 
+	int num_failed_cases = 0;
+
 	// Sub two vector
 	for (int l = 0; l < vec_len.size(); l++)
 	{
@@ -74,34 +76,24 @@ void test::Test_VectorScalarSub(std::vector<int>& vec_len, float utilization, fl
 		// compare the results
 		bool res = TestCompare(dst_ref, dst_opt, threshold);
 
-		if (res && status == Status::SUCCESS)
+		PrintTestResults(res, status, ref, opt, col_handle);
+
+		if (!res)
 		{
-			// print output information
-			SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
-			cout << "opt code time  : " << opt.Duration() << " usec\n";
-			SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_YELLOW);
-			cout << "test code time  : " << ref.Duration() << " usec\n";
-
-			if (opt.Duration() < ref.Duration())
-			{
-				SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
-				cout << "opt code is faster by  : " << ((ref.Duration() - opt.Duration()) / opt.Duration()) * 100 << " %\n";
-			}
-			else
-			{
-				SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_LIGHT_YELLOW);
-				cout << "opt code is slower by  : " << ((opt.Duration() - ref.Duration()) / ref.Duration()) * 100 << " %\n";
-			}
-
-			SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
-			cout << "STATUS  : " << "PASSED\n";
+			num_failed_cases++;
 		}
-		else
-		{
-			SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_LIGHT_RED);
-			cout << "STATUS  : " << "FAILED\n";
-		}
-
 	}
+
+	if (num_failed_cases > 0)
+	{
+		SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_LIGHT_RED);
+		std::cout << "Number of FAILED test cases  : " << num_failed_cases << "\n";
+	}
+	else
+	{
+		SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
+		std::cout << "All test casses PASSED\n";
+	}
+
 	SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_WHITE);
 }

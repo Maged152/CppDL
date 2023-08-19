@@ -1,4 +1,4 @@
-#include "../../include/matrix/Test_Matrix.h"
+#include "../../include/Test_Matrix.h"
 #include "../../include/test_utils.h"
 #include "shakhbat_ml.h"
 #include <iostream>
@@ -49,6 +49,8 @@ void test::Test_MatrixDot(std::vector<int>& mat_rows, std::vector<int>& mat_cols
 	cout << "Matrix addition test\n";
 	cout << "Number of test cases = " << mat_rows.size() * mat_cols.size() << "\n";
 
+	int num_failed_cases = 0;
+
 	// add two matrix
 	for (int r = 0; r < mat_rows.size(); r++)
 	{
@@ -82,34 +84,25 @@ void test::Test_MatrixDot(std::vector<int>& mat_rows, std::vector<int>& mat_cols
 			// compare the results
 			bool res = TestCompare(dst_ref, dst_opt, threshold);
 
-			if (res && status == Status::SUCCESS)
-			{
-				// print output information
-				SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
-				cout << "opt code time  : " << opt.Duration() << " usec\n";
-				SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_YELLOW);
-				cout << "test code time  : " << ref.Duration() << " usec\n";
+			PrintTestResults(res, status, ref, opt, col_handle);
 
-				if (opt.Duration() < ref.Duration())
-				{
-					SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
-					cout << "opt code is faster by  : " << ((ref.Duration() - opt.Duration()) / opt.Duration()) * 100 << " %\n";
-				}
-				else
-				{
-					SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_LIGHT_YELLOW);
-					cout << "opt code is slower by  : " << ((opt.Duration() - ref.Duration()) / ref.Duration()) * 100 << " %\n";
-				}
-
-				SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
-				cout << "STATUS  : " << "PASSED\n";
-			}
-			else
+			if (!res)
 			{
-				SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_LIGHT_RED);
-				cout << "STATUS  : " << "FAILED\n";
+				num_failed_cases++;
 			}
 		}
 	}
+
+	if (num_failed_cases > 0)
+	{
+		SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_LIGHT_RED);
+		std::cout << "Number of FAILED test cases  : " << num_failed_cases << "\n";
+	}
+	else
+	{
+		SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
+		std::cout << "All test casses PASSED\n";
+	}
+
 	SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_WHITE);
 }

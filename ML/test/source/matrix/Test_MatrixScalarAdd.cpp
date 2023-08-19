@@ -40,6 +40,8 @@ void test::Test_MatrixScalarAdd(std::vector<int>& mat_rows, std::vector<int>& ma
 	cout << "Matrix scalar addition test\n";
 	cout << "Number of test cases = " << mat_rows.size() * mat_cols.size() << "\n";
 
+	int num_failed_cases = 0;
+
 	// add two matrix
 	for (int r = 0; r < mat_rows.size(); r++)
 	{
@@ -77,8 +79,25 @@ void test::Test_MatrixScalarAdd(std::vector<int>& mat_rows, std::vector<int>& ma
 			bool res = TestCompare(dst_ref, dst_opt, threshold);
 
 			PrintTestResults(res, status, ref, opt, col_handle);
+
+			if (!res)
+			{
+				num_failed_cases++;
+			}
 		
 		}
 	}
+
+	if (num_failed_cases > 0)
+	{
+		SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_LIGHT_RED);
+		std::cout << "Number of FAILED test cases  : " << num_failed_cases << "\n";
+	}
+	else
+	{
+		SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
+		std::cout << "All test casses PASSED\n";
+	}
+
 	SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_WHITE);
 }
