@@ -1,6 +1,8 @@
 #pragma once
 
 #include <limits>
+#include "types.h"
+
 namespace qlm
 {
     class Vector {

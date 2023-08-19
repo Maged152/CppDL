@@ -5,24 +5,24 @@
 
 int main()
 {
-	std::vector<int>w {10, 50, 200, 2000};
-	std::vector<int>h { 10, 50, 200, 2000};
-	test::Test_MatrixScalarAdd(w, h, 0.5);
-	/*qlm::Matrix m1{ 3, 2 };
-	qlm::Matrix m2{ 2, 3 };
-	qlm::Matrix m3{ 3, 3 };*/
+	std::vector<int>l {10, 50, 200, 2000, 2000};
+	test::Test_VectorAdd(l, 1);
 
-	/*m1.RandomInit(0, 10);
-	m2.RandomInit(0, 10);
+	/*qlm::Vector v1{ 10 };
+	qlm::Vector v2{ 10 };
+	qlm::Vector v3{ 10 };
 
-	std::cout << "m1\n";
-	m1.Print();
-	std::cout << "m2\n";
-	m2.Print();
+	v1.RandomInit(0, 10);
+	v2.RandomInit(0, 10);
 
-	m1.Dot(m2, m3);
+	std::cout << "\nv1\n";
+	v1.Print();
+	std::cout << "\nv2\n";
+	v2.Print();
 
-	std::cout << "m3\n";
-	m3.Print();*/
+	v1.Add(v2, v3);
+
+	std::cout << "\nv3\n";
+	v3.Print();*/
 
 }

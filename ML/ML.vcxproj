@@ -85,6 +85,9 @@
     <ClCompile Include="source\matrix\MatrixElemOp.cpp" />
     <ClCompile Include="source\matrix\MatrixElemWiseOp.cpp" />
     <ClCompile Include="source\matrix\MatrixTranspose.cpp" />
+    <ClCompile Include="source\vector\Vector.cpp" />
+    <ClCompile Include="source\vector\VectorElemOp.cpp" />
+    <ClCompile Include="source\vector\VectorElemWiseOp.cpp" />
     <ClCompile Include="test\source\matrix\Test_MatrixAdd.cpp" />
     <ClCompile Include="test\source\matrix\Test_MatrixDot.cpp" />
     <ClCompile Include="test\source\matrix\Test_MatrixDiv.cpp" />

@@ -22,7 +22,7 @@ namespace qlm
 		const unsigned int num_used_threads = utilization > 1.0f ? static_cast<unsigned int>(utilization) : static_cast<unsigned int>(utilization * num_threads);
 		const unsigned int total_length = rows * columns;
 
-		auto add_mat = [](const float* __restrict  src1, const float* __restrict  src2, float* __restrict  dst, const unsigned int size)
+		auto op_mat = [](const float* __restrict  src1, const float* __restrict  src2, float* __restrict  dst, const unsigned int size)
 		{
 			#pragma loop( ivdep )
 			#pragma omp simd
@@ -41,14 +41,14 @@ namespace qlm
 		#pragma omp unroll full
 		for (unsigned int i = 0; i < thread_tail_length; i++)
 		{
-			futures[i] = std::async(std::launch::async, add_mat, &data[next_idx], &src.data[next_idx], &dst.data[next_idx], thread_length + 1);
+			futures[i] = std::async(std::launch::async, op_mat, &data[next_idx], &src.data[next_idx], &dst.data[next_idx], thread_length + 1);
 			next_idx += thread_length + 1;
 		}
 
 		#pragma omp unroll full
 		for (unsigned int i = thread_tail_length; i < num_used_threads; i++)
 		{
-			futures[i] = std::async(std::launch::async, add_mat, &data[next_idx], &src.data[next_idx], &dst.data[next_idx], thread_length);
+			futures[i] = std::async(std::launch::async, op_mat, &data[next_idx], &src.data[next_idx], &dst.data[next_idx], thread_length);
 			next_idx += thread_length;
 		}
 		// wait for the threads to finish
