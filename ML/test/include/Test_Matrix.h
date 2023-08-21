@@ -77,4 +77,32 @@ namespace test
 		float max = 1.0f);
 	////////////////////////////////////////////////////////////////
 	// Matrix - Vector
+	// add
+	void Test_MatrixVectorAdd(std::vector<int>& mat_width,
+		std::vector<int>& mat_height,
+		float utilization = 0.5f,
+		float threshold = 0.001f,
+		float min = 0.0f,
+		float max = 1.0f);
+	// sub
+	void Test_MatrixVectorSub(std::vector<int>& mat_width,
+		std::vector<int>& mat_height,
+		float utilization = 0.5f,
+		float threshold = 0.001f,
+		float min = 0.0f,
+		float max = 1.0f);
+	// mul
+	void Test_MatrixVectorMul(std::vector<int>& mat_width,
+		std::vector<int>& mat_height,
+		float utilization = 0.5f,
+		float threshold = 0.001f,
+		float min = 0.0f,
+		float max = 1.0f);
+	// div
+	void Test_MatrixVectorDiv(std::vector<int>& mat_width,
+		std::vector<int>& mat_height,
+		float utilization = 0.5f,
+		float threshold = 0.001f,
+		float min = 0.0f,
+		float max = 1.0f);
 }
