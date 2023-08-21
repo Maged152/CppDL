@@ -18,6 +18,9 @@ namespace qlm
         template<typename op>
         Status MatrixElemOp(const float src, Matrix& dst, float utilization = 0.5f);
 
+        template<typename op>
+        Status MatrixVectorOp(const Vector& src, Matrix& dst, float utilization = 0.5f);
+
     public:
         // Default constructor
         Matrix() : data(nullptr), columns(0), rows(0)
@@ -42,6 +45,7 @@ namespace qlm
             if (data != nullptr)
                 delete[] data;
         }
+        // move and = operator
     public:
         // Setter for individual element
         void Set(int row, int col, float value) 
@@ -105,6 +109,14 @@ namespace qlm
         Status Transpose(Matrix& dst, float utilization = 0.5f);
     public:
         // matrix-vector operations
+         // addition
+        Status Add(const Vector& src, Matrix& dst, float utilization = 0.5f);
+        // subtraction
+        Status Sub(const Vector& src, Matrix& dst, float utilization = 0.5f);
+        // element wise multiplication
+        Status Mul(const Vector& src, Matrix& dst, float utilization = 0.5f);
+        // element wise division
+        Status Div(const Vector& src, Matrix& dst, float utilization = 0.5f);
     public:
         // matrix-scalar operations
         // addition
