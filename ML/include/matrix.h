@@ -5,6 +5,8 @@
 
 namespace qlm
 {
+    class Vector;
+
     class Matrix {
     private:
         float* data;
@@ -109,13 +111,13 @@ namespace qlm
         Status Transpose(Matrix& dst, float utilization = 0.5f);
     public:
         // matrix-vector operations
-         // addition
+        // addition
         Status Add(const Vector& src, Matrix& dst, float utilization = 0.5f);
         // subtraction
         Status Sub(const Vector& src, Matrix& dst, float utilization = 0.5f);
-        // element wise multiplication
+        // multiplication
         Status Mul(const Vector& src, Matrix& dst, float utilization = 0.5f);
-        // element wise division
+        // division
         Status Div(const Vector& src, Matrix& dst, float utilization = 0.5f);
     public:
         // matrix-scalar operations
@@ -127,5 +129,6 @@ namespace qlm
         Status Mul(const float src, Matrix& dst, float utilization = 0.5f);
         // element wise division
         Status Div(const float src, Matrix& dst, float utilization = 0.5f);
+
     };
 }

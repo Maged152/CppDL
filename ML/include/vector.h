@@ -5,6 +5,8 @@
 
 namespace qlm
 {
+    class Matrix;
+
     class Vector {
     private:
         float* data;
@@ -87,5 +89,8 @@ namespace qlm
         Status Mul(const float src, Vector& dst, float utilization = 0.5f);
         // division
         Status Div(const float src, Vector& dst, float utilization = 0.5f);
+
+        //--------------------------------------------------------------//
+        friend class Matrix;
     };
 }

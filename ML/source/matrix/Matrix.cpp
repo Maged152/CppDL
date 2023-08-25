@@ -48,7 +48,28 @@ namespace qlm
 		return this->MatrixElemOp<std::divides<float>>(src, dst, utilization);
 	}
 
+	// matrix vector  operations 
+	Status Matrix::Add(const Vector& src, Matrix& dst, float utilization)
+	{
+		return this->MatrixVectorOp<std::plus<float>>(src, dst, utilization);
+	}
 
+	Status Matrix::Sub(const Vector& src, Matrix& dst, float utilization)
+	{
+		return this->MatrixVectorOp<std::minus<float>>(src, dst, utilization);
+	}
+
+	Status Matrix::Mul(const Vector& src, Matrix& dst, float utilization)
+	{
+		return this->MatrixVectorOp<std::multiplies<float>>(src, dst, utilization);
+	}
+
+	Status Matrix::Div(const Vector& src, Matrix& dst, float utilization)
+	{
+		return this->MatrixVectorOp<std::divides<float>>(src, dst, utilization);
+	}
+
+	// general matrix functions
 	void Matrix::RandomInit(const float min_value, const float max_value)
 	{
 		std::random_device rd;
