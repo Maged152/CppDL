@@ -56,7 +56,7 @@ void test::Test_MatrixVectorAdd(std::vector<int>& mat_rows, std::vector<int>& ma
 	cout << "Number of test cases = " << mat_rows.size() * mat_cols.size() << "\n";
 
 	int num_failed_cases = 0;
-	bool is_row = true;
+	BroadCast broad_cast = BroadCast::BROAD_CAST_ROW;
 
 	// add vector matrix
 	for (int r = 0; r < mat_rows.size(); r++)
@@ -65,7 +65,7 @@ void test::Test_MatrixVectorAdd(std::vector<int>& mat_rows, std::vector<int>& ma
 		{
 			int row = mat_rows[r];
 			int col = mat_cols[c];
-			int vector_length = is_row ? row : col;
+			int vector_length = (broad_cast == BroadCast::BROAD_CAST_ROW )? row : col;
 
 			SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
 			cout << "Rows  : " << row << "\n" << "Cols  : " << col << "\n";
@@ -83,7 +83,7 @@ void test::Test_MatrixVectorAdd(std::vector<int>& mat_rows, std::vector<int>& ma
 			src1.RandomInit(min, max);
 			src2.RandomInit(min, max);
 			// test matrix addition
-			if (is_row)
+			if (broad_cast == BroadCast::BROAD_CAST_ROW)
 			{
 				ref.Start();
 				TestMatrixVectorAdd_Row(src1, src2, dst_ref);
@@ -97,7 +97,7 @@ void test::Test_MatrixVectorAdd(std::vector<int>& mat_rows, std::vector<int>& ma
 			}
 			// add matrix function
 			opt.Start();
-			auto status = src1.Add(src2, dst_opt, utilization);
+			auto status = src1.Add(src2, dst_opt, broad_cast, utilization);
 			opt.End();
 			// compare the results
 			bool res = TestCompare(dst_ref, dst_opt, threshold);
@@ -108,6 +108,8 @@ void test::Test_MatrixVectorAdd(std::vector<int>& mat_rows, std::vector<int>& ma
 			{
 				num_failed_cases++;
 			}
+
+			broad_cast = (broad_cast == BroadCast::BROAD_CAST_ROW)? BroadCast::BROAD_CAST_COLUMN : BroadCast::BROAD_CAST_ROW;
 		}
 	}
 
