@@ -9,4 +9,10 @@ namespace qlm
 		INVALID_DIMENTIONS,
 		INVALID_UTILIZATION	
 	};
+
+	enum class BroadCast
+	{
+		BROAD_CAST_ROW,
+		BROAD_CAST_COLUMN
+	};
 }

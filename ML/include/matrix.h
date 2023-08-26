@@ -21,7 +21,7 @@ namespace qlm
         Status MatrixElemOp(const float src, Matrix& dst, float utilization = 0.5f);
 
         template<typename op>
-        Status MatrixVectorOp(const Vector& src, Matrix& dst, float utilization = 0.5f);
+        Status MatrixVectorOp(const Vector& src, Matrix& dst, const BroadCast& broad_cast, float utilization = 0.5f);
 
     public:
         // Default constructor
@@ -112,13 +112,13 @@ namespace qlm
     public:
         // matrix-vector operations
         // addition
-        Status Add(const Vector& src, Matrix& dst, float utilization = 0.5f);
+        Status Add(const Vector& src, Matrix& dst, const BroadCast& broad_cast, float utilization = 0.5f);
         // subtraction
-        Status Sub(const Vector& src, Matrix& dst, float utilization = 0.5f);
+        Status Sub(const Vector& src, Matrix& dst, const BroadCast& broad_cast, float utilization = 0.5f);
         // multiplication
-        Status Mul(const Vector& src, Matrix& dst, float utilization = 0.5f);
+        Status Mul(const Vector& src, Matrix& dst, const BroadCast& broad_cast, float utilization = 0.5f);
         // division
-        Status Div(const Vector& src, Matrix& dst, float utilization = 0.5f);
+        Status Div(const Vector& src, Matrix& dst, const BroadCast& broad_cast, float utilization = 0.5f);
     public:
         // matrix-scalar operations
         // addition
