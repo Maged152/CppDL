@@ -9,7 +9,7 @@
 namespace qlm
 {
 	template<typename op>
-	inline Status Matrix::MatrixVectorOp(const Vector& src, Matrix& dst, float utilization)
+	inline Status Matrix::MatrixVectorOp(const Vector& src, Matrix& dst, const BroadCast& broad_cast, float utilization)
 	{
 		if (utilization <= 0)
 		{
@@ -25,7 +25,7 @@ namespace qlm
 		int dim_1, dim_2;
 		std::function<void(const int, const int, const float* const, const float* const, const int, const int, float* const)> vec_mat;
 
-		if (this->Rows() == src.Length())
+		if (this->Rows() == src.Length() && broad_cast == BroadCast::BROAD_CAST_ROW)
 		{
 			dim_1 = columns;
 			dim_2 = rows;
@@ -38,12 +38,12 @@ namespace qlm
 				{
 					for (int d2 = 0; d2 < dim_2; d2++)
 					{
-						p_dst[d1 * dim_1 + d2] = op()(p_src1[d1 * dim_1 + d2], p_src2[d2]);
+						p_dst[d2 * dim_1 + d1] = op()(p_src1[d2 * dim_1 + d1], p_src2[d2]);
 					}
 				}
 			};
 		}
-		else if (this->Columns() == src.Length())
+		else if (this->Columns() == src.Length() && broad_cast == BroadCast::BROAD_CAST_COLUMN)
 		{
 			dim_1 = rows;
 			dim_2 = columns;
@@ -100,8 +100,8 @@ namespace qlm
 		return Status::SUCCESS;
 	}
 
-	template Status Matrix::MatrixVectorOp<std::plus<float>>(const Vector&, Matrix&, float);
-	template Status Matrix::MatrixVectorOp<std::minus<float>>(const Vector&, Matrix&, float);
-	template Status Matrix::MatrixVectorOp<std::multiplies<float>>(const Vector&, Matrix&, float);
-	template Status Matrix::MatrixVectorOp<std::divides<float>>(const Vector&, Matrix&, float);
+	template Status Matrix::MatrixVectorOp<std::plus<float>>(const Vector&, Matrix&, const BroadCast&, float);
+	template Status Matrix::MatrixVectorOp<std::minus<float>>(const Vector&, Matrix&, const BroadCast&, float);
+	template Status Matrix::MatrixVectorOp<std::multiplies<float>>(const Vector&, Matrix&, const BroadCast&, float);
+	template Status Matrix::MatrixVectorOp<std::divides<float>>(const Vector&, Matrix&, const BroadCast&, float);
 }

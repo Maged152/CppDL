@@ -49,24 +49,24 @@ namespace qlm
 	}
 
 	// matrix vector  operations 
-	Status Matrix::Add(const Vector& src, Matrix& dst, float utilization)
+	Status Matrix::Add(const Vector& src, Matrix& dst, const BroadCast& broad_cast, float utilization)
 	{
-		return this->MatrixVectorOp<std::plus<float>>(src, dst, utilization);
+		return this->MatrixVectorOp<std::plus<float>>(src, dst, broad_cast, utilization);
 	}
 
-	Status Matrix::Sub(const Vector& src, Matrix& dst, float utilization)
+	Status Matrix::Sub(const Vector& src, Matrix& dst, const BroadCast& broad_cast, float utilization)
 	{
-		return this->MatrixVectorOp<std::minus<float>>(src, dst, utilization);
+		return this->MatrixVectorOp<std::minus<float>>(src, dst, broad_cast, utilization);
 	}
 
-	Status Matrix::Mul(const Vector& src, Matrix& dst, float utilization)
+	Status Matrix::Mul(const Vector& src, Matrix& dst, const BroadCast& broad_cast, float utilization)
 	{
-		return this->MatrixVectorOp<std::multiplies<float>>(src, dst, utilization);
+		return this->MatrixVectorOp<std::multiplies<float>>(src, dst, broad_cast, utilization);
 	}
 
-	Status Matrix::Div(const Vector& src, Matrix& dst, float utilization)
+	Status Matrix::Div(const Vector& src, Matrix& dst, const BroadCast& broad_cast, float utilization)
 	{
-		return this->MatrixVectorOp<std::divides<float>>(src, dst, utilization);
+		return this->MatrixVectorOp<std::divides<float>>(src, dst, broad_cast, utilization);
 	}
 
 	// general matrix functions
