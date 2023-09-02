@@ -70,6 +70,18 @@ namespace qlm
         // random initialization
         void RandomInit(const float min_value, const float max_value);
     public:
+        // vector operations
+        // dot product
+        Status Dot(const Vector& src, float& dst, float utilization = 0.5f);
+        // magnitude
+        Status Mag(float& dst, float utilization = 0.5f);
+        // unit vector
+        Status Unit(Vector& dst, float utilization = 0.5f);
+        // angle
+        Status Angle(const Vector& src, float& dst, float utilization = 0.5f);
+        // trnsform using transformation matrix
+        Status Transform(const Matrix& transform, Vector& dst, float utilization = 0.5f);
+    public:
         // vector-vector operations
         // vector addition
         Status Add(const Vector& src, Vector& dst, float utilization = 0.5f);
