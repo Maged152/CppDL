@@ -51,6 +51,16 @@ namespace test
 		return true;
 	}
 
+	inline bool TestCompare(const float& src1, const float& src2, const float threshold)
+	{
+		if (std::abs(src1 - src2) > threshold)
+		{
+			return false;
+		}
+
+		return true;
+	}
+
 	inline void PrintTestResults(bool res, qlm::Status status, const qlm::Timer<qlm::usec>& ref, const qlm::Timer<qlm::usec>& opt, const HANDLE& col_handle)
 	{
 		if (res && status == qlm::Status::SUCCESS)
