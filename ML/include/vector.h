@@ -59,7 +59,7 @@ namespace qlm
             }
             return std::numeric_limits<float>::signaling_NaN();
         }
-        // Getter for lenght
+        // Getter for length
         int Length() const
         {
             return len;
@@ -79,7 +79,7 @@ namespace qlm
         Status Unit(Vector& dst, float utilization = 0.5f);
         // angle
         Status Angle(const Vector& src, float& dst, float utilization = 0.5f);
-        // trnsform using transformation matrix
+        // transform using transformation matrix
         Status Transform(const Matrix& transform, Vector& dst, float utilization = 0.5f);
     public:
         // vector-vector operations
