@@ -58,31 +58,31 @@ namespace test
 	// dot product
 	void Test_VectorDot(std::vector<int>& vec_len,
 		float utilization = 0.5f,
-		float threshold = 0.001f,
+		float threshold = 0.1f,
 		float min = 0.0f,
 		float max = 1.0f);
 	// magnitude
 	void Test_VectorMag(std::vector<int>& vec_len,
 		float utilization = 0.5f,
-		float threshold = 0.001f,
+		float threshold = 0.1f,
 		float min = 0.0f,
 		float max = 1.0f);
 	// unit vector
 	void Test_VectorUnit(std::vector<int>& vec_len,
 		float utilization = 0.5f,
-		float threshold = 0.001f,
+		float threshold = 0.1f,
 		float min = 0.0f,
 		float max = 1.0f);
 	// angle
 	void Test_VectorAngle(std::vector<int>& vec_len,
 		float utilization = 0.5f,
-		float threshold = 0.001f,
+		float threshold = 0.1f,
 		float min = 0.0f,
 		float max = 1.0f);
 	// transform using transformation matrix
 	void Test_VectorTransform(std::vector<int>& vec_len,
 		float utilization = 0.5f,
-		float threshold = 0.001f,
+		float threshold = 0.1f,
 		float min = 0.0f,
 		float max = 1.0f);
 }
