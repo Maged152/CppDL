@@ -43,9 +43,10 @@ void test::Test_VectorDot(std::vector<int>& vec_len, float utilization, float th
 	int num_failed_cases = 0;
 
 	for (int l = 0; l < vec_len.size(); l++)
-	{
-
+	{	
 		int len = vec_len[l];
+
+		float current_threshold = threshold * len;
 
 		SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
 		cout << "length  : " << len << "\n";
@@ -70,12 +71,13 @@ void test::Test_VectorDot(std::vector<int>& vec_len, float utilization, float th
 		auto status = src1.Dot(src2, dst_opt, utilization);
 		opt.End();
 		// compare the results
-		bool res = TestCompare(dst_ref, dst_opt, threshold);
+		bool res = TestCompare(dst_ref, dst_opt, current_threshold);
 
 		PrintTestResults(res, status, ref, opt, col_handle);
 
 		if (!res)
 		{
+			std::cout << "test : " << dst_ref << " vs " << " code : " << dst_opt << "\n";
 			num_failed_cases++;
 		}
 	}

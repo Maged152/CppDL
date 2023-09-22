@@ -4,6 +4,7 @@
 #include <omp.h>
 #include <future>
 #include <semaphore>
+#include <atomic>
 
 namespace qlm
 {
@@ -21,7 +22,8 @@ namespace qlm
 
 		const unsigned int num_used_threads = utilization > 1.0f ? static_cast<unsigned int>(utilization) : static_cast<unsigned int>(utilization * num_threads);
 		const unsigned int total_length = len;
-		std::binary_semaphore sem {1};
+
+		std::atomic<float> total_sum{ 0 };
 
 		auto dot_op = [&](const float* const __restrict  src1,
 						 const float* const __restrict  src2, 
@@ -35,9 +37,7 @@ namespace qlm
 				sum += src1[i] * src2[i];
 			}
 			// critical section
-			sem.acquire();
-			dst += sum;
-			sem.release();
+			total_sum += sum;
 		};
 		// divide the matrix among the threads
 		const unsigned int thread_length = total_length / num_used_threads;
@@ -65,6 +65,8 @@ namespace qlm
 		{
 			futures[i].wait();
 		}
+
+		dst = total_sum;
 
 		return Status::SUCCESS;
 	}
