@@ -6,3 +6,4 @@
 #include "types.h"
 #include "panda.h"
 #include "config.h"
+#include "thread_safe_queue.h"
