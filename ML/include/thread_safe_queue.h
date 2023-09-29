@@ -29,7 +29,7 @@ namespace qlm
 			cv.notify_one();
 		}
 
-		void WaitAndPop(T& value)
+		void WaitPop(T& value)
 		{
 			std::unique_lock<std::mutex> lk(mut);
 			cv.wait(lk, [this] {return !data_queue.empty(); });
