@@ -22,7 +22,35 @@ namespace qlm
 		ThreadSafeQueue& operator=(const ThreadSafeQueue&) = delete;
 		ThreadSafeQueue& operator=(ThreadSafeQueue&&) = delete;
 	public:
+		void Push(T new_value)
+		{
+			std::lock_guard<std::mutex> lk(mut);
+			data_queue.push(std::move(new_value));
+			cv.notify_one();
+		}
 
+		void WaitAndPop(T& value)
+		{
+			std::unique_lock<std::mutex> lk(mut);
+			cv.wait(lk, [this] {return !data_queue.empty(); });
+			value = std::move(data_queue.front());
+			data_queue.pop();
+		}
 
+		bool TryPop(T& value)
+		{
+			std::lock_guard<std::mutex> lk(mut);
+			if (data_queue.empty())
+				return false;
+			value = std::move(data_queue.front());
+			data_queue.pop();
+			return true;
+		}
+
+		bool empty() const
+		{
+			std::lock_guard<std::mutex> lk(mut);
+			return data_queue.empty();
+		}
 	};
 }
