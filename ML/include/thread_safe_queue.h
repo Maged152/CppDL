@@ -16,6 +16,9 @@ namespace qlm
 	public:
 		ThreadSafeQueue() = default;
 
+		ThreadSafeQueue(int len) : data_queue(len)
+		{}
+
 		// disable copy and move constructors and the corresponding assignment operators
 		ThreadSafeQueue(const ThreadSafeQueue&) = delete;
 		ThreadSafeQueue(ThreadSafeQueue&&) = delete;
@@ -47,10 +50,16 @@ namespace qlm
 			return true;
 		}
 
-		bool empty() const
+		bool Empty() const
 		{
 			std::lock_guard<std::mutex> lk(mut);
 			return data_queue.empty();
+		}
+
+		int Size() const 
+		{
+			std::lock_guard<std::mutex> lk(mut);
+			return data_queue.size();
 		}
 	};
 }
