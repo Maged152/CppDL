@@ -35,7 +35,7 @@ namespace qlm
 		void WaitPop(T& value)
 		{
 			std::unique_lock<std::mutex> lk(mut);
-			cv.wait(lk, [this] {return !data_queue.empty(); });
+			cv.wait(lk, [this]() {return !data_queue.empty(); });
 			value = std::move(data_queue.front());
 			data_queue.pop();
 		}

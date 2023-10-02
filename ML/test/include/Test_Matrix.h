@@ -3,7 +3,7 @@
 
 namespace test
 {
-	// Matrix - Martix
+	// Matrix - Matrix
 	// add
 	void Test_MatrixAdd(std::vector<int>& mat_width,
 		std::vector<int>& mat_height,
