@@ -13,13 +13,14 @@ namespace qlm
 	{
 	private:
 		std::vector<std::thread> workers;
-		ThreadSafeQueue<std::function<void()> > task_queue;
+		ThreadSafeQueue<std::function<void()>> task_queue;
 
 		std::atomic_bool kill;
 		std::atomic_bool stop;
+
 		mutable std::mutex mut;
 		std::condition_variable cv;
-
+		
 		int thread_count;
 		
 	private:
@@ -44,8 +45,8 @@ namespace qlm
 		// stop and drop all tasks remained in queue
 		void Kill();
 		// submit task
-		template <class f, class... Args>
-		std::future<std::invoke_result<f(Args...)>> Submit(f&& fun, Args &&...args);
+		template <class F, class... Args>
+		std::future<std::invoke_result_t<std::decay_t<F>, std::decay_t<Args>...>>  Submit(F&& fun, Args &&...args);
 	};
 
 
@@ -54,7 +55,6 @@ namespace qlm
 		while (true)
 		{
 			std::function<void()> task;
-
 			{
 				std::unique_lock lk(mut);
 				cv.wait(lk, [this]() {return !task_queue.Empty() || kill || stop; });
@@ -70,26 +70,31 @@ namespace qlm
 		}
 	}
 
-	inline ThreadPool::ThreadPool(const int thread_count) : thread_count(thread_count), kill(false), stop(false)
+	inline ThreadPool::ThreadPool(const int thread_count) : thread_count(thread_count), workers(thread_count), kill(false), stop(false)
 	{
 		for (int i = 0; i < thread_count; i++) 
 		{
-			workers.emplace_back(std::bind(& ThreadPool::WorkerThread, this));
+			workers[i] = std::move(std::thread(std::bind(&ThreadPool::WorkerThread, this)));
 		}
 	}
 
 	inline ThreadPool::~ThreadPool()
 	{
-		this->Stop();
+		stop = true;
+		// notify all threads to finish the remained tasks
+		cv.notify_all();
+		for (auto& worker : workers)
+			worker.join();
 	}
 
-	template<class f, class ...Args>
-	inline std::future<std::invoke_result<f(Args...)>> ThreadPool::Submit(f&& fun, Args && ...args)
+	template<class F, class ...Args>
+	inline std::future<std::invoke_result_t<std::decay_t<F>, std::decay_t<Args>...>> ThreadPool::Submit(F&& fun, Args && ...args)
 	{
-		using return_type = std::invoke_result<f(Args...)>;
+		
+		using return_type = std::invoke_result_t<std::decay_t<F>, std::decay_t<Args>...>;
 
 		auto task = std::make_shared<std::packaged_task<return_type()>>(
-			std::bind(std::forward<f>(fun), std::forward<Args>(args)...));
+			std::bind(std::forward<F>(fun), std::forward<Args>(args)...));
 
 		std::future<return_type> res = task->get_future();
 
@@ -111,8 +116,6 @@ namespace qlm
 		stop = true;
 		// notify all threads to finish the remained tasks
 		cv.notify_all();
-		for (auto& worker : workers)
-			worker.join();
 	}
 
 	inline void ThreadPool::Kill()
@@ -120,8 +123,6 @@ namespace qlm
 		kill = true;
 		// notify all threads to finish the remained tasks
 		cv.notify_all();
-		for (auto& worker : workers)
-			worker.join();
 	}
 
 	inline int qlm::ThreadPool::Size() const
@@ -131,7 +132,6 @@ namespace qlm
 
 	inline bool qlm::ThreadPool::Running() const
 	{
-		std::lock_guard<std::mutex> lk(mut);
 		return !stop && !kill;
 	}
 }
