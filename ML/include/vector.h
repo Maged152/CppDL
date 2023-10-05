@@ -2,6 +2,7 @@
 
 #include <limits>
 #include "types.h"
+#include "thread_pool.h"
 
 namespace qlm
 {
@@ -72,7 +73,7 @@ namespace qlm
     public:
         // vector operations
         // dot product
-        Status Dot(const Vector& src, float& dst, float utilization = 0.5f);
+        Status Dot(const Vector& src, float& dst, ThreadPool& pool);
         // magnitude
         Status Mag(float& dst, float utilization = 0.5f);
         // unit vector

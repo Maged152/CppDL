@@ -13,6 +13,7 @@
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8C2F0D6D-5F1A-47C0-9F37-82E62F89FBFF}</ProjectGuid>
     <RootNamespace>ML</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -48,6 +49,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;WIN64;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)ML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -66,6 +68,7 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;WIN64;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>$(SolutionDir)ML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -85,7 +88,9 @@
     <ClCompile Include="source\matrix\MatrixElemOp.cpp" />
     <ClCompile Include="source\matrix\MatrixElemWiseOp.cpp" />
     <ClCompile Include="source\matrix\MatrixTranspose.cpp" />
+    <ClCompile Include="source\matrix\MatrixVectorOp.cpp" />
     <ClCompile Include="source\vector\Vector.cpp" />
+    <ClCompile Include="source\vector\VectorDot.cpp" />
     <ClCompile Include="source\vector\VectorElemOp.cpp" />
     <ClCompile Include="source\vector\VectorElemWiseOp.cpp" />
     <ClCompile Include="test\source\matrix\Test_MatrixAdd.cpp" />
@@ -98,20 +103,30 @@
     <ClCompile Include="test\source\matrix\Test_MatrixScalarSub.cpp" />
     <ClCompile Include="test\source\matrix\Test_MatrixSub.cpp" />
     <ClCompile Include="test\source\matrix\Test_MatrixTranspose.cpp" />
+    <ClCompile Include="test\source\matrix\Test_MatrixVectorAdd.cpp" />
+    <ClCompile Include="test\source\matrix\Test_MatrixVectorDiv.cpp" />
+    <ClCompile Include="test\source\matrix\Test_MatrixVectorMul.cpp" />
+    <ClCompile Include="test\source\matrix\Test_MatrixVectorSub.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorAdd.cpp" />
+    <ClCompile Include="test\source\vector\Test_VectorAngle.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorDiv.cpp" />
+    <ClCompile Include="test\source\vector\Test_VectorDot.cpp" />
+    <ClCompile Include="test\source\vector\Test_VectorMag.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorMul.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorScalarAdd.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorScalarDiv.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorScalarMul.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorScalarSub.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorSub.cpp" />
+    <ClCompile Include="test\source\vector\Test_VectorUnit.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\config.h" />
     <ClInclude Include="include\matrix.h" />
     <ClInclude Include="include\panda.h" />
     <ClInclude Include="include\shakhbat_ml.h" />
+    <ClInclude Include="include\thread_pool.h" />
+    <ClInclude Include="include\thread_safe_queue.h" />
     <ClInclude Include="include\types.h" />
     <ClInclude Include="include\vector.h" />
     <ClInclude Include="test\include\Test_Matrix.h" />

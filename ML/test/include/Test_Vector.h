@@ -1,5 +1,6 @@
 #pragma once
 #include<vector>
+#include <thread>
 
 namespace test
 {
@@ -57,7 +58,7 @@ namespace test
 	// vector operations
 	// dot product
 	void Test_VectorDot(std::vector<int>& vec_len,
-		float utilization = 0.5f,
+		int num_threads = std::thread::hardware_concurrency(),
 		float threshold = 0.001f,
 		float min = 0.0f,
 		float max = 1.0f);

@@ -17,7 +17,7 @@ void TestVectorDot(const Vector& src1, const Vector& src2, float& dst)
 	}
 }
 
-void test::Test_VectorDot(std::vector<int>& vec_len, float utilization, float threshold, float min, float max)
+void test::Test_VectorDot(std::vector<int>& vec_len, int num_threads, float threshold, float min, float max)
 {
 	HANDLE col_handle;
 	col_handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -48,6 +48,8 @@ void test::Test_VectorDot(std::vector<int>& vec_len, float utilization, float th
 
 		float current_threshold = threshold * len;
 
+		ThreadPool pool{ num_threads };
+
 		SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
 		cout << "length  : " << len << "\n";
 
@@ -68,7 +70,7 @@ void test::Test_VectorDot(std::vector<int>& vec_len, float utilization, float th
 		ref.End();
 		// multi-threading code
 		opt.Start();
-		auto status = src1.Dot(src2, dst_opt, utilization);
+		auto status = src1.Dot(src2, dst_opt, pool);
 		opt.End();
 		// compare the results
 		bool res = TestCompare(dst_ref, dst_opt, current_threshold);
