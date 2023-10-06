@@ -17,7 +17,7 @@ void TestVectorAdd(const Vector& src1, const Vector& src2, Vector& dst)
 	}
 }
 
-void test::Test_VectorAdd(std::vector<int>& vec_len, float utilization, float threshold, float min, float max)
+void test::Test_VectorAdd(std::vector<int>& vec_len, int num_threads, float threshold, float min, float max)
 {
 	HANDLE col_handle;
 	col_handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -25,7 +25,7 @@ void test::Test_VectorAdd(std::vector<int>& vec_len, float utilization, float th
 	if (vec_len.size() == 0)
 	{
 		SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_LIGHT_RED);
-		cout << "Dimensions array must have valus\n";
+		cout << "Dimensions array must have values\n";
 		return;
 	}
 
@@ -49,7 +49,9 @@ void test::Test_VectorAdd(std::vector<int>& vec_len, float utilization, float th
 		int len = vec_len[l];
 
 		SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
-		cout << "lenght  : " << len << "\n";
+		cout << "length  : " << len << "\n";
+
+		ThreadPool pool{ num_threads };
 
 		Timer<usec> ref;
 		Timer<usec> opt;
@@ -68,7 +70,7 @@ void test::Test_VectorAdd(std::vector<int>& vec_len, float utilization, float th
 		ref.End();
 		// add Vector function
 		opt.Start();
-		auto status = src1.Add(src2, dst_opt, utilization);
+		auto status = src1.Add(src2, dst_opt, pool);
 		opt.End();
 		// compare the results
 		bool res = TestCompare(dst_ref, dst_opt, threshold);
@@ -89,7 +91,7 @@ void test::Test_VectorAdd(std::vector<int>& vec_len, float utilization, float th
 	else
 	{
 		SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
-		std::cout << "All test casses PASSED\n";
+		std::cout << "All test cases PASSED\n";
 	}
 
 	SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_WHITE);

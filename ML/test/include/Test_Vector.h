@@ -7,25 +7,25 @@ namespace test
 	// Vector - Vector
 	// add
 	void Test_VectorAdd(std::vector<int>& vec_len,
-		float utilization = 0.5f,
+		int num_threads = std::thread::hardware_concurrency(),
 		float threshold = 0.001f,
 		float min = 0.0f,
 		float max = 1.0f);
 	// sub
 	void Test_VectorSub(std::vector<int>& vec_len,
-		float utilization = 0.5f,
+		int num_threads = std::thread::hardware_concurrency(),
 		float threshold = 0.001f,
 		float min = 0.0f,
 		float max = 1.0f);
 	// mul
 	void Test_VectorMul(std::vector<int>& vec_len,
-		float utilization = 0.5f,
+		int num_threads = std::thread::hardware_concurrency(),
 		float threshold = 0.001f,
 		float min = 0.0f,
 		float max = 1.0f);
 	// div
 	void Test_VectorDiv(std::vector<int>& vec_len,
-		float utilization = 0.5f,
+		int num_threads = std::thread::hardware_concurrency(),
 		float threshold = 0.001f,
 		float min = 0.0f,
 		float max = 1.0f);

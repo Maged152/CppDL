@@ -15,7 +15,7 @@ namespace qlm
 
     private:
         template<typename op>
-        Status VectorElemWiseOp(const Vector& src, Vector& dst, float utilization = 0.5f);
+        Status VectorElemWiseOp(const Vector& src, Vector& dst, ThreadPool& pool);
 
         template<typename op>
         Status VectorElemOp(const float src, Vector& dst, float utilization = 0.5f);
@@ -85,13 +85,13 @@ namespace qlm
     public:
         // vector-vector operations
         // vector addition
-        Status Add(const Vector& src, Vector& dst, float utilization = 0.5f);
+        Status Add(const Vector& src, Vector& dst, ThreadPool& pool);
         // vector subtraction
-        Status Sub(const Vector& src, Vector& dst, float utilization = 0.5f);
+        Status Sub(const Vector& src, Vector& dst, ThreadPool& pool);
         // vector multiplication
-        Status Mul(const Vector& src, Vector& dst, float utilization = 0.5f);
+        Status Mul(const Vector& src, Vector& dst, ThreadPool& pool);
         // vector division
-        Status Div(const Vector& src, Vector& dst, float utilization = 0.5f);
+        Status Div(const Vector& src, Vector& dst, ThreadPool& pool);
     public:
         // Vector-scalar operations
         // addition

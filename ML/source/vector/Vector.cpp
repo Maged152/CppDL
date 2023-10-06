@@ -7,24 +7,24 @@
 namespace qlm
 {
 	// Vector element wise operations +,-,*,/
-	Status Vector::Add(const Vector& src, Vector& dst, float utilization)
+	Status Vector::Add(const Vector& src, Vector& dst, ThreadPool& pool)
 	{
-		return this->VectorElemWiseOp<std::plus<float>>(src, dst, utilization);
+		return this->VectorElemWiseOp<std::plus<float>>(src, dst, pool);
 	}
 
-	Status Vector::Sub(const Vector& src, Vector& dst, float utilization)
+	Status Vector::Sub(const Vector& src, Vector& dst, ThreadPool& pool)
 	{
-		return this->VectorElemWiseOp<std::minus<float>>(src, dst, utilization);
+		return this->VectorElemWiseOp<std::minus<float>>(src, dst, pool);
 	}
 
-	Status Vector::Mul(const Vector& src, Vector& dst, float utilization)
+	Status Vector::Mul(const Vector& src, Vector& dst, ThreadPool& pool)
 	{
-		return this->VectorElemWiseOp<std::multiplies<float>>(src, dst, utilization);
+		return this->VectorElemWiseOp<std::multiplies<float>>(src, dst, pool);
 	}
 
-	Status Vector::Div(const Vector& src, Vector& dst, float utilization)
+	Status Vector::Div(const Vector& src, Vector& dst, ThreadPool& pool)
 	{
-		return this->VectorElemWiseOp<std::divides<float>>(src, dst, utilization);
+		return this->VectorElemWiseOp<std::divides<float>>(src, dst, pool);
 	}
 
 	// Vector scalar wise operations +,-,*,/
