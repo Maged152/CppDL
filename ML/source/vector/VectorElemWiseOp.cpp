@@ -1,5 +1,4 @@
 #include "vector.h"
-#include "config.h"
 #include <vector>
 #include <omp.h>
 #include <future>

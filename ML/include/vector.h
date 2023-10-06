@@ -18,7 +18,7 @@ namespace qlm
         Status VectorElemWiseOp(const Vector& src, Vector& dst, ThreadPool& pool);
 
         template<typename op>
-        Status VectorElemOp(const float src, Vector& dst, float utilization = 0.5f);
+        Status VectorElemOp(const float src, Vector& dst, ThreadPool& pool);
 
     public:
         // Default constructor
@@ -75,13 +75,13 @@ namespace qlm
         // dot product
         Status Dot(const Vector& src, float& dst, ThreadPool& pool);
         // magnitude
-        Status Mag(float& dst, float utilization = 0.5f);
+        Status Mag(float& dst, ThreadPool& pool);
         // unit vector
-        Status Unit(Vector& dst, float utilization = 0.5f);
+        Status Unit(Vector& dst, ThreadPool& pool);
         // angle
-        Status Angle(const Vector& src, float& dst, float utilization = 0.5f);
+        Status Angle(const Vector& src, float& dst, ThreadPool& pool);
         // transform using transformation matrix
-        Status Transform(const Matrix& transform, Vector& dst, float utilization = 0.5f);
+        Status Transform(const Matrix& transform, Vector& dst, ThreadPool& pool);
     public:
         // vector-vector operations
         // vector addition
@@ -95,13 +95,13 @@ namespace qlm
     public:
         // Vector-scalar operations
         // addition
-        Status Add(const float src, Vector& dst, float utilization = 0.5f);
+        Status Add(const float src, Vector& dst, ThreadPool& pool);
         // subtraction
-        Status Sub(const float src, Vector& dst, float utilization = 0.5f);
+        Status Sub(const float src, Vector& dst, ThreadPool& pool);
         // multiplication
-        Status Mul(const float src, Vector& dst, float utilization = 0.5f);
+        Status Mul(const float src, Vector& dst, ThreadPool& pool);
         // division
-        Status Div(const float src, Vector& dst, float utilization = 0.5f);
+        Status Div(const float src, Vector& dst, ThreadPool& pool);
 
         //--------------------------------------------------------------//
         friend class Matrix;

@@ -28,27 +28,27 @@ namespace qlm
 	}
 
 	// Vector scalar wise operations +,-,*,/
-	Status Vector::Add(const float src, Vector& dst, float utilization)
+	Status Vector::Add(const float src, Vector& dst, ThreadPool& pool)
 	{
-		return this->VectorElemOp<std::plus<float>>(src, dst, utilization);
+		return this->VectorElemOp<std::plus<float>>(src, dst, pool);
 	}
 
-	Status Vector::Sub(const float src, Vector& dst, float utilization)
+	Status Vector::Sub(const float src, Vector& dst, ThreadPool& pool)
 	{
-		return this->VectorElemOp<std::minus<float>>(src, dst, utilization);
+		return this->VectorElemOp<std::minus<float>>(src, dst, pool);
 	}
 
-	Status Vector::Mul(const float src, Vector& dst, float utilization)
+	Status Vector::Mul(const float src, Vector& dst, ThreadPool& pool)
 	{
-		return this->VectorElemOp<std::multiplies<float>>(src, dst, utilization);
+		return this->VectorElemOp<std::multiplies<float>>(src, dst, pool);
 	}
 
-	Status Vector::Div(const float src, Vector& dst, float utilization)
+	Status Vector::Div(const float src, Vector& dst, ThreadPool& pool)
 	{
-		return this->VectorElemOp<std::divides<float>>(src, dst, utilization);
+		return this->VectorElemOp<std::divides<float>>(src, dst, pool);
 	}
 
-
+	// Vector helper functions
 	void Vector::RandomInit(const float min_value, const float max_value)
 	{
 		std::random_device rd;

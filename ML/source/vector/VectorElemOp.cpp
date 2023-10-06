@@ -1,5 +1,4 @@
 #include "vector.h"
-#include "config.h"
 #include <vector>
 #include <omp.h>
 #include <future>
@@ -7,9 +6,9 @@
 namespace qlm
 {
 	template<typename op>
-	inline Status Vector::VectorElemOp(const float val, Vector& dst, float utilization)
+	inline Status Vector::VectorElemOp(const float val, Vector& dst, ThreadPool& pool)
 	{
-		if (utilization <= 0)
+		if (pool.Size() <= 0)
 		{
 			return Status::INVALID_UTILIZATION;
 		}
@@ -19,7 +18,7 @@ namespace qlm
 			return Status::INVALID_DIMENTIONS;
 		}
 
-		const unsigned int num_used_threads = utilization > 1.0f ? static_cast<unsigned int>(utilization) : static_cast<unsigned int>(utilization * num_threads);
+		const unsigned int num_used_threads = pool.Size();
 		const unsigned int total_length = len;
 
 		auto op_vec = [](const float* const __restrict  src1, const float val, float* const __restrict  dst, const unsigned int size)
@@ -41,14 +40,14 @@ namespace qlm
 #pragma omp unroll full
 		for (unsigned int i = 0; i < thread_tail_length; i++)
 		{
-			futures[i] = std::async(std::launch::async, op_vec, &data[next_idx], val, &dst.data[next_idx], thread_length + 1);
+			futures[i] = pool.Submit(op_vec, &data[next_idx], val, &dst.data[next_idx], thread_length + 1);
 			next_idx += thread_length + 1;
 		}
 
 #pragma omp unroll full
 		for (unsigned int i = thread_tail_length; i < num_used_threads; i++)
 		{
-			futures[i] = std::async(std::launch::async, op_vec, &data[next_idx], val, &dst.data[next_idx], thread_length);
+			futures[i] = pool.Submit(op_vec, &data[next_idx], val, &dst.data[next_idx], thread_length);
 			next_idx += thread_length;
 		}
 		// wait for the threads to finish
@@ -62,8 +61,8 @@ namespace qlm
 	}
 
 
-	template Status Vector::VectorElemOp<std::plus<float>>(const float, Vector&, float);
-	template Status Vector::VectorElemOp<std::minus<float>>(const float, Vector&, float);
-	template Status Vector::VectorElemOp<std::multiplies<float>>(const float, Vector&, float);
-	template Status Vector::VectorElemOp<std::divides<float>>(const float, Vector&, float);
+	template Status Vector::VectorElemOp<std::plus<float>>(const float, Vector&, ThreadPool&);
+	template Status Vector::VectorElemOp<std::minus<float>>(const float, Vector&, ThreadPool&);
+	template Status Vector::VectorElemOp<std::multiplies<float>>(const float, Vector&, ThreadPool&);
+	template Status Vector::VectorElemOp<std::divides<float>>(const float, Vector&, ThreadPool&);
 }
