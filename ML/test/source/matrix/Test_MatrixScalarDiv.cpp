@@ -17,7 +17,7 @@ void TestMatrixDiv(const Matrix& src1, const float val, Matrix& dst)
 	}
 }
 
-void test::Test_MatrixScalarDiv(std::vector<int>& mat_rows, std::vector<int>& mat_cols, float utilization, float threshold, float min, float max)
+void test::Test_MatrixScalarDiv(std::vector<int>& mat_rows, std::vector<int>& mat_cols, int num_threads, float threshold, float min, float max)
 {
 	HANDLE col_handle;
 	col_handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -25,7 +25,7 @@ void test::Test_MatrixScalarDiv(std::vector<int>& mat_rows, std::vector<int>& ma
 	if (mat_rows.size() == 0 || mat_cols.size() == 0)
 	{
 		SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_LIGHT_RED);
-		cout << "Dimensions array must have valus\n";
+		cout << "Dimensions array must have values\n";
 		return;
 	}
 
@@ -52,6 +52,8 @@ void test::Test_MatrixScalarDiv(std::vector<int>& mat_rows, std::vector<int>& ma
 
 			SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
 			cout << "Rows  : " << row << "\n" << "Cols  : " << col << "\n";
+			
+			ThreadPool pool{ num_threads };
 
 			Timer<usec> ref;
 			Timer<usec> opt;
@@ -73,7 +75,7 @@ void test::Test_MatrixScalarDiv(std::vector<int>& mat_rows, std::vector<int>& ma
 			ref.End();
 			// add matrix function
 			opt.Start();
-			auto status = src1.Div(val, dst_opt, utilization);
+			auto status = src1.Div(val, dst_opt, pool);
 			opt.End();
 			// compare the results
 			bool res = TestCompare(dst_ref, dst_opt, threshold);
@@ -96,7 +98,7 @@ void test::Test_MatrixScalarDiv(std::vector<int>& mat_rows, std::vector<int>& ma
 	else
 	{
 		SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
-		std::cout << "All test casses PASSED\n";
+		std::cout << "All test cases PASSED\n";
 	}
 
 	SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_WHITE);

@@ -1,6 +1,5 @@
 #include "matrix.h"
 #include "vector.h"
-#include "config.h"
 #include <vector>
 #include <functional>
 #include <omp.h>
@@ -9,9 +8,9 @@
 namespace qlm
 {
 	template<typename op>
-	inline Status Matrix::MatrixVectorOp(const Vector& src, Matrix& dst, const BroadCast& broad_cast, float utilization)
+	inline Status Matrix::MatrixVectorOp(const Vector& src, Matrix& dst, const BroadCast& broad_cast, ThreadPool& pool)
 	{
-		if (utilization <= 0)
+		if (pool.Size() <= 0)
 		{
 			return Status::INVALID_UTILIZATION;
 		}
@@ -21,7 +20,7 @@ namespace qlm
 			return Status::INVALID_DIMENTIONS;
 		}
 
-		unsigned int num_used_threads = utilization > 1.0f ? static_cast<unsigned int>(utilization) : static_cast<unsigned int>(utilization * num_threads);
+		unsigned int num_used_threads = pool.Size();
 		int dim_1, dim_2;
 		std::function<void(const int, const int, const float* const, const float* const, const int, const int, float* const)> vec_mat;
 
@@ -79,14 +78,14 @@ namespace qlm
 #pragma omp unroll full
 		for (unsigned int i = 0; i < thread_tail; i++)
 		{
-			futures[i] = std::async(std::launch::async, vec_mat, dim_1_per_thread + 1, next_dim_1, data, src.data, dim_1, dim_2, dst.data);
+			futures[i] = pool.Submit(vec_mat, dim_1_per_thread + 1, next_dim_1, data, src.data, dim_1, dim_2, dst.data);
 			next_dim_1 += dim_1_per_thread + 1;
 		}
 
 #pragma omp unroll full
 		for (unsigned int i = thread_tail; i < num_used_threads; i++)
 		{
-			futures[i] = std::async(std::launch::async, vec_mat, dim_1_per_thread, next_dim_1, data, src.data, dim_1, dim_2, dst.data);
+			futures[i] = pool.Submit(vec_mat, dim_1_per_thread, next_dim_1, data, src.data, dim_1, dim_2, dst.data);
 			next_dim_1 += dim_1_per_thread;
 		}
 
@@ -100,8 +99,8 @@ namespace qlm
 		return Status::SUCCESS;
 	}
 
-	template Status Matrix::MatrixVectorOp<std::plus<float>>(const Vector&, Matrix&, const BroadCast&, float);
-	template Status Matrix::MatrixVectorOp<std::minus<float>>(const Vector&, Matrix&, const BroadCast&, float);
-	template Status Matrix::MatrixVectorOp<std::multiplies<float>>(const Vector&, Matrix&, const BroadCast&, float);
-	template Status Matrix::MatrixVectorOp<std::divides<float>>(const Vector&, Matrix&, const BroadCast&, float);
+	template Status Matrix::MatrixVectorOp<std::plus<float>>(const Vector&, Matrix&, const BroadCast&, ThreadPool&);
+	template Status Matrix::MatrixVectorOp<std::minus<float>>(const Vector&, Matrix&, const BroadCast&, ThreadPool&);
+	template Status Matrix::MatrixVectorOp<std::multiplies<float>>(const Vector&, Matrix&, const BroadCast&, ThreadPool&);
+	template Status Matrix::MatrixVectorOp<std::divides<float>>(const Vector&, Matrix&, const BroadCast&, ThreadPool&);
 }

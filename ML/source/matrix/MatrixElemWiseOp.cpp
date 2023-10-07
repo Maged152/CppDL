@@ -1,5 +1,4 @@
 #include "matrix.h"
-#include "config.h"
 #include <vector>
 #include <omp.h>
 #include <future>
@@ -7,9 +6,9 @@
 namespace qlm
 {
 	template<typename op>
-	inline Status Matrix::MatrixElemWiseOp(const Matrix& src, Matrix& dst, float utilization)
+	inline Status Matrix::MatrixElemWiseOp(const Matrix& src, Matrix& dst, ThreadPool& pool)
 	{
-		if (utilization <= 0)
+		if (pool.Size() <= 0)
 		{
 			return Status::INVALID_UTILIZATION;
 		}
@@ -19,7 +18,7 @@ namespace qlm
 			return Status::INVALID_DIMENTIONS;
 		}
 
-		const unsigned int num_used_threads = utilization > 1.0f ? static_cast<unsigned int>(utilization) : static_cast<unsigned int>(utilization * num_threads);
+		const unsigned int num_used_threads = pool.Size();
 		const unsigned int total_length = rows * columns;
 
 		auto op_mat = [](const float* __restrict  src1, const float* __restrict  src2, float* __restrict  dst, const unsigned int size)
@@ -41,14 +40,14 @@ namespace qlm
 		#pragma omp unroll full
 		for (unsigned int i = 0; i < thread_tail_length; i++)
 		{
-			futures[i] = std::async(std::launch::async, op_mat, &data[next_idx], &src.data[next_idx], &dst.data[next_idx], thread_length + 1);
+			futures[i] = pool.Submit(op_mat, &data[next_idx], &src.data[next_idx], &dst.data[next_idx], thread_length + 1);
 			next_idx += thread_length + 1;
 		}
 
 		#pragma omp unroll full
 		for (unsigned int i = thread_tail_length; i < num_used_threads; i++)
 		{
-			futures[i] = std::async(std::launch::async, op_mat, &data[next_idx], &src.data[next_idx], &dst.data[next_idx], thread_length);
+			futures[i] = pool.Submit(op_mat, &data[next_idx], &src.data[next_idx], &dst.data[next_idx], thread_length);
 			next_idx += thread_length;
 		}
 		// wait for the threads to finish
@@ -62,8 +61,8 @@ namespace qlm
 	}
 
 
-	template Status Matrix::MatrixElemWiseOp<std::plus<float>>(const Matrix&, Matrix&, float );
-	template Status Matrix::MatrixElemWiseOp<std::minus<float>>(const Matrix&, Matrix&, float);
-	template Status Matrix::MatrixElemWiseOp<std::multiplies<float>>(const Matrix&, Matrix&, float);
-	template Status Matrix::MatrixElemWiseOp<std::divides<float>>(const Matrix&, Matrix&, float);
+	template Status Matrix::MatrixElemWiseOp<std::plus<float>>(const Matrix&, Matrix&, ThreadPool&);
+	template Status Matrix::MatrixElemWiseOp<std::minus<float>>(const Matrix&, Matrix&, ThreadPool&);
+	template Status Matrix::MatrixElemWiseOp<std::multiplies<float>>(const Matrix&, Matrix&, ThreadPool&);
+	template Status Matrix::MatrixElemWiseOp<std::divides<float>>(const Matrix&, Matrix&, ThreadPool&);
 }

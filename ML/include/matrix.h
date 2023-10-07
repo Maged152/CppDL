@@ -2,7 +2,7 @@
 
 #include <limits>
 #include "types.h"
-
+#include "thread_pool.h"
 namespace qlm
 {
     class Vector;
@@ -15,13 +15,13 @@ namespace qlm
 
     private:
         template<typename op>
-        Status MatrixElemWiseOp(const Matrix& src, Matrix& dst, float utilization = 0.5f);
+        Status MatrixElemWiseOp(const Matrix& src, Matrix& dst,ThreadPool& pool);
 
         template<typename op>
-        Status MatrixElemOp(const float src, Matrix& dst, float utilization = 0.5f);
+        Status MatrixElemOp(const float src, Matrix& dst,ThreadPool& pool);
 
         template<typename op>
-        Status MatrixVectorOp(const Vector& src, Matrix& dst, const BroadCast& broad_cast, float utilization = 0.5f);
+        Status MatrixVectorOp(const Vector& src, Matrix& dst, const BroadCast& broad_cast,ThreadPool& pool);
 
     public:
         // Default constructor
@@ -98,37 +98,37 @@ namespace qlm
     public:
         // matrix-matrix operations
         // matrix addition
-        Status Add(const Matrix& src, Matrix& dst, float utilization = 0.5f);
+        Status Add(const Matrix& src, Matrix& dst,ThreadPool& pool);
         // matrix subtraction
-        Status Sub(const Matrix& src, Matrix& dst, float utilization = 0.5f);
+        Status Sub(const Matrix& src, Matrix& dst,ThreadPool& pool);
         // matrix element wise multiplication
-        Status Mul(const Matrix& src, Matrix& dst, float utilization = 0.5f);
+        Status Mul(const Matrix& src, Matrix& dst,ThreadPool& pool);
         // matrix element wise division
-        Status Div(const Matrix& src, Matrix& dst, float utilization = 0.5f);
+        Status Div(const Matrix& src, Matrix& dst,ThreadPool& pool);
         // matrix multiplication
-        Status Dot(const Matrix& src, Matrix& dst, float utilization = 0.5f);
+        Status Dot(const Matrix& src, Matrix& dst,ThreadPool& pool);
         // matrix transpose
-        Status Transpose(Matrix& dst, float utilization = 0.5f);
+        Status Transpose(Matrix& dst,ThreadPool& pool);
     public:
         // matrix-vector operations
         // addition
-        Status Add(const Vector& src, Matrix& dst, const BroadCast& broad_cast, float utilization = 0.5f);
+        Status Add(const Vector& src, Matrix& dst, const BroadCast& broad_cast,ThreadPool& pool);
         // subtraction
-        Status Sub(const Vector& src, Matrix& dst, const BroadCast& broad_cast, float utilization = 0.5f);
+        Status Sub(const Vector& src, Matrix& dst, const BroadCast& broad_cast,ThreadPool& pool);
         // multiplication
-        Status Mul(const Vector& src, Matrix& dst, const BroadCast& broad_cast, float utilization = 0.5f);
+        Status Mul(const Vector& src, Matrix& dst, const BroadCast& broad_cast,ThreadPool& pool);
         // division
-        Status Div(const Vector& src, Matrix& dst, const BroadCast& broad_cast, float utilization = 0.5f);
+        Status Div(const Vector& src, Matrix& dst, const BroadCast& broad_cast,ThreadPool& pool);
     public:
         // matrix-scalar operations
         // addition
-        Status Add(const float src, Matrix& dst, float utilization = 0.5f);
+        Status Add(const float src, Matrix& dst,ThreadPool& pool);
         // subtraction
-        Status Sub(const float src, Matrix& dst, float utilization = 0.5f);
+        Status Sub(const float src, Matrix& dst,ThreadPool& pool);
         // element wise multiplication
-        Status Mul(const float src, Matrix& dst, float utilization = 0.5f);
+        Status Mul(const float src, Matrix& dst,ThreadPool& pool);
         // element wise division
-        Status Div(const float src, Matrix& dst, float utilization = 0.5f);
+        Status Div(const float src, Matrix& dst,ThreadPool& pool);
 
     };
 }

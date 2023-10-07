@@ -20,7 +20,7 @@ void TestMatrixMul(const Matrix& src1, const Matrix& src2, Matrix& dst)
 	}
 }
 
-void test::Test_MatrixMul(std::vector<int>& mat_rows, std::vector<int>& mat_cols, float utilization, float threshold, float min, float max)
+void test::Test_MatrixMul(std::vector<int>& mat_rows, std::vector<int>& mat_cols, int num_threads, float threshold, float min, float max)
 {
 	HANDLE col_handle;
 	col_handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -28,7 +28,7 @@ void test::Test_MatrixMul(std::vector<int>& mat_rows, std::vector<int>& mat_cols
 	if (mat_rows.size() == 0 || mat_cols.size() == 0)
 	{
 		SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_LIGHT_RED);
-		cout << "Dimensions array must have valus\n";
+		cout << "Dimensions array must have values\n";
 		return;
 	}
 
@@ -40,7 +40,7 @@ void test::Test_MatrixMul(std::vector<int>& mat_rows, std::vector<int>& mat_cols
 	}
 
 	SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_BLUE);
-	cout << "Matrix element wise multilpication test\n";
+	cout << "Matrix element wise multiplication test\n";
 	cout << "Number of test cases = " << mat_rows.size() * mat_cols.size() << "\n";
 
 	int num_failed_cases = 0;
@@ -55,6 +55,8 @@ void test::Test_MatrixMul(std::vector<int>& mat_rows, std::vector<int>& mat_cols
 
 			SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
 			cout << "Rows  : " << row << "\n" << "Cols  : " << col << "\n";
+
+			ThreadPool pool{ num_threads };
 
 			Timer<usec> ref;
 			Timer<usec> opt;
@@ -73,7 +75,7 @@ void test::Test_MatrixMul(std::vector<int>& mat_rows, std::vector<int>& mat_cols
 			ref.End();
 			// add matrix function
 			opt.Start();
-			auto status = src1.Mul(src2, dst_opt, utilization);
+			auto status = src1.Mul(src2, dst_opt, pool);
 			opt.End();
 			// compare the results
 			bool res = TestCompare(dst_ref, dst_opt, threshold);
@@ -95,7 +97,7 @@ void test::Test_MatrixMul(std::vector<int>& mat_rows, std::vector<int>& mat_cols
 	else
 	{
 		SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
-		std::cout << "All test casses PASSED\n";
+		std::cout << "All test cases PASSED\n";
 	}
 
 	SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_WHITE);

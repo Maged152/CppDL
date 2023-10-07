@@ -1,5 +1,4 @@
 #include "matrix.h"
-#include "config.h"
 #include <vector>
 #include <functional>
 #include <omp.h>
@@ -7,9 +6,9 @@
 
 namespace qlm
 {
-	Status Matrix::Transpose(Matrix& dst, float utilization)
+	Status Matrix::Transpose(Matrix& dst, ThreadPool& pool)
 	{
-		if (utilization <= 0)
+		if (pool.Size() <= 0)
 		{
 			return Status::INVALID_UTILIZATION;
 		}
@@ -19,7 +18,7 @@ namespace qlm
 			return Status::INVALID_DIMENTIONS;
 		}
 
-		unsigned int num_used_threads = utilization > 1.0f ? static_cast<unsigned int>(utilization) : static_cast<unsigned int>(utilization * num_threads);
+		unsigned int num_used_threads = pool.Size();
 		int dim_1, dim_2;
 		std::function<void(const int, const int, const float* const, const int, const int, float* const)> transpose_mat;
 
@@ -73,14 +72,14 @@ namespace qlm
 		#pragma omp unroll full
 		for (unsigned int i = 0; i < thread_tail; i++)
 		{
-			futures[i] = std::async(std::launch::async, transpose_mat, dim_1_per_thread + 1, next_dim_1, data, dim_1, dim_2, dst.data);
+			futures[i] = pool.Submit(transpose_mat, dim_1_per_thread + 1, next_dim_1, data, dim_1, dim_2, dst.data);
 			next_dim_1 += dim_1_per_thread + 1;
 		}
 
 		#pragma omp unroll full
 		for (unsigned int i = thread_tail; i < num_used_threads; i++)
 		{
-			futures[i] = std::async(std::launch::async, transpose_mat, dim_1_per_thread, next_dim_1, data, dim_1, dim_2, dst.data);
+			futures[i] = pool.Submit(transpose_mat, dim_1_per_thread, next_dim_1, data, dim_1, dim_2, dst.data);
 			next_dim_1 += dim_1_per_thread;
 		}
 

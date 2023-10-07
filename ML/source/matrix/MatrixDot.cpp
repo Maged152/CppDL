@@ -1,14 +1,13 @@
 #include "matrix.h"
-#include "config.h"
 #include <vector>
 #include <omp.h>
 #include <future>
 
 namespace qlm
 {
-	Status Matrix::Dot(const Matrix& src, Matrix& dst, float utilization)
+	Status Matrix::Dot(const Matrix& src, Matrix& dst, ThreadPool& pool)
 	{
-		if (utilization <= 0)
+		if (pool.Size() <= 0)
 		{
 			return Status::INVALID_UTILIZATION;
 		}
@@ -18,7 +17,7 @@ namespace qlm
 			return Status::INVALID_DIMENTIONS;
 		}
 
-		unsigned int num_used_threads = utilization > 1.0f ? static_cast<unsigned int>(utilization) : static_cast<unsigned int>(utilization * num_threads);
+		unsigned int num_used_threads = pool.Size();
 		const unsigned int total_rows = rows;
 		num_used_threads = total_rows < num_used_threads ? total_rows : num_used_threads;
 
@@ -51,14 +50,14 @@ namespace qlm
 		#pragma omp unroll full
 		for (unsigned int i = 0; i < thread_tail; i++)
 		{
-			futures[i] = std::async(std::launch::async, dot_mat, rows_per_thread + 1, next_row, data, src.data, src.rows, src.columns, dst.data);
+			futures[i] = pool.Submit(dot_mat, rows_per_thread + 1, next_row, data, src.data, src.rows, src.columns, dst.data);
 			next_row += rows_per_thread + 1;
 		}
 
 		#pragma omp unroll full
 		for (unsigned int i = thread_tail; i < num_used_threads; i++)
 		{
-			futures[i] = std::async(std::launch::async, dot_mat, rows_per_thread, next_row, data, src.data, src.rows, src.columns, dst.data);
+			futures[i] = pool.Submit(dot_mat, rows_per_thread, next_row, data, src.data, src.rows, src.columns, dst.data);
 			next_row += rows_per_thread;
 		}
 

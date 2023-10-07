@@ -35,7 +35,7 @@
 //	angle = std::acosf(dot / (mag1 * mag2)) * 180.0f / std::numbers::pi;
 //}
 //
-//void test::Test_VectorAngle(std::vector<int>& vec_len, float utilization, float threshold, float min, float max)
+//void test::Test_VectorAngle(std::vector<int>& vec_len, int num_threads, float threshold, float min, float max)
 //{
 //	HANDLE col_handle;
 //	col_handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -86,7 +86,7 @@
 //		ref.End();
 //		// multi-threading code
 //		opt.Start();
-//		auto status = src1.Angle(src2, dst_opt, utilization);
+//		auto status = src1.Angle(src2, dst_opt, pool);
 //		opt.End();
 //		// compare the results
 //		bool res = TestCompare(dst_ref, dst_opt, threshold);

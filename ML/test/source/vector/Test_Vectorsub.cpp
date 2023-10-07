@@ -91,7 +91,7 @@ void test::Test_VectorSub(std::vector<int>& vec_len, int num_threads, float thre
 	else
 	{
 		SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
-		std::cout << "All test casses PASSED\n";
+		std::cout << "All test cases PASSED\n";
 	}
 
 	SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_WHITE);

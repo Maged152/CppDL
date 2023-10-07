@@ -19,7 +19,7 @@
 //	dst = std::sqrtf(dst);
 //}
 //
-//void test::Test_VectorMag(std::vector<int>& vec_len, float utilization, float threshold, float min, float max)
+//void test::Test_VectorMag(std::vector<int>& vec_len, int num_threads, float threshold, float min, float max)
 //{
 //	HANDLE col_handle;
 //	col_handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -68,7 +68,7 @@
 //		ref.End();
 //		// multi-threading code
 //		opt.Start();
-//		auto status = src.Mag(dst_opt, utilization);
+//		auto status = src.Mag(dst_opt, pool);
 //		opt.End();
 //		// compare the results
 //		bool res = TestCompare(dst_ref, dst_opt, threshold);

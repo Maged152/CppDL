@@ -7,66 +7,66 @@
 namespace qlm
 {
 	// matrix element wise operations +,-,*,/
-	Status Matrix::Add(const Matrix& src, Matrix& dst, float utilization)
+	Status Matrix::Add(const Matrix& src, Matrix& dst, ThreadPool& pool)
 	{
-		return this->MatrixElemWiseOp<std::plus<float>>(src, dst, utilization);
+		return this->MatrixElemWiseOp<std::plus<float>>(src, dst, pool);
 	}
 
-	Status Matrix::Sub(const Matrix& src, Matrix& dst, float utilization)
+	Status Matrix::Sub(const Matrix& src, Matrix& dst, ThreadPool& pool)
 	{
-		return this->MatrixElemWiseOp<std::minus<float>>(src, dst, utilization);
+		return this->MatrixElemWiseOp<std::minus<float>>(src, dst, pool);
 	}
 
-	Status Matrix::Mul(const Matrix& src, Matrix& dst, float utilization)
+	Status Matrix::Mul(const Matrix& src, Matrix& dst, ThreadPool& pool)
 	{
-		return this->MatrixElemWiseOp<std::multiplies<float>>(src, dst, utilization);
+		return this->MatrixElemWiseOp<std::multiplies<float>>(src, dst, pool);
 	}
 
-	Status Matrix::Div(const Matrix& src, Matrix& dst, float utilization)
+	Status Matrix::Div(const Matrix& src, Matrix& dst, ThreadPool& pool)
 	{
-		return this->MatrixElemWiseOp<std::divides<float>>(src, dst, utilization);
+		return this->MatrixElemWiseOp<std::divides<float>>(src, dst, pool);
 	}
 
 	// matrix scalar wise operations +,-,*,/
-	Status Matrix::Add(const float src, Matrix& dst, float utilization)
+	Status Matrix::Add(const float src, Matrix& dst, ThreadPool& pool)
 	{
-		return this->MatrixElemOp<std::plus<float>>(src, dst, utilization);
+		return this->MatrixElemOp<std::plus<float>>(src, dst, pool);
 	}
 
-	Status Matrix::Sub(const float src, Matrix& dst, float utilization)
+	Status Matrix::Sub(const float src, Matrix& dst, ThreadPool& pool)
 	{
-		return this->MatrixElemOp<std::minus<float>>(src, dst, utilization);
+		return this->MatrixElemOp<std::minus<float>>(src, dst, pool);
 	}
 
-	Status Matrix::Mul(const float src, Matrix& dst, float utilization)
+	Status Matrix::Mul(const float src, Matrix& dst, ThreadPool& pool)
 	{
-		return this->MatrixElemOp<std::multiplies<float>>(src, dst, utilization);
+		return this->MatrixElemOp<std::multiplies<float>>(src, dst, pool);
 	}
 
-	Status Matrix::Div(const float src, Matrix& dst, float utilization)
+	Status Matrix::Div(const float src, Matrix& dst, ThreadPool& pool)
 	{
-		return this->MatrixElemOp<std::divides<float>>(src, dst, utilization);
+		return this->MatrixElemOp<std::divides<float>>(src, dst, pool);
 	}
 
 	// matrix vector  operations 
-	Status Matrix::Add(const Vector& src, Matrix& dst, const BroadCast& broad_cast, float utilization)
+	Status Matrix::Add(const Vector& src, Matrix& dst, const BroadCast& broad_cast, ThreadPool& pool)
 	{
-		return this->MatrixVectorOp<std::plus<float>>(src, dst, broad_cast, utilization);
+		return this->MatrixVectorOp<std::plus<float>>(src, dst, broad_cast, pool);
 	}
 
-	Status Matrix::Sub(const Vector& src, Matrix& dst, const BroadCast& broad_cast, float utilization)
+	Status Matrix::Sub(const Vector& src, Matrix& dst, const BroadCast& broad_cast, ThreadPool& pool)
 	{
-		return this->MatrixVectorOp<std::minus<float>>(src, dst, broad_cast, utilization);
+		return this->MatrixVectorOp<std::minus<float>>(src, dst, broad_cast, pool);
 	}
 
-	Status Matrix::Mul(const Vector& src, Matrix& dst, const BroadCast& broad_cast, float utilization)
+	Status Matrix::Mul(const Vector& src, Matrix& dst, const BroadCast& broad_cast, ThreadPool& pool)
 	{
-		return this->MatrixVectorOp<std::multiplies<float>>(src, dst, broad_cast, utilization);
+		return this->MatrixVectorOp<std::multiplies<float>>(src, dst, broad_cast, pool);
 	}
 
-	Status Matrix::Div(const Vector& src, Matrix& dst, const BroadCast& broad_cast, float utilization)
+	Status Matrix::Div(const Vector& src, Matrix& dst, const BroadCast& broad_cast, ThreadPool& pool)
 	{
-		return this->MatrixVectorOp<std::divides<float>>(src, dst, broad_cast, utilization);
+		return this->MatrixVectorOp<std::divides<float>>(src, dst, broad_cast, pool);
 	}
 
 	// general matrix functions

@@ -81,6 +81,7 @@ namespace qlm
 	inline ThreadPool::~ThreadPool()
 	{
 		stop = true;
+		thread_count = 0;
 		// notify all threads to finish the remained tasks
 		cv.notify_all();
 		for (auto& worker : workers)
@@ -114,6 +115,7 @@ namespace qlm
 	inline void ThreadPool::Stop()
 	{
 		stop = true;
+		thread_count = 0;
 		// notify all threads to finish the remained tasks
 		cv.notify_all();
 	}
@@ -121,6 +123,7 @@ namespace qlm
 	inline void ThreadPool::Kill()
 	{
 		kill = true;
+		thread_count = 0;
 		// notify all threads to finish the remained tasks
 		cv.notify_all();
 	}
