@@ -121,7 +121,6 @@
     <ClCompile Include="test\source\vector\Test_VectorUnit.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\config.h" />
     <ClInclude Include="include\matrix.h" />
     <ClInclude Include="include\panda.h" />
     <ClInclude Include="include\shakhbat_ml.h" />

@@ -22,11 +22,8 @@ namespace qlm
 		const unsigned int num_used_threads = pool.Size();
 		const unsigned int total_length = src.Length();
 
-		std::atomic<float> total_sum{ 0 };
-
-		auto dot_op = [&](const float* const __restrict  src1,
+		auto dot_op = [](const float* const __restrict  src1,
 						 const float* const __restrict  src2, 
-						 float& dst,
 						 const unsigned int size)
 		{
 			float sum = 0;
@@ -36,26 +33,26 @@ namespace qlm
 				sum += src1[i] * src2[i];
 			}
 			// critical section
-			total_sum += sum;
+			return sum;
 		};
 		// divide the matrix among the threads
 		const unsigned int thread_length = total_length / num_used_threads;
 		const unsigned int thread_tail_length = total_length % num_used_threads;
-		std::vector<std::future<void>> futures(num_used_threads);
+		std::vector<std::future<float>> futures(num_used_threads);
 		// launch the threads
 		int next_idx = 0;
 
 #pragma omp unroll full
 		for (unsigned int i = 0; i < thread_tail_length; i++)
 		{
-			futures[i] = pool.Submit(dot_op, &data[next_idx], &src.data[next_idx], std::ref(dst), thread_length + 1);
+			futures[i] = pool.Submit(dot_op, &data[next_idx], &src.data[next_idx], thread_length + 1);
 			next_idx += thread_length + 1;
 		}
 
 #pragma omp unroll full
 		for (unsigned int i = thread_tail_length; i < num_used_threads; i++)
 		{
-			futures[i] = pool.Submit(dot_op, &data[next_idx], &src.data[next_idx], std::ref(dst), thread_length);
+			futures[i] = pool.Submit(dot_op, &data[next_idx], &src.data[next_idx], thread_length);
 			next_idx += thread_length;
 		}
 		// wait for the threads to finish
@@ -63,10 +60,8 @@ namespace qlm
 #pragma omp unroll full
 		for (unsigned int i = 0; i < num_used_threads; i++)
 		{
-			futures[i].wait();
+			dst += futures[i].get();
 		}
-
-		dst = total_sum;
 
 		return Status::SUCCESS;
 	}
