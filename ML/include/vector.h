@@ -15,10 +15,10 @@ namespace qlm
 
     private:
         template<typename op>
-        Status VectorElemWiseOp(const Vector& src, Vector& dst, ThreadPool& pool);
+        Status VectorElemWiseOp(const Vector& src, Vector& dst, ThreadPool& pool) const;
 
         template<typename op>
-        Status VectorElemOp(const float src, Vector& dst, ThreadPool& pool);
+        Status VectorElemOp(const float src, Vector& dst, ThreadPool& pool) const;
 
     public:
         // Default constructor
@@ -67,41 +67,41 @@ namespace qlm
         }
     public:
         // print matrix
-        void Print();
+        void Print() const;
         // random initialization
         void RandomInit(const float min_value, const float max_value);
     public:
         // vector operations
         // dot product
-        Status Dot(const Vector& src, float& dst, ThreadPool& pool);
+        Status Dot(const Vector& src, float& dst, ThreadPool& pool) const;
         // magnitude
-        Status Mag(float& dst, ThreadPool& pool);
+        Status Mag(float& dst, ThreadPool& pool) const;
         // unit vector
-        Status Unit(Vector& dst, ThreadPool& pool);
+        Status Unit(Vector& dst, ThreadPool& pool) const;
         // angle
-        Status Angle(const Vector& src, float& dst, ThreadPool& pool);
+        Status Angle(const Vector& src, float& dst, ThreadPool& pool) const;
         // transform using transformation matrix
-        Status Transform(const Matrix& transform, Vector& dst, ThreadPool& pool);
+        Status Transform(const Matrix& transform, Vector& dst, ThreadPool& pool) const;
     public:
         // vector-vector operations
         // vector addition
-        Status Add(const Vector& src, Vector& dst, ThreadPool& pool);
+        Status Add(const Vector& src, Vector& dst, ThreadPool& pool) const;
         // vector subtraction
-        Status Sub(const Vector& src, Vector& dst, ThreadPool& pool);
+        Status Sub(const Vector& src, Vector& dst, ThreadPool& pool) const;
         // vector multiplication
-        Status Mul(const Vector& src, Vector& dst, ThreadPool& pool);
+        Status Mul(const Vector& src, Vector& dst, ThreadPool& pool) const;
         // vector division
-        Status Div(const Vector& src, Vector& dst, ThreadPool& pool);
+        Status Div(const Vector& src, Vector& dst, ThreadPool& pool) const;
     public:
         // Vector-scalar operations
         // addition
-        Status Add(const float src, Vector& dst, ThreadPool& pool);
+        Status Add(const float src, Vector& dst, ThreadPool& pool) const;
         // subtraction
-        Status Sub(const float src, Vector& dst, ThreadPool& pool);
+        Status Sub(const float src, Vector& dst, ThreadPool& pool) const;
         // multiplication
-        Status Mul(const float src, Vector& dst, ThreadPool& pool);
+        Status Mul(const float src, Vector& dst, ThreadPool& pool) const;
         // division
-        Status Div(const float src, Vector& dst, ThreadPool& pool);
+        Status Div(const float src, Vector& dst, ThreadPool& pool) const;
 
         //--------------------------------------------------------------//
         friend class Matrix;

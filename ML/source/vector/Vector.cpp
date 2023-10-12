@@ -7,43 +7,43 @@
 namespace qlm
 {
 	// Vector element wise operations +,-,*,/
-	Status Vector::Add(const Vector& src, Vector& dst, ThreadPool& pool)
+	Status Vector::Add(const Vector& src, Vector& dst, ThreadPool& pool) const
 	{
 		return this->VectorElemWiseOp<std::plus<float>>(src, dst, pool);
 	}
 
-	Status Vector::Sub(const Vector& src, Vector& dst, ThreadPool& pool)
+	Status Vector::Sub(const Vector& src, Vector& dst, ThreadPool& pool) const
 	{
 		return this->VectorElemWiseOp<std::minus<float>>(src, dst, pool);
 	}
 
-	Status Vector::Mul(const Vector& src, Vector& dst, ThreadPool& pool)
+	Status Vector::Mul(const Vector& src, Vector& dst, ThreadPool& pool) const
 	{
 		return this->VectorElemWiseOp<std::multiplies<float>>(src, dst, pool);
 	}
 
-	Status Vector::Div(const Vector& src, Vector& dst, ThreadPool& pool)
+	Status Vector::Div(const Vector& src, Vector& dst, ThreadPool& pool) const
 	{
 		return this->VectorElemWiseOp<std::divides<float>>(src, dst, pool);
 	}
 
 	// Vector scalar wise operations +,-,*,/
-	Status Vector::Add(const float src, Vector& dst, ThreadPool& pool)
+	Status Vector::Add(const float src, Vector& dst, ThreadPool& pool) const
 	{
 		return this->VectorElemOp<std::plus<float>>(src, dst, pool);
 	}
 
-	Status Vector::Sub(const float src, Vector& dst, ThreadPool& pool)
+	Status Vector::Sub(const float src, Vector& dst, ThreadPool& pool) const
 	{
 		return this->VectorElemOp<std::minus<float>>(src, dst, pool);
 	}
 
-	Status Vector::Mul(const float src, Vector& dst, ThreadPool& pool)
+	Status Vector::Mul(const float src, Vector& dst, ThreadPool& pool) const
 	{
 		return this->VectorElemOp<std::multiplies<float>>(src, dst, pool);
 	}
 
-	Status Vector::Div(const float src, Vector& dst, ThreadPool& pool)
+	Status Vector::Div(const float src, Vector& dst, ThreadPool& pool) const
 	{
 		return this->VectorElemOp<std::divides<float>>(src, dst, pool);
 	}
@@ -61,7 +61,7 @@ namespace qlm
 		}
 	}
 
-	void Vector::Print()
+	void Vector::Print() const
 	{
 		int number_digits = 5;
 

@@ -6,9 +6,9 @@
 namespace qlm
 {
 	template<typename op>
-	inline Status Vector::VectorElemOp(const float val, Vector& dst, ThreadPool& pool)
+	inline Status Vector::VectorElemOp(const float val, Vector& dst, ThreadPool& pool) const
 	{
-		if (pool.Size() <= 0)
+		if (pool.used_threads <= 0)
 		{
 			return Status::INVALID_UTILIZATION;
 		}
@@ -18,7 +18,7 @@ namespace qlm
 			return Status::INVALID_DIMENTIONS;
 		}
 
-		const unsigned int num_used_threads = pool.Size();
+		const unsigned int num_used_threads = pool.used_threads;
 		const unsigned int total_length = len;
 
 		auto op_vec = [](const float* const __restrict  src1, const float val, float* const __restrict  dst, const unsigned int size)
@@ -61,8 +61,8 @@ namespace qlm
 	}
 
 
-	template Status Vector::VectorElemOp<std::plus<float>>(const float, Vector&, ThreadPool&);
-	template Status Vector::VectorElemOp<std::minus<float>>(const float, Vector&, ThreadPool&);
-	template Status Vector::VectorElemOp<std::multiplies<float>>(const float, Vector&, ThreadPool&);
-	template Status Vector::VectorElemOp<std::divides<float>>(const float, Vector&, ThreadPool&);
+	template Status Vector::VectorElemOp<std::plus<float>>(const float, Vector&, ThreadPool&) const;
+	template Status Vector::VectorElemOp<std::minus<float>>(const float, Vector&, ThreadPool&) const;
+	template Status Vector::VectorElemOp<std::multiplies<float>>(const float, Vector&, ThreadPool&) const;
+	template Status Vector::VectorElemOp<std::divides<float>>(const float, Vector&, ThreadPool&) const;
 }

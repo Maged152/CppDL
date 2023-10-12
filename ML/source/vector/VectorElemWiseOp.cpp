@@ -8,9 +8,9 @@
 namespace qlm
 {
 	template<typename op>
-	inline Status Vector::VectorElemWiseOp(const Vector& src, Vector& dst, ThreadPool& pool)
+	inline Status Vector::VectorElemWiseOp(const Vector& src, Vector& dst, ThreadPool& pool) const
 	{
-		if (pool.Size() <= 0)
+		if (pool.used_threads <= 0)
 		{
 			return Status::INVALID_UTILIZATION;
 		}
@@ -22,7 +22,7 @@ namespace qlm
 
 		const unsigned int total_length = len;
 		const  int lines = std::ceil((float)len / std::hardware_destructive_interference_size);
-		const  int threads =  std::min(lines, pool.Size());
+		const  int threads =  std::min(lines, pool.used_threads);
 		
 
 		auto op_vec = [](const float* const __restrict  src1, const float* const __restrict  src2, float* const __restrict  dst, const unsigned int size)
@@ -61,8 +61,8 @@ namespace qlm
 	}
 
 
-	template Status Vector::VectorElemWiseOp<std::plus<float>>(const Vector&, Vector&, ThreadPool&);
-	template Status Vector::VectorElemWiseOp<std::minus<float>>(const Vector&, Vector&, ThreadPool&);
-	template Status Vector::VectorElemWiseOp<std::multiplies<float>>(const Vector&, Vector&, ThreadPool&);
-	template Status Vector::VectorElemWiseOp<std::divides<float>>(const Vector&, Vector&, ThreadPool&);
+	template Status Vector::VectorElemWiseOp<std::plus<float>>(const Vector&, Vector&, ThreadPool&) const;
+	template Status Vector::VectorElemWiseOp<std::minus<float>>(const Vector&, Vector&, ThreadPool&) const;
+	template Status Vector::VectorElemWiseOp<std::multiplies<float>>(const Vector&, Vector&, ThreadPool&) const;
+	template Status Vector::VectorElemWiseOp<std::divides<float>>(const Vector&, Vector&, ThreadPool&) const;
 }

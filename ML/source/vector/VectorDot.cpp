@@ -7,9 +7,9 @@
 
 namespace qlm
 {
-	Status Vector::Dot(const Vector& src, float& dst, ThreadPool& pool)
+	Status Vector::Dot(const Vector& src, float& dst, ThreadPool& pool) const
 	{
-		if (pool.Size() <= 0)
+		if (pool.used_threads <= 0)
 		{
 			return Status::INVALID_UTILIZATION;
 		}
@@ -19,7 +19,7 @@ namespace qlm
 			return Status::INVALID_DIMENTIONS;
 		}
 
-		const unsigned int num_used_threads = pool.Size();
+		const unsigned int num_used_threads = pool.used_threads;
 		const unsigned int total_length = src.Length();
 
 		auto dot_op = [](const float* const __restrict  src1,
@@ -56,7 +56,6 @@ namespace qlm
 			next_idx += thread_length;
 		}
 		// wait for the threads to finish
-		pool.Stop();
 #pragma omp unroll full
 		for (unsigned int i = 0; i < num_used_threads; i++)
 		{
