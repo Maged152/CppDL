@@ -93,6 +93,7 @@
     <ClCompile Include="source\vector\VectorDot.cpp" />
     <ClCompile Include="source\vector\VectorElemOp.cpp" />
     <ClCompile Include="source\vector\VectorElemWiseOp.cpp" />
+    <ClCompile Include="source\vector\VectorLA.cpp" />
     <ClCompile Include="test\source\matrix\Test_MatrixAdd.cpp" />
     <ClCompile Include="test\source\matrix\Test_MatrixDot.cpp" />
     <ClCompile Include="test\source\matrix\Test_MatrixDiv.cpp" />
