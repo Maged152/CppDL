@@ -8,7 +8,7 @@ namespace qlm
 	template<typename op>
 	inline Status Matrix::MatrixElemWiseOp(const Matrix& src, Matrix& dst, ThreadPool& pool)
 	{
-		if (pool.Size() <= 0)
+		if (pool.used_threads <= 0)
 		{
 			return Status::INVALID_UTILIZATION;
 		}
@@ -18,7 +18,7 @@ namespace qlm
 			return Status::INVALID_DIMENTIONS;
 		}
 
-		const unsigned int num_used_threads = pool.Size();
+		const unsigned int num_used_threads = pool.used_threads;
 		const unsigned int total_length = rows * columns;
 
 		auto op_mat = [](const float* __restrict  src1, const float* __restrict  src2, float* __restrict  dst, const unsigned int size)

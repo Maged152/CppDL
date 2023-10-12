@@ -7,7 +7,7 @@ namespace qlm
 {
 	Status Matrix::Dot(const Matrix& src, Matrix& dst, ThreadPool& pool)
 	{
-		if (pool.Size() <= 0)
+		if (pool.used_threads <= 0)
 		{
 			return Status::INVALID_UTILIZATION;
 		}
@@ -17,7 +17,7 @@ namespace qlm
 			return Status::INVALID_DIMENTIONS;
 		}
 
-		unsigned int num_used_threads = pool.Size();
+		unsigned int num_used_threads = pool.used_threads;
 		const unsigned int total_rows = rows;
 		num_used_threads = total_rows < num_used_threads ? total_rows : num_used_threads;
 

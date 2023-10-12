@@ -10,7 +10,7 @@ namespace qlm
 	template<typename op>
 	inline Status Matrix::MatrixVectorOp(const Vector& src, Matrix& dst, const BroadCast& broad_cast, ThreadPool& pool)
 	{
-		if (pool.Size() <= 0)
+		if (pool.used_threads <= 0)
 		{
 			return Status::INVALID_UTILIZATION;
 		}
@@ -20,7 +20,7 @@ namespace qlm
 			return Status::INVALID_DIMENTIONS;
 		}
 
-		unsigned int num_used_threads = pool.Size();
+		unsigned int num_used_threads = pool.used_threads;
 		int dim_1, dim_2;
 		std::function<void(const int, const int, const float* const, const float* const, const int, const int, float* const)> vec_mat;
 
