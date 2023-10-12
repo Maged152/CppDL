@@ -22,6 +22,8 @@ namespace qlm
 		std::condition_variable cv;
 		
 		int thread_count;
+	public:
+		int used_threads;
 		
 	private:
 		void WorkerThread();
@@ -70,7 +72,7 @@ namespace qlm
 		}
 	}
 
-	inline ThreadPool::ThreadPool(const int thread_count) : thread_count(thread_count), workers(thread_count), kill(false), stop(false)
+	inline ThreadPool::ThreadPool(const int thread_count) : thread_count(thread_count), used_threads(thread_count), workers(thread_count), kill(false), stop(false)
 	{
 		for (int i = 0; i < thread_count; i++) 
 		{
