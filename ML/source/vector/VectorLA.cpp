@@ -29,19 +29,41 @@ namespace qlm
 	// angle
 	Status Vector::Angle(const Vector& src, float& dst, ThreadPool& pool) const
 	{
+		const int old_pool_size = pool.used_threads;
+		const int new_pool_size = old_pool_size / 3;
+		pool.used_threads = new_pool_size;
+
 		float dot{0}, mag1{0}, mag2{0};
+
+		auto bind_dot  = [&]() { return this->Dot(src, dot, pool); };
+		auto bind_mag1 = [&]() { return this->Mag(mag1, pool); };
+		auto bind_mag2 = [&]() { return src.Mag(mag2, pool); };
+
+		auto fut_dot = pool.Submit(bind_dot);
+		auto fut_mag1 = pool.Submit(bind_mag1);
+		auto fut_mag2 = pool.Submit(bind_mag2);
+
 		// dot product
-		auto status = this->Dot(src, dot, pool);
-		if (status != Status::SUCCESS)  return status;
+		auto status = fut_dot.get();
+		if (status != Status::SUCCESS)
+		{
+			return status;
+			pool.used_threads = old_pool_size;
+		}
 
 		// magnitude for first vector
-		status = this->Mag(mag1, pool);
-		if (status != Status::SUCCESS)  return status;
-
+		status = fut_mag1.get();
+		if (status != Status::SUCCESS)
+		{
+			return status;
+			pool.used_threads = old_pool_size;
+		}
 		// magnitude for second vector
-		status = src.Mag(mag2, pool);
+		status = fut_mag2.get();
 
 		dst = std::acos(dot / (mag1 * mag2)) * 180.0f / std::numbers::pi;
+
+		pool.used_threads = old_pool_size;
 
 		return status;
 	}
