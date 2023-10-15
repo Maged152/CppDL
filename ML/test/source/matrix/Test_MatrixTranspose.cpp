@@ -1,5 +1,4 @@
-#include "../../include/Test_Matrix.h"
-#include "../../include/test_utils.h"
+#include "../../test.h"
 #include "shakhbat_ml.h"
 #include <iostream>
 #include <windows.h>
@@ -8,17 +7,6 @@ using namespace test;
 using namespace qlm;
 using namespace std;
 
-void TestMatrixAdd(const Matrix& src, Matrix& dst)
-{
-	for (int r = 0; r < src.Rows(); r++)
-	{
-		for (int c = 0; c < src.Columns(); c++)
-		{
-			float res = src.Get(r, c);
-			dst.Set(c, r, res);
-		}
-	}
-}
 
 void test::Test_MatrixTranspose(std::vector<int>& mat_rows, std::vector<int>& mat_cols, int num_threads, float threshold, float min, float max)
 {

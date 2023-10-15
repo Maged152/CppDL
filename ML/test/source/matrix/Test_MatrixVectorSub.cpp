@@ -1,5 +1,4 @@
-#include "../../include/Test_Matrix.h"
-#include "../../include/test_utils.h"
+#include "../../test.h"
 #include "shakhbat_ml.h"
 #include <iostream>
 #include <windows.h>
@@ -8,17 +7,6 @@ using namespace test;
 using namespace qlm;
 using namespace std;
 
-void TestMatrixVectorSub_Row(const Matrix& src1, const Vector& src2, Matrix& dst)
-{
-	for (int c = 0; c < src1.Columns(); c++)
-	{
-		for (int r = 0; r < src1.Rows(); r++)
-		{
-			float res = src1.Get(r, c) - src2.Get(r);
-			dst.Set(r, c, res);
-		}
-	}
-}
 
 void TestMatrixVectorSub_Coloumn(const Matrix& src1, const Vector& src2, Matrix& dst)
 {

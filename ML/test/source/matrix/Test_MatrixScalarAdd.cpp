@@ -1,21 +1,10 @@
-#include "../../include/Test_Matrix.h"
-#include "../../include/test_utils.h"
+#include "../../test.h"
 
 using namespace test;
 using namespace qlm;
 using namespace std;
 
-void TestMatrixAdd(const Matrix& src1, const float val, Matrix& dst)
-{
-	for (int r = 0; r < src1.Rows(); r++)
-	{
-		for (int c = 0; c < src1.Columns(); c++)
-		{
-			float res = src1.Get(r, c) + val;
-			dst.Set(r, c, res);
-		}
-	}
-}
+
 
 void test::Test_MatrixScalarAdd(std::vector<int>& mat_rows, std::vector<int>& mat_cols, int num_threads, float threshold, float min, float max)
 {

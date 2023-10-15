@@ -1,5 +1,4 @@
-#include "../../include/Test_Matrix.h"
-#include "../../include/test_utils.h"
+#include "../../test.h"
 #include "shakhbat_ml.h"
 #include <iostream>
 #include <windows.h>
@@ -8,23 +7,6 @@ using namespace test;
 using namespace qlm;
 using namespace std;
 
-void TestMatrixDot(const Matrix& src1, const Matrix& src2, Matrix& dst)
-{
-	for (int r = 0; r < src1.Rows(); r++)
-	{
-		for (int c = 0; c < src2.Columns(); c++)
-		{
-			float sum = 0.0f; // Initialize a variable to store the sum of products
-
-			for (int e = 0; e < src1.Columns(); e++)
-			{
-				sum += src1.Get(r, e) * src2.Get(e, c);
-			}
-
-			dst.Set(r, c, sum); // Set the result in the destination matrix
-		}
-	}
-}
 
 void test::Test_MatrixDot(std::vector<int>& mat_rows, std::vector<int>& mat_cols, int num_threads, float threshold, float min, float max)
 {
