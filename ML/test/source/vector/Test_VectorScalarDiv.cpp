@@ -1,5 +1,4 @@
-#include "../../include/Test_Vector.h"
-#include "../../include/test_utils.h"
+#include "../../test.h"
 #include "shakhbat_ml.h"
 #include <iostream>
 #include <windows.h>
@@ -8,14 +7,6 @@ using namespace test;
 using namespace qlm;
 using namespace std;
 
-void TestVectorScalarDiv(const Vector& src1, const float val, Vector& dst)
-{
-	for (int l = 0; l < src1.Length(); l++)
-	{
-		float res = src1.Get(l) / val;
-		dst.Set(l, res);
-	}
-}
 
 void test::Test_VectorScalarDiv(std::vector<int>& vec_len, int num_threads, float threshold, float min, float max)
 {

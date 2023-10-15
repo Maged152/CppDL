@@ -1,5 +1,5 @@
-#include "../../include/Test_Vector.h"
-#include "../../include/test_utils.h"
+
+#include "../../test.h"
 #include "shakhbat_ml.h"
 #include <iostream>
 #include <windows.h>
@@ -8,22 +8,6 @@ using namespace test;
 using namespace qlm;
 using namespace std;
 
-void TestVectorUnit(const Vector& src, Vector& dst)
-{
-	float mag = 0;
-	for (int l = 0; l < src.Length(); l++)
-	{
-		mag += src.Get(l) * src.Get(l);
-	}
-
-	mag = std::sqrtf(mag);
-
-	for (int l = 0; l < src.Length(); l++)
-	{
-		float res = src.Get(l) / mag;
-		dst.Set(l, res);
-	}
-}
 
 void test::Test_VectorUnit(std::vector<int>& vec_len, int num_threads, float threshold, float min, float max)
 {

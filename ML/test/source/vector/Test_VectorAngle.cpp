@@ -1,39 +1,12 @@
-#include "../../include/Test_Vector.h"
-#include "../../include/test_utils.h"
+#include "../../test.h"
 #include "shakhbat_ml.h"
 #include <iostream>
 #include <windows.h>
-#include <numbers>
 
 using namespace test;
 using namespace qlm;
 using namespace std;
 
-void TestVectorAngle(const Vector& src1, const Vector& src2, float& angle)
-{
-	// mag for src1
-	float mag1 = 0;
-	for (int l = 0; l < src1.Length(); l++)
-	{
-		mag1 += src1.Get(l) * src1.Get(l);
-	}
-	mag1 = std::sqrtf(mag1);
-	// mag for src2
-	float mag2 = 0;
-	for (int l = 0; l < src2.Length(); l++)
-	{
-		mag2 += src2.Get(l) * src2.Get(l);
-	}
-	mag2 = std::sqrtf(mag2);
-	// dot product
-	float dot = 0;
-	for (int l = 0; l < src1.Length(); l++)
-	{
-		dot += src1.Get(l) * src2.Get(l);
-	}
-
-	angle = std::acosf(dot / (mag1 * mag2)) * 180.0f / std::numbers::pi;
-}
 
 void test::Test_VectorAngle(std::vector<int>& vec_len, int num_threads, float threshold, float min, float max)
 {
