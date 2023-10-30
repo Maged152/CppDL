@@ -88,4 +88,10 @@ namespace test
 		float threshold = 0.001f,
 		float min = 0.0f,
 		float max = 1.0f);
+	// sum
+	void Test_VectorSum(std::vector<int>& vec_len,
+		int num_threads = std::thread::hardware_concurrency(),
+		float threshold = 0.001f,
+		float min = 0.0f,
+		float max = 1.0f);
 }
