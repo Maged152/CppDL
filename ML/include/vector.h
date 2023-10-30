@@ -82,6 +82,8 @@ namespace qlm
         Status Angle(const Vector& src, float& dst, ThreadPool& pool) const;
         // transform using transformation matrix
         Status Transform(const Matrix& transform, Vector& dst, ThreadPool& pool) const;
+        // sum
+        Status Sum(float& dst, ThreadPool& pool) const;
     public:
         // vector-vector operations
         // vector addition

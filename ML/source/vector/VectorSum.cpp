@@ -7,32 +7,30 @@
 
 namespace qlm
 {
-	Status Vector::Dot(const Vector& src, float& dst, ThreadPool& pool) const
+	Status Vector::Sum(float& dst, ThreadPool& pool) const
 	{
 		if (pool.used_threads <= 0)
 		{
 			return Status::INVALID_UTILIZATION;
 		}
 
-		if (src.Length() != this->Length())
+		if (this->Length() <= 0)
 		{
 			return Status::INVALID_DIMENTIONS;
 		}
 
 		const unsigned int num_used_threads = pool.used_threads;
-		const unsigned int total_length = src.Length();
+		const unsigned int total_length = this->Length();
 
-		auto dot_op = [](const float* const __restrict  src1,
-						 const float* const __restrict  src2, 
+		auto sum_op = [](const float* const __restrict  src,
 						 const unsigned int size)
 		{
 			float sum = 0;
-			#pragma omp simd reduction(+:sum)
+#pragma omp simd reduction(+:sum)
 			for (unsigned int i = 0; i < size; i++)
 			{
-				sum += src1[i] * src2[i];
+				sum += src[i];
 			}
-			// critical section
 			return sum;
 		};
 		// divide the matrix among the threads
@@ -45,14 +43,14 @@ namespace qlm
 #pragma omp unroll full
 		for (unsigned int i = 0; i < thread_tail_length; i++)
 		{
-			futures[i] = pool.Submit(dot_op, &data[next_idx], &src.data[next_idx], thread_length + 1);
+			futures[i] = pool.Submit(sum_op, &data[next_idx], thread_length + 1);
 			next_idx += thread_length + 1;
 		}
 
 #pragma omp unroll full
 		for (unsigned int i = thread_tail_length; i < num_used_threads; i++)
 		{
-			futures[i] = pool.Submit(dot_op, &data[next_idx], &src.data[next_idx], thread_length);
+			futures[i] = pool.Submit(sum_op, &data[next_idx], thread_length);
 			next_idx += thread_length;
 		}
 		// ensuring sum variable is 0

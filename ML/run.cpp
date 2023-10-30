@@ -4,19 +4,26 @@
 #include <vector>
 #include "thread_pool.h"
 
-int fun(int x)
-{
-	std::cout << "inside fun : " << x << "\n";
-	return x;
-}
+
 int main()
 {
 
 	std::vector<int>l2{ 1000, 5000, 20000, 200000, 200000 };
-	test::Test_VectorDot(l2);
+	test::Test_VectorSum(l2, 3);
 
+	/*qlm::Vector v1{ 10 };
+
+	for (int i = 0; i < 10; i++)
+	{
+		v1.Set(i, i);
+	}
+
+	qlm::ThreadPool p;
 	
-
+	float dst;
+	v1.Sum(dst, p);
+	v1.Print();
+	std::cout << "\n" << dst << "\n";*/
 	/*qlm::Vector v1{ 10 };
 	qlm::Matrix m1{ 10, 10 };
 	qlm::Matrix m2{ 10, 10 };

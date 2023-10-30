@@ -94,6 +94,7 @@
     <ClCompile Include="source\vector\VectorElemOp.cpp" />
     <ClCompile Include="source\vector\VectorElemWiseOp.cpp" />
     <ClCompile Include="source\vector\VectorLA.cpp" />
+    <ClCompile Include="source\vector\VectorSum.cpp" />
     <ClCompile Include="test\source\implementation\matrix\Test_Matrix_Code.cpp" />
     <ClCompile Include="test\source\implementation\vector\Test_Vector_Code.cpp" />
     <ClCompile Include="test\source\matrix\Test_MatrixAdd.cpp" />
@@ -121,6 +122,7 @@
     <ClCompile Include="test\source\vector\Test_VectorScalarMul.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorScalarSub.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorSub.cpp" />
+    <ClCompile Include="test\source\vector\Test_VectorSum.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorUnit.cpp" />
   </ItemGroup>
   <ItemGroup>
