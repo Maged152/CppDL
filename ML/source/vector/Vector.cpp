@@ -47,6 +47,14 @@ namespace qlm
 	{
 		return this->VectorElemOp<std::divides<float>>(src, dst, pool);
 	}
+	// vector operations
+	Status qlm::Vector::Mean(float& dst, ThreadPool& pool) const
+	{
+		const auto status = this->Sum(dst, pool);
+		dst /= len;
+
+		return status;
+	}
 
 	// Vector helper functions
 	void Vector::RandomInit(const float min_value, const float max_value)

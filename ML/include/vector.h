@@ -84,6 +84,10 @@ namespace qlm
         Status Transform(const Matrix& transform, Vector& dst, ThreadPool& pool) const;
         // sum
         Status Sum(float& dst, ThreadPool& pool) const;
+        // mean
+        Status Mean(float& dst, ThreadPool& pool) const;
+        // variance
+        Status Var(float& dst, ThreadPool& pool) const;
     public:
         // vector-vector operations
         // vector addition
@@ -94,6 +98,8 @@ namespace qlm
         Status Mul(const Vector& src, Vector& dst, ThreadPool& pool) const;
         // vector division
         Status Div(const Vector& src, Vector& dst, ThreadPool& pool) const;
+        // covariance
+        Status Cov(const Vector& src, float& dst, ThreadPool& pool) const;
     public:
         // Vector-scalar operations
         // addition

@@ -131,4 +131,9 @@ namespace test
 		 }
 	 }
 	 ///////////////////////////////////////////////////////////////////////////
+	 void TestVectorMean(const qlm::Vector& src, float& dst)
+	 {
+		 TestVectorSum(src, dst);
+		 dst /= src.Length();
+	 }
 }

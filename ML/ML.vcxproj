@@ -116,6 +116,7 @@
     <ClCompile Include="test\source\vector\Test_VectorDiv.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorDot.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorMag.cpp" />
+    <ClCompile Include="test\source\vector\Test_VectorMean.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorMul.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorScalarAdd.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorScalarDiv.cpp" />

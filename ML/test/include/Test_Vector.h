@@ -94,4 +94,22 @@ namespace test
 		float threshold = 0.001f,
 		float min = 0.0f,
 		float max = 1.0f);
+	// mean
+	void Test_VectorMean(std::vector<int>& vec_len,
+		int num_threads = std::thread::hardware_concurrency(),
+		float threshold = 0.001f,
+		float min = 0.0f,
+		float max = 1.0f);
+	// variance
+	void Test_VectorVar(std::vector<int>& vec_len,
+		int num_threads = std::thread::hardware_concurrency(),
+		float threshold = 0.001f,
+		float min = 0.0f,
+		float max = 1.0f);
+	// covariance
+	void Test_VectorCov(std::vector<int>& vec_len,
+		int num_threads = std::thread::hardware_concurrency(),
+		float threshold = 0.001f,
+		float min = 0.0f,
+		float max = 1.0f);
 }
