@@ -136,4 +136,18 @@ namespace test
 		 TestVectorSum(src, dst);
 		 dst /= src.Length();
 	 }
+	 ///////////////////////////////////////////////////////////////////////////
+	 void TestVectorVar(const qlm::Vector& src, float& dst)
+	 {
+		 float mean;
+		 TestVectorMean(src, mean);
+		 dst = 0;
+		 for (int l = 0; l < src.Length(); l++)
+		 {
+			 dst += std::powf(src.Get(l) - mean, 2);
+		 }
+
+		 dst = dst / (src.Length() - 1);
+	 }
+	 ///////////////////////////////////////////////////////////////////////////
 }

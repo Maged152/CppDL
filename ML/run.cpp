@@ -9,7 +9,7 @@ int main()
 {
 
 	std::vector<int>l2{ 1000, 5000, 20000, 200000, 200000 };
-	test::Test_VectorSum(l2, 3);
+	test::Test_VectorVar(l2, 8);
 
 	/*qlm::Vector v1{ 10 };
 
