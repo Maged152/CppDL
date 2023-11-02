@@ -90,6 +90,7 @@
     <ClCompile Include="source\matrix\MatrixTranspose.cpp" />
     <ClCompile Include="source\matrix\MatrixVectorOp.cpp" />
     <ClCompile Include="source\vector\Vector.cpp" />
+    <ClCompile Include="source\vector\VectorCov.cpp" />
     <ClCompile Include="source\vector\VectorDot.cpp" />
     <ClCompile Include="source\vector\VectorElemOp.cpp" />
     <ClCompile Include="source\vector\VectorElemWiseOp.cpp" />
@@ -114,6 +115,7 @@
     <ClCompile Include="test\source\matrix\Test_MatrixVectorSub.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorAdd.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorAngle.cpp" />
+    <ClCompile Include="test\source\vector\Test_VectorCov.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorDiv.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorDot.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorMag.cpp" />

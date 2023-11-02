@@ -8,27 +8,33 @@
 
 namespace qlm
 {
-	Status Vector::Var(float& dst, ThreadPool& pool) const
+	Status Vector::Cov(const Vector& src, float& dst, ThreadPool& pool) const
 	{
-		float mean;
-		const auto status = this->Mean(mean, pool);
+		float mean1, mean2;
+		const auto status1 = this->Mean(mean1, pool);
+		const auto status2 = src.Mean(mean2, pool);
 
-		if (status != Status::SUCCESS)
+		if (status1 != Status::SUCCESS)
 		{
-			return status;
+			return status1;
+		}
+		if (status2 != Status::SUCCESS)
+		{
+			return status2;
 		}
 
 		const unsigned int num_used_threads = pool.used_threads;
 		const unsigned int total_length = this->Length();
 
-		auto var_op = [](const float* const __restrict  src, const float mean,
+		auto cov_op = [](const float* const __restrict  src1, const float mean1,
+						 const float* const __restrict  src2, const float mean2,
 			const unsigned int size)
 		{
 			float sum = 0;
 #pragma omp simd reduction(+:sum)
 			for (unsigned int i = 0; i < size; i++)
 			{
-				sum += std::powf(src[i] - mean, 2);
+				sum += (src1[i] - mean1) * (src2[i] - mean2);
 			}
 			return sum;
 		};
@@ -42,14 +48,14 @@ namespace qlm
 #pragma omp unroll full
 		for (unsigned int i = 0; i < thread_tail_length; i++)
 		{
-			futures[i] = pool.Submit(var_op, &data[next_idx], mean, thread_length + 1);
+			futures[i] = pool.Submit(cov_op, &data[next_idx], mean1, &src.data[next_idx], mean2, thread_length + 1);
 			next_idx += thread_length + 1;
 		}
 
 #pragma omp unroll full
 		for (unsigned int i = thread_tail_length; i < num_used_threads; i++)
 		{
-			futures[i] = pool.Submit(var_op, &data[next_idx], mean, thread_length);
+			futures[i] = pool.Submit(cov_op, &data[next_idx], mean1, &src.data[next_idx], mean2, thread_length);
 			next_idx += thread_length;
 		}
 		// ensuring sum variable is 0

@@ -9,7 +9,11 @@ int main()
 {
 
 	std::vector<int>l2{ 1000, 5000, 20000, 200000, 200000 };
-	test::Test_VectorVar(l2, 8);
+	test::Test_VectorCov(l2, 8);
+	
+	int v;
+	std::cin >> v;
+	std::cout << v << "\n";
 
 	/*qlm::Vector v1{ 10 };
 
