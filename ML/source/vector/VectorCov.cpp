@@ -10,17 +10,27 @@ namespace qlm
 {
 	Status Vector::Cov(const Vector& src, float& dst, ThreadPool& pool) const
 	{
-		float mean1, mean2;
-		const auto status1 = this->Mean(mean1, pool);
-		const auto status2 = src.Mean(mean2, pool);
+		const int old_pool_size = pool.used_threads;
+		const int new_pool_size = old_pool_size / 3;
+		pool.used_threads = new_pool_size;
 
-		if (status1 != Status::SUCCESS)
+		float mean1, mean2;
+
+		auto bind_mean1 = [&]() { return this->Mean(mean1, pool); };
+		auto bind_mean2 = [&]() { return src.Mean(mean2, pool); };
+
+		auto fut_status1 = pool.Submit(bind_mean1);
+		auto fut_status2 = pool.Submit(bind_mean2);
+
+		pool.used_threads = old_pool_size;
+
+		if (fut_status1.get() != Status::SUCCESS)
 		{
-			return status1;
+			return fut_status1.get();
 		}
-		if (status2 != Status::SUCCESS)
+		if (fut_status2.get() != Status::SUCCESS)
 		{
-			return status2;
+			return fut_status2.get();
 		}
 
 		const unsigned int num_used_threads = pool.used_threads;
