@@ -8,7 +8,7 @@ using namespace qlm;
 using namespace std;
 
 
-void test::Test_VectorVar(std::vector<int>& vec_len, int num_threads, float threshold, float min, float max)
+bool test::Test_VectorVar(std::vector<int>& vec_len, int num_threads, float threshold, float min, float max)
 {
 	HANDLE col_handle;
 	col_handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -32,12 +32,13 @@ void test::Test_VectorVar(std::vector<int>& vec_len, int num_threads, float thre
 	cout << "Number of test cases = " << vec_len.size() << "\n";
 
 	int num_failed_cases = 0;
+	bool res = true;
 
 	for (int l = 0; l < vec_len.size(); l++)
 	{
 		int len = vec_len[l];
 
-		float current_threshold = threshold * len;
+		float current_threshold = threshold * num_threads;
 
 		ThreadPool pool{ num_threads };
 
@@ -85,4 +86,6 @@ void test::Test_VectorVar(std::vector<int>& vec_len, int num_threads, float thre
 	}
 
 	SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_WHITE);
+
+	return res;
 }

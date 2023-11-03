@@ -8,7 +8,7 @@ using namespace qlm;
 using namespace std;
 
 
-bool test::Test_VectorDot(std::vector<int>& vec_len, int num_threads, float threshold, float min, float max)
+bool test::Test_VectorCorr(std::vector<int>& vec_len, int num_threads, float threshold, float min, float max)
 {
 	HANDLE col_handle;
 	col_handle = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -28,14 +28,14 @@ bool test::Test_VectorDot(std::vector<int>& vec_len, int num_threads, float thre
 	}
 
 	SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_BLUE);
-	cout << "Vector Dot product test\n";
+	cout << "Vector correlation test\n";
 	cout << "Number of test cases = " << vec_len.size() << "\n";
 
 	int num_failed_cases = 0;
 	bool res = true;
 
 	for (int l = 0; l < vec_len.size(); l++)
-	{	
+	{
 		int len = vec_len[l];
 
 		float current_threshold = threshold * num_threads;
@@ -58,11 +58,11 @@ bool test::Test_VectorDot(std::vector<int>& vec_len, int num_threads, float thre
 		src2.RandomInit(min, max);
 		// test code
 		ref.Start();
-		TestVectorDot(src1, src2, dst_ref);
+		TestVectorCorr(src1, src2, dst_ref);
 		ref.End();
 		// multi-threading code
 		opt.Start();
-		auto status = src1.Dot(src2, dst_opt, pool);
+		auto status = src1.Corr(src2, dst_opt, pool);
 		opt.End();
 		// compare the results
 		res &= TestCompare(dst_ref, dst_opt, current_threshold);
