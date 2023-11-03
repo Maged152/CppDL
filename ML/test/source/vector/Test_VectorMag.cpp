@@ -18,14 +18,14 @@ bool test::Test_VectorMag(std::vector<int>& vec_len, int num_threads, float thre
 	{
 		SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_LIGHT_RED);
 		cout << "Dimensions array must have values\n";
-		return;
+		return false;
 	}
 
 	if (max <= min)
 	{
 		SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_LIGHT_RED);
 		cout << "Max value must be greater than the min value\n";
-		return;
+		return false;
 	}
 
 	SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_BLUE);

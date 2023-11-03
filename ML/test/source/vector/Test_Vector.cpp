@@ -3,7 +3,7 @@
 
 using namespace test;
 
-bool Test_Vector()
+bool test::Test_Vector()
 {
 	std::vector<int> sizes{ 100, 5000, 20000, 200000, 2000000 };
 
@@ -14,4 +14,5 @@ bool Test_Vector()
 	res &= Test_VectorScalarDiv(sizes);
 	res &= Test_VectorScalarMul(sizes);
 
+	return res;
 }
