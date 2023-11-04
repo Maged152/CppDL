@@ -38,7 +38,7 @@ bool test::Test_VectorMean(std::vector<int>& vec_len, int num_threads, float thr
 	{
 		int len = vec_len[l];
 
-		float current_threshold = threshold * num_threads;
+		float current_threshold = threshold * std::pow(len, 5.0f / 3) / len;
 
 		ThreadPool pool{ num_threads };
 

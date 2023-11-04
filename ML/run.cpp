@@ -2,18 +2,27 @@
 #include <iostream>
 #include "test/test.h"
 #include <vector>
-#include "thread_pool.h"
 
 
 int main()
 {
 
-	std::vector<int>l2{ 1000, 5000, 20000, 200000, 200000 };
-	test::Test_VectorCov(l2, 8);
-	
-	int v;
+	//std::vector<int>l2{ 1000, 5000, 20000, 200000, 200000 };
+	//test::Test_VectorCorr(l2, 8);
+	auto res = test::Test_Vector();
+
+	if (res == true)
+	{
+		std::cout << "PASSED\n";
+	}
+	else
+	{
+		std::cout << "FAILED\n";
+	}
+
+	/*int v;
 	std::cin >> v;
-	std::cout << v << "\n";
+	std::cout << v << "\n";*/
 
 	/*qlm::Vector v1{ 10 };
 

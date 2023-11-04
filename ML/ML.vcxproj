@@ -113,8 +113,10 @@
     <ClCompile Include="test\source\matrix\Test_MatrixVectorDiv.cpp" />
     <ClCompile Include="test\source\matrix\Test_MatrixVectorMul.cpp" />
     <ClCompile Include="test\source\matrix\Test_MatrixVectorSub.cpp" />
+    <ClCompile Include="test\source\vector\Test_Vector.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorAdd.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorAngle.cpp" />
+    <ClCompile Include="test\source\vector\Test_VectorCorr.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorCov.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorDiv.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorDot.cpp" />

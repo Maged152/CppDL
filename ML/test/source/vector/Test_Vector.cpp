@@ -21,8 +21,14 @@ bool test::Test_Vector()
 
 	res &= Test_VectorDot(sizes);
 	res &= Test_VectorMag(sizes);
-	res &= Test_VectorAngle(sizes);
-	res &= Test_VectorMul(sizes);
+	res &= Test_VectorAngle(sizes); 
+	res &= Test_VectorUnit(sizes);
+
+	res &= Test_VectorSum(sizes);
+	res &= Test_VectorMean(sizes);
+	res &= Test_VectorVar(sizes);
+	res &= Test_VectorCov(sizes);
+	res &= Test_VectorCorr(sizes);
 
 	return res;
 }

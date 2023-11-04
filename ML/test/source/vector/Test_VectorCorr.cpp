@@ -38,7 +38,7 @@ bool test::Test_VectorCorr(std::vector<int>& vec_len, int num_threads, float thr
 	{
 		int len = vec_len[l];
 
-		float current_threshold = threshold * num_threads;
+		float current_threshold = threshold;
 
 		ThreadPool pool{ num_threads };
 

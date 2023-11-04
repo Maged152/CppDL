@@ -63,29 +63,23 @@ namespace test
 	// dot product
 	bool Test_VectorDot(std::vector<int>& vec_len,
 		int num_threads = std::thread::hardware_concurrency(),
-		float threshold = 0.001f,
+		float threshold = 0.0005f,
 		float min = 0.0f,
 		float max = 100.0f);
 	// magnitude
 	bool Test_VectorMag(std::vector<int>& vec_len,
 		int num_threads = std::thread::hardware_concurrency(),
-		float threshold = 0.001f,
+		float threshold = 0.0005f,
 		float min = 0.0f,
 		float max = 100.0f);
 	// unit vector
 	bool Test_VectorUnit(std::vector<int>& vec_len,
 		int num_threads = std::thread::hardware_concurrency(),
-		float threshold = 0.0f,
+		float threshold = 0.00001f,
 		float min = 0.0f,
 		float max = 100.0f);
 	// angle
 	bool Test_VectorAngle(std::vector<int>& vec_len,
-		int num_threads = std::thread::hardware_concurrency(),
-		float threshold = 0.0f,
-		float min = 0.0f,
-		float max = 100.0f);
-	// transform using transformation matrix
-	bool Test_VectorTransform(std::vector<int>& vec_len,
 		int num_threads = std::thread::hardware_concurrency(),
 		float threshold = 0.00001f,
 		float min = 0.0f,
@@ -111,13 +105,13 @@ namespace test
 	// covariance
 	bool Test_VectorCov(std::vector<int>& vec_len,
 		int num_threads = std::thread::hardware_concurrency(),
-		float threshold = 0.00001f,
+		float threshold = 0.000001f,
 		float min = 0.0f,
 		float max = 100.0f);
 	// correlation
 	bool Test_VectorCorr(std::vector<int>& vec_len,
 		int num_threads = std::thread::hardware_concurrency(),
-		float threshold = 0.00001f,
+		float threshold = 0.000001f,
 		float min = 0.0f,
 		float max = 100.0f);
 }

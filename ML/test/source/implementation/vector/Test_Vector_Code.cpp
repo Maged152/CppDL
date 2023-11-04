@@ -54,12 +54,7 @@ namespace test
 	 void TestVectorUnit(const qlm::Vector& src, qlm::Vector& dst)
 	{
 		float mag = 0;
-		for (int l = 0; l < src.Length(); l++)
-		{
-			mag += src.Get(l) * src.Get(l);
-		}
-
-		mag = std::sqrtf(mag);
+		TestVectorMag(src, mag);
 
 		for (int l = 0; l < src.Length(); l++)
 		{

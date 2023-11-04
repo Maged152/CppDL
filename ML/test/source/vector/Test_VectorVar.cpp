@@ -38,7 +38,7 @@ bool test::Test_VectorVar(std::vector<int>& vec_len, int num_threads, float thre
 	{
 		int len = vec_len[l];
 
-		float current_threshold = threshold * num_threads;
+		float current_threshold = threshold * len;
 
 		ThreadPool pool{ num_threads };
 

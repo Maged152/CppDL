@@ -41,7 +41,7 @@ bool test::Test_VectorMag(std::vector<int>& vec_len, int num_threads, float thre
 
 		int len = vec_len[l];
 
-		float current_threshold = threshold * std::pow(len, 3.0f / 2);
+		float current_threshold = std::sqrt(threshold * std::pow(len, 5.0f / 3));
 
 		SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
 		cout << "length  : " << len << "\n";
