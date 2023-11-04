@@ -80,8 +80,6 @@ namespace qlm
         Status Unit(Vector& dst, ThreadPool& pool) const;
         // angle
         Status Angle(const Vector& src, float& dst, ThreadPool& pool) const;
-        // transform using transformation matrix
-        Status Transform(const Matrix& transform, Vector& dst, ThreadPool& pool) const;
         // sum
         Status Sum(float& dst, ThreadPool& pool) const;
         // mean
@@ -100,6 +98,8 @@ namespace qlm
         Status Div(const Vector& src, Vector& dst, ThreadPool& pool) const;
         // covariance
         Status Cov(const Vector& src, float& dst, ThreadPool& pool) const;
+        // correlation
+        Status Corr(const Vector& src, float& dst, ThreadPool& pool) const;
     public:
         // Vector-scalar operations
         // addition

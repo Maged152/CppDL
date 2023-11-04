@@ -22,15 +22,18 @@ namespace qlm
 		auto fut_status1 = pool.Submit(bind_mean1);
 		auto fut_status2 = pool.Submit(bind_mean2);
 
-		pool.used_threads = old_pool_size;
-
-		if (fut_status1.get() != Status::SUCCESS)
+		auto status1 = fut_status1.get();
+		if (status1 != Status::SUCCESS)
 		{
-			return fut_status1.get();
+			return status1;
+			pool.used_threads = old_pool_size;
 		}
-		if (fut_status2.get() != Status::SUCCESS)
+
+		auto status2 = fut_status2.get();
+		if (status2 != Status::SUCCESS)
 		{
-			return fut_status2.get();
+			return status2;
+			pool.used_threads = old_pool_size;
 		}
 
 		const unsigned int num_used_threads = pool.used_threads;
@@ -78,6 +81,8 @@ namespace qlm
 		}
 
 		dst = dst / (len - 1);
+
+		pool.used_threads = old_pool_size;
 
 		return Status::SUCCESS;
 	}
