@@ -68,14 +68,16 @@ bool test::Test_VectorScalarDiv(std::vector<int>& vec_len, int num_threads, floa
 		auto status = src1.Div(val, dst_opt, pool);
 		opt.End();
 		// compare the results
-		res &= TestCompare(dst_ref, dst_opt, threshold);
+		bool n_res = TestCompare(dst_ref, dst_opt, threshold);
 
-		PrintTestResults(res, status, ref, opt, col_handle);
+		PrintTestResults(n_res, status, ref, opt, col_handle);
 
-		if (!res)
+		if (!n_res)
 		{
 			num_failed_cases++;
 		}
+
+		res &= n_res;
 	}
 
 	if (num_failed_cases > 0)

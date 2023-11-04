@@ -63,15 +63,17 @@ bool test::Test_VectorVar(std::vector<int>& vec_len, int num_threads, float thre
 		auto status = src.Var(dst_opt, pool);
 		opt.End();
 		// compare the results
-		bool res = TestCompare(dst_ref, dst_opt, current_threshold);
+		bool n_res = TestCompare(dst_ref, dst_opt, current_threshold);
 
-		PrintTestResults(res, status, ref, opt, col_handle);
+		PrintTestResults(n_res, status, ref, opt, col_handle);
 
-		if (!res)
+		if (!n_res)
 		{
 			std::cout << "test : " << dst_ref << " vs " << " code : " << dst_opt << "\n";
 			num_failed_cases++;
 		}
+
+		res &= n_res;
 	}
 
 	if (num_failed_cases > 0)

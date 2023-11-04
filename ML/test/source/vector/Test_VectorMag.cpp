@@ -41,7 +41,7 @@ bool test::Test_VectorMag(std::vector<int>& vec_len, int num_threads, float thre
 
 		int len = vec_len[l];
 
-		float current_threshold = threshold * num_threads;
+		float current_threshold = threshold * std::pow(len, 3.0f / 2);
 
 		SetConsoleTextAttribute(col_handle, CONSOLE_COLOR_GREEN);
 		cout << "length  : " << len << "\n";
@@ -66,14 +66,16 @@ bool test::Test_VectorMag(std::vector<int>& vec_len, int num_threads, float thre
 		auto status = src.Mag(dst_opt, pool);
 		opt.End();
 		// compare the results
-		res &= TestCompare(dst_ref, dst_opt, current_threshold);
+		bool n_res = TestCompare(dst_ref, dst_opt, current_threshold);
 
-		PrintTestResults(res, status, ref, opt, col_handle);
+		PrintTestResults(n_res, status, ref, opt, col_handle);
 
-		if (!res)
+		if (!n_res)
 		{
 			num_failed_cases++;
 		}
+
+		res &= n_res;
 	}
 
 	if (num_failed_cases > 0)

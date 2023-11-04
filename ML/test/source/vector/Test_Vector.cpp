@@ -14,5 +14,15 @@ bool test::Test_Vector()
 	res &= Test_VectorScalarDiv(sizes);
 	res &= Test_VectorScalarMul(sizes);
 
+	res &= Test_VectorAdd(sizes);
+	res &= Test_VectorSub(sizes);
+	res &= Test_VectorDiv(sizes);
+	res &= Test_VectorMul(sizes);
+
+	res &= Test_VectorDot(sizes);
+	res &= Test_VectorMag(sizes);
+	res &= Test_VectorAngle(sizes);
+	res &= Test_VectorMul(sizes);
+
 	return res;
 }

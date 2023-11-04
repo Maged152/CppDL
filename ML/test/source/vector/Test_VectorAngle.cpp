@@ -66,14 +66,16 @@ bool test::Test_VectorAngle(std::vector<int>& vec_len, int num_threads, float th
 		auto status = src1.Angle(src2, dst_opt, pool);
 		opt.End();
 		// compare the results
-		res &= TestCompare(dst_ref, dst_opt, current_threshold);
+		bool n_res = TestCompare(dst_ref, dst_opt, current_threshold);
 
-		PrintTestResults(res, status, ref, opt, col_handle);
+		PrintTestResults(n_res, status, ref, opt, col_handle);
 
-		if (!res)
+		if (!n_res)
 		{
 			num_failed_cases++;
 		}
+
+		res &= n_res;
 	}
 
 	if (num_failed_cases > 0)
