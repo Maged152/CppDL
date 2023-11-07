@@ -90,6 +90,7 @@
     <ClCompile Include="source\matrix\MatrixTranspose.cpp" />
     <ClCompile Include="source\matrix\MatrixVectorOp.cpp" />
     <ClCompile Include="source\vector\Vector.cpp" />
+    <ClCompile Include="source\vector\VectorCorr.cpp" />
     <ClCompile Include="source\vector\VectorCov.cpp" />
     <ClCompile Include="source\vector\VectorDot.cpp" />
     <ClCompile Include="source\vector\VectorElemOp.cpp" />

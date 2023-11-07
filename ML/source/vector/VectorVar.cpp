@@ -28,7 +28,7 @@ namespace qlm
 #pragma omp simd reduction(+:sum)
 			for (unsigned int i = 0; i < size; i++)
 			{
-				sum += std::powf(src[i] - mean, 2);
+				sum += (src[i] - mean) * (src[i] - mean);
 			}
 			return sum;
 		};
