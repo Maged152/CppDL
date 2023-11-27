@@ -171,8 +171,31 @@ namespace test
 		 dst = cov / std::sqrt(var1 * var2);
 	 }
 	 ///////////////////////////////////////////////////////////////////////////
+	 void test::TestVectorMin(const qlm::Vector& src, float& dst)
+	 {
+		 dst = src.Get(0);
+
+		 for (int i = 1; i < src.Length(); i++)
+		 {
+			 dst = std::min(dst, src.Get(i));
+		 }
+	 }
 	 ///////////////////////////////////////////////////////////////////////////
+	 void test::TestVectorMax(const qlm::Vector& src, float& dst)
+	 {
+		 dst = src.Get(0);
+
+		 for (int i = 1; i < src.Length(); i++)
+		 {
+			 dst = std::max(dst, src.Get(i));
+		 }
+	 }
 	 ///////////////////////////////////////////////////////////////////////////
+	 void test::TestVectorMinMax(const qlm::Vector& src, float& min, float& max)
+	 {
+		 TestVectorMin(src, min);
+		 TestVectorMax(src, max);
+	 }
 	 ///////////////////////////////////////////////////////////////////////////
 
 }
