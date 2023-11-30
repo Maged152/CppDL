@@ -56,6 +56,16 @@ namespace qlm
 		return status;
 	}
 
+	Status Vector::Min(float& dst, ThreadPool& pool) const
+	{
+		return this->VectorOp<std::min<float>>(dst, pool);
+	}
+
+	Status Vector::Max(float& dst, ThreadPool& pool) const
+	{
+		return this->VectorOp<std::max<float>>(dst, pool);
+	}
+
 	// Vector helper functions
 	void Vector::RandomInit(const float min_value, const float max_value)
 	{
