@@ -114,4 +114,23 @@ namespace test
 		float threshold = 0.000001f,
 		float min = 0.0f,
 		float max = 100.0f);
+	// min
+	bool Test_VectorMin(std::vector<int>& vec_len,
+		int num_threads = std::thread::hardware_concurrency(),
+		float threshold = 0.0f,
+		float min = 0.0f,
+		float max = 100.0f);
+	// max
+	bool Test_VectorMax(std::vector<int>& vec_len,
+		int num_threads = std::thread::hardware_concurrency(),
+		float threshold = 0.0f,
+		float min = 0.0f,
+		float max = 100.0f);
+	// min max
+	bool Test_VectorMinMax(std::vector<int>& vec_len,
+		int num_threads = std::thread::hardware_concurrency(),
+		float threshold = 0.0f,
+		float min = 0.0f,
+		float max = 100.0f);
+
 }
