@@ -89,6 +89,7 @@
     <ClCompile Include="source\matrix\MatrixElemWiseOp.cpp" />
     <ClCompile Include="source\matrix\MatrixTranspose.cpp" />
     <ClCompile Include="source\matrix\MatrixVectorOp.cpp" />
+    <ClCompile Include="source\statistics\statistics.cpp" />
     <ClCompile Include="source\vector\Vector.cpp" />
     <ClCompile Include="source\vector\VectorCorr.cpp" />
     <ClCompile Include="source\vector\VectorCov.cpp" />
@@ -96,6 +97,8 @@
     <ClCompile Include="source\vector\VectorElemOp.cpp" />
     <ClCompile Include="source\vector\VectorElemWiseOp.cpp" />
     <ClCompile Include="source\vector\VectorLA.cpp" />
+    <ClCompile Include="source\vector\VectorMinMax.cpp" />
+    <ClCompile Include="source\vector\VectorOp.cpp" />
     <ClCompile Include="source\vector\VectorSum.cpp" />
     <ClCompile Include="source\vector\VectorVar.cpp" />
     <ClCompile Include="test\source\implementation\matrix\Test_Matrix_Code.cpp" />
@@ -122,7 +125,10 @@
     <ClCompile Include="test\source\vector\Test_VectorDiv.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorDot.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorMag.cpp" />
+    <ClCompile Include="test\source\vector\Test_VectorMax.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorMean.cpp" />
+    <ClCompile Include="test\source\vector\Test_VectorMin.cpp" />
+    <ClCompile Include="test\source\vector\Test_VectorMinMax.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorMul.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorScalarAdd.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorScalarDiv.cpp" />
@@ -137,6 +143,7 @@
     <ClInclude Include="include\matrix.h" />
     <ClInclude Include="include\panda.h" />
     <ClInclude Include="include\shakhbat_ml.h" />
+    <ClInclude Include="include\statistics.h" />
     <ClInclude Include="include\thread_pool.h" />
     <ClInclude Include="include\thread_safe_queue.h" />
     <ClInclude Include="include\types.h" />

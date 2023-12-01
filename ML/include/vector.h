@@ -20,6 +20,9 @@ namespace qlm
         template<typename op>
         Status VectorElemOp(const float src, Vector& dst, ThreadPool& pool) const;
 
+        template<const float& (*op)(const float&, const float&)>
+        Status VectorOp(float& dst, ThreadPool& pool) const;
+
     public:
         // Default constructor
         Vector() : data(nullptr), len(0)
@@ -86,6 +89,13 @@ namespace qlm
         Status Mean(float& dst, ThreadPool& pool) const;
         // variance
         Status Var(float& dst, ThreadPool& pool) const;
+        // min 
+        Status Min(float& dst, ThreadPool& pool) const;
+        // max 
+        Status Max(float& dst, ThreadPool& pool) const;
+        // min max
+        Status MinMax(float& dst_min, float& dst_max, ThreadPool& pool) const;
+
     public:
         // vector-vector operations
         // vector addition
