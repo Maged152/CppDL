@@ -9,7 +9,7 @@ using namespace qlm;
 using namespace std;
 
 
-bool test::Test_VectorUnit(std::vector<int>& vec_len, int num_threads, float threshold, float min, float max)
+bool test::Test_VectorUnit(std::vector<int>& vec_len, unsigned int  num_threads, float threshold, float min, float max)
 {
 	HANDLE col_handle;
 	col_handle = GetStdHandle(STD_OUTPUT_HANDLE);

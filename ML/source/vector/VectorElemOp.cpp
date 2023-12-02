@@ -18,8 +18,8 @@ namespace qlm
 			return Status::INVALID_DIMENTIONS;
 		}
 
-		const unsigned int num_used_threads = pool.used_threads;
 		const unsigned int total_length = len;
+		const unsigned int num_used_threads = std::min(pool.used_threads, total_length);
 
 		auto op_vec = [](const float* const __restrict  src1, const float val, float* const __restrict  dst, const unsigned int size)
 		{

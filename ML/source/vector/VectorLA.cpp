@@ -30,7 +30,7 @@ namespace qlm
 	Status Vector::Angle(const Vector& src, float& dst, ThreadPool& pool) const
 	{
 		const int old_pool_size = pool.used_threads;
-		const int new_pool_size = std::floor(old_pool_size / 3);
+		const int new_pool_size = std::ceil(old_pool_size / 3);
 		pool.used_threads = new_pool_size;
 
 		float dot{0}, mag1{0}, mag2{0};

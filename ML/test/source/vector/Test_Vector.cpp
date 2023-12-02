@@ -30,5 +30,9 @@ bool test::Test_Vector()
 	res &= Test_VectorCov(sizes);
 	res &= Test_VectorCorr(sizes);
 
+	res &= Test_VectorMin(sizes);
+	res &= Test_VectorMax(sizes);
+	res &= Test_VectorMinMax(sizes);
+
 	return res;
 }

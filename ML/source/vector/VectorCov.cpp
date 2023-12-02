@@ -11,7 +11,7 @@ namespace qlm
 	Status Vector::Cov(const Vector& src, float& dst, ThreadPool& pool) const
 	{
 		const int old_pool_size = pool.used_threads;
-		const int new_pool_size = std::floor(old_pool_size / 2);
+		const int new_pool_size = std::ceil(old_pool_size / 2);
 		pool.used_threads = new_pool_size;
 
 		float mean1, mean2;

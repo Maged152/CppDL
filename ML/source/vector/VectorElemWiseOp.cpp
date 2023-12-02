@@ -21,8 +21,8 @@ namespace qlm
 		}
 
 		const unsigned int total_length = len;
-		const  int lines = std::ceil((float)len / std::hardware_destructive_interference_size);
-		const  int threads =  std::min(lines, pool.used_threads);
+		const unsigned int lines = std::ceil((float)len / std::hardware_destructive_interference_size);
+		const unsigned int threads =  std::min(lines, pool.used_threads);
 		
 
 		auto op_vec = [](const float* const __restrict  src1, const float* const __restrict  src2, float* const __restrict  dst, const unsigned int size)

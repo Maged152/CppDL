@@ -8,7 +8,7 @@ using namespace qlm;
 using namespace std;
 
 
-void test::Test_MatrixDiv(std::vector<int>& mat_rows, std::vector<int>& mat_cols, int num_threads, float threshold, float min, float max)
+void test::Test_MatrixDiv(std::vector<int>& mat_rows, std::vector<int>& mat_cols, unsigned int  num_threads, float threshold, float min, float max)
 {
 	HANDLE col_handle;
 	col_handle = GetStdHandle(STD_OUTPUT_HANDLE);

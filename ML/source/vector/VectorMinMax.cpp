@@ -20,8 +20,8 @@ namespace qlm
 			return Status::INVALID_DIMENTIONS;
 		}
 
-		const unsigned int num_used_threads = pool.used_threads;
 		const unsigned int total_length = len;
+		const unsigned int num_used_threads = std::min(pool.used_threads, total_length);
 
 
 		auto op_vec = [](const float* const __restrict  src, const unsigned int size)
@@ -69,7 +69,7 @@ namespace qlm
 		{
 			auto dst_th = futures[i].get();
 			dst_min= std::min(dst_min, dst_th.first);
-			dst_max = std::min(dst_max , dst_th.second);
+			dst_max = std::max(dst_max , dst_th.second);
 
 		}
 

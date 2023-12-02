@@ -6,6 +6,7 @@
 #include <cmath>
 #include <algorithm>
 
+
 namespace qlm
 {
 	template <const float& (*op)(const float&, const float&)>
@@ -21,8 +22,8 @@ namespace qlm
 			return Status::INVALID_DIMENTIONS;
 		}
 
-		const unsigned int num_used_threads = pool.used_threads;
 		const unsigned int total_length =len;
+		const unsigned int num_used_threads = std::min(pool.used_threads, total_length);
 
 
 		auto op_vec = [](const float* const __restrict  src, const unsigned int size)
@@ -34,7 +35,7 @@ namespace qlm
 			{
 				dst = op(dst, src[i]);
 			}
-
+			
 			return dst;
 		};
 		// divide the matrix among the threads
