@@ -132,5 +132,11 @@ namespace test
 		float threshold = 0.0f,
 		float min = 0.0f,
 		float max = 100.0f);
+	// norm
+	bool Test_VectorNorm(std::vector<int>& vec_len,
+		unsigned int  num_threads = std::thread::hardware_concurrency(),
+		float threshold = 0.0005f,
+		float min = 0.0f,
+		float max = 100.0f);
 
 }

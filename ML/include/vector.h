@@ -14,6 +14,8 @@ namespace qlm
         int len;
 
     private:
+        // naming for common precessing function
+        // Vector_input_lambda_output -> Vector_vv_vv_v
         template<typename op>
         Status VectorElemWiseOp(const Vector& src, Vector& dst, ThreadPool& pool) const;
 
@@ -21,7 +23,7 @@ namespace qlm
         Status VectorElemOp(const float src, Vector& dst, ThreadPool& pool) const;
 
         template<const float& (*op)(const float&, const float&)>
-        Status VectorOp(float& dst, ThreadPool& pool) const;
+        Status Vector_V_V_S(float& dst, ThreadPool& pool) const;
 
     public:
         // Default constructor
@@ -95,6 +97,8 @@ namespace qlm
         Status Max(float& dst, ThreadPool& pool) const;
         // min max
         Status MinMax(float& dst_min, float& dst_max, ThreadPool& pool) const;
+        // norm
+        Status Norm(const NORM norm,float& dst, ThreadPool& pool) const;
 
     public:
         // vector-vector operations

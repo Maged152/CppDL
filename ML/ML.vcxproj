@@ -98,7 +98,6 @@
     <ClCompile Include="source\vector\VectorElemWiseOp.cpp" />
     <ClCompile Include="source\vector\VectorLA.cpp" />
     <ClCompile Include="source\vector\VectorMinMax.cpp" />
-    <ClCompile Include="source\vector\VectorOp.cpp" />
     <ClCompile Include="source\vector\VectorSum.cpp" />
     <ClCompile Include="source\vector\VectorVar.cpp" />
     <ClCompile Include="test\source\implementation\matrix\Test_Matrix_Code.cpp" />
@@ -130,6 +129,7 @@
     <ClCompile Include="test\source\vector\Test_VectorMin.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorMinMax.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorMul.cpp" />
+    <ClCompile Include="test\source\vector\Test_VectorNorm.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorScalarAdd.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorScalarDiv.cpp" />
     <ClCompile Include="test\source\vector\Test_VectorScalarMul.cpp" />
@@ -148,6 +148,7 @@
     <ClInclude Include="include\thread_safe_queue.h" />
     <ClInclude Include="include\types.h" />
     <ClInclude Include="include\vector.h" />
+    <ClInclude Include="source\vector\common\VectorOp.h" />
     <ClInclude Include="test\include\Test_Matrix_Code.h" />
     <ClInclude Include="test\include\Test_Vector_Code.h" />
     <ClInclude Include="test\include\Test_Matrix.h" />

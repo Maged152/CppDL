@@ -3,6 +3,7 @@
 #include <iostream>
 #include <iomanip>
 #include <functional>
+#include "common/VectorOp.h"
 
 namespace qlm
 {
@@ -58,12 +59,34 @@ namespace qlm
 
 	Status Vector::Min(float& dst, ThreadPool& pool) const
 	{
-		return this->VectorOp<std::min<float>>(dst, pool);
+		return this->Vector_V_V_S<std::min<float>>(dst, pool);
 	}
 
 	Status Vector::Max(float& dst, ThreadPool& pool) const
 	{
-		return this->VectorOp<std::max<float>>(dst, pool);
+		return this->Vector_V_V_S<std::max<float>>(dst, pool);
+	}
+
+	Status qlm::Vector::Norm(const NORM norm, float& dst, ThreadPool& pool) const
+	{
+		if (norm == qlm::NORM::L1_NORM)
+		{
+			auto l1_norm_lambda = [](const float& dst, const float& src) -> const float&
+			{
+				return dst + std::abs(src);
+			};
+
+			return this->Vector_V_V_S<l1_norm_lambda>(dst, pool);
+		}
+		else if (norm == qlm::NORM::L2_NORM)
+		{
+			return this->Mag(dst, pool);
+		}
+		else
+		{
+			return this->Max(dst, pool);
+		}
+		return Status();
 	}
 
 	// Vector helper functions

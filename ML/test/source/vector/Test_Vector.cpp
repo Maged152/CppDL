@@ -33,6 +33,7 @@ bool test::Test_Vector()
 	res &= Test_VectorMin(sizes);
 	res &= Test_VectorMax(sizes);
 	res &= Test_VectorMinMax(sizes);
+	res &= Test_VectorNorm(sizes);
 
 	return res;
 }

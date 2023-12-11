@@ -15,4 +15,11 @@ namespace qlm
 		BROAD_CAST_ROW,
 		BROAD_CAST_COLUMN
 	};
+
+	enum class NORM
+	{
+		L1_NORM,
+		L2_NORM,
+		INF_NORM
+	};
 }

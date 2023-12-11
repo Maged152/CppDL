@@ -1,3 +1,5 @@
+#pragma once
+
 #include "vector.h"
 #include <vector>
 #include <omp.h>
@@ -10,7 +12,7 @@
 namespace qlm
 {
 	template <const float& (*op)(const float&, const float&)>
-	inline Status Vector::VectorOp(float& dst, ThreadPool& pool) const
+	inline Status Vector::Vector_V_V_S(float& dst, ThreadPool& pool) const
 	{
 		if (pool.used_threads <= 0)
 		{
@@ -22,7 +24,7 @@ namespace qlm
 			return Status::INVALID_DIMENTIONS;
 		}
 
-		const unsigned int total_length =len;
+		const unsigned int total_length = len;
 		const unsigned int num_used_threads = std::min(pool.used_threads, total_length);
 
 
@@ -35,7 +37,7 @@ namespace qlm
 			{
 				dst = op(dst, src[i]);
 			}
-			
+
 			return dst;
 		};
 		// divide the matrix among the threads
@@ -58,7 +60,7 @@ namespace qlm
 			futures[i] = pool.Submit(op_vec, &data[next_idx], thread_length);
 			next_idx += thread_length;
 		}
-		
+
 		dst = futures[0].get();
 		// wait for the threads to finish
 #pragma omp unroll full
@@ -69,9 +71,4 @@ namespace qlm
 
 		return Status::SUCCESS;
 	}
-
-
-	template Status Vector::VectorOp<std::min>(float&, ThreadPool&) const;
-
-	template Status Vector::VectorOp<std::max>(float&, ThreadPool&) const;
 }

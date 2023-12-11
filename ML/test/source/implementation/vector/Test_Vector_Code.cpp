@@ -197,5 +197,27 @@ namespace test
 		 TestVectorMax(src, max);
 	 }
 	 ///////////////////////////////////////////////////////////////////////////
+	 void test::TestVectorNorm(const qlm::Vector& src, qlm::NORM norm, float& dst)
+	 {
+		 if (norm == qlm::NORM::L1_NORM)
+		 {
+			 dst = 0;
+			 for (int l = 0; l < src.Length(); l++)
+			 {
+				 dst += std::abs(src.Get(l));
+			 }
+		 }
+		 else if (norm == qlm::NORM::L2_NORM)
+		 {
+			 TestVectorMag(src, dst);
+		 }
+		 else
+		 {
+			 TestVectorMax(src, dst);
+		 }
+	 }
+	 ///////////////////////////////////////////////////////////////////////////
+	 ///////////////////////////////////////////////////////////////////////////
+	 ///////////////////////////////////////////////////////////////////////////
 
 }
