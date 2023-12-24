@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "test_helper.h"
 #include "../ML/include/shakhbat_ml.h"
-//#include "../ML/test/test.h"
 
 
 // Define the test parameters types
@@ -22,10 +21,9 @@ TEST_P(Parameters, Test_VectorAdd)
     test::PrintParameter(num, "num");
     test::PrintParameter(n, "n");
 
-    //auto x = qlm::Factorial(5);
-    //std::cout << x << "\n";
+    auto x = qlm::Factorial(5);
     // do the test
-   // EXPECT_EQ(IsEven(num), num % 2 == 0);
+    EXPECT_EQ(x,120);
 }
 
 
