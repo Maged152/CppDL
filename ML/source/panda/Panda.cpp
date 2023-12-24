@@ -2,12 +2,12 @@
 
 namespace qlm
 {
-	int Panda::Rows() const
+	unsigned int Panda::Rows() const
 	{
 		return rows;
 	}
 
-	int Panda::Cols() const
+	unsigned int Panda::Cols() const
 	{
 		return cols;
 	}

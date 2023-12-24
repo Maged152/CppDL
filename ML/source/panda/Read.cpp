@@ -2,6 +2,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <cmath>
 
 namespace qlm
 {
@@ -28,8 +29,6 @@ namespace qlm
 
 		};
 
-		int num_rows = 0;
-
 		std::string line;
 		
 		if (header)
@@ -41,7 +40,7 @@ namespace qlm
 				tokens.push_back(token);
 			};
 
-			parse(line, this->headers, push_str);
+			parse(line, headers, push_str);
 		}
 
 		// read first line
@@ -86,9 +85,51 @@ namespace qlm
 
 		};
 		
-		parse(line, this->dtypes, deduce_dtypes);
+		parse(line, dtypes, deduce_dtypes);
 
 		cols = dtypes.size();
+
+		// set sizes of the vectors
+		categorical_data = std::vector<std::vector<std::string>>{ cols };
+		numerical_data = std::vector<qlm::Vector>{ cols };
+		max_len = std::vector<unsigned int>{ cols, 1 };
+
+		// set headers to numbers if not exist
+		if (!header)
+		{
+			for (int i = 0; i < cols; i++)
+			{
+				headers.push_back(std::to_string(i));
+			}
+		}
+		else
+		{
+			for (int i = 0; i < cols; i++)
+			{
+				max_len[i] = headers[i].size();
+			}
+		}
+
+		// Read data, line by line
+		do
+		{
+			rows++;
+
+			std::stringstream ss(line);
+			std::string token;
+
+			int idx = 0;
+
+			while (std::getline(ss, token, sep))
+			{
+				unsigned int len = token.size();
+				max_len[idx] = std::max(len, max_len[idx]);
+
+				categorical_data[idx++].push_back(token);
+
+			}
+
+		} while (std::getline(file, line));
 
 		file.close();
 

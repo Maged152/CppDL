@@ -8,13 +8,16 @@ namespace qlm
 	class Panda
 	{
 	private:
-		int cols;
-		int rows;
+		unsigned int cols;
+		unsigned int rows;
 
 		std::vector<std::string> headers;
 		std::vector<std::string> dtypes;
-		std::vector<std::string> categorical_data;
+
+		std::vector<std::vector<std::string>> categorical_data;
 		std::vector<qlm::Vector> numerical_data;
+
+		std::vector<unsigned int> max_len;
 	public:
 		Panda() : cols(0), rows(0)
 		{}
@@ -32,8 +35,8 @@ namespace qlm
 
 		void Print(int num_row = 10) const;
 
-		int Rows() const;
-		int Cols() const;
+		unsigned int Rows() const;
+		unsigned int Cols() const;
 
 		std::vector<std::string> Headers() const;
 		std::vector<std::string> DTypes() const;
