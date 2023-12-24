@@ -12,8 +12,9 @@ namespace qlm
 		int rows;
 
 		std::vector<std::string> headers;
-		std::vector<std::string> str_data;
-		std::vector<qlm::Vector> num_data;
+		std::vector<std::string> dtypes;
+		std::vector<std::string> categorical_data;
+		std::vector<qlm::Vector> numerical_data;
 	public:
 		Panda() : cols(0), rows(0)
 		{}
@@ -33,6 +34,8 @@ namespace qlm
 
 		int Rows() const;
 		int Cols() const;
+
 		std::vector<std::string> Headers() const;
+		std::vector<std::string> DTypes() const;
 	};
 }

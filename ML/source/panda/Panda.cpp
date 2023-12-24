@@ -17,5 +17,10 @@ namespace qlm
 		return headers;
 	}
 
+	std::vector<std::string> Panda::DTypes() const
+	{
+		return dtypes;
+	}
+
 
 }
