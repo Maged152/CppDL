@@ -26,7 +26,7 @@ namespace test
 {
 	// print
 	template<typename T>
-	void PrintParameter(T parameter, const std::string& para_name)
+	inline void PrintParameter(T parameter, const std::string& para_name)
 	{
 		std::cout << COUT_GTEST_MGT << para_name 
 			                        << " = " 
@@ -34,7 +34,7 @@ namespace test
 			                        << ANSI_TXT_DFT << std::endl;
 	}
 
-	void PrintTime(const qlm::Timer<qlm::usec>& ref, const qlm::Timer<qlm::usec>& lib)
+	inline void PrintTime(const qlm::Timer<qlm::usec>& ref, const qlm::Timer<qlm::usec>& lib)
 	{
 		std::cout << COUT_GTEST_MGT_TIME << "lib time"
 			                             << " = "
