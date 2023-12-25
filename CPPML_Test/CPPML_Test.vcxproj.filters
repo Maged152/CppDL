@@ -2,13 +2,20 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="pch.cpp" />
-    <ClCompile Include="Test_Template.cpp" />
+    <ClCompile Include="source\vector\Test_VectorAdd.cpp">
+      <Filter>source\vector</Filter>
+    </ClCompile>
+    <ClCompile Include="source\implementation\matrix\Test_Matrix_Code.cpp" />
+    <ClCompile Include="source\implementation\vector\Test_Vector_Code.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="test_helper.h">
+    <ClInclude Include="include\pch.h" />
+    <ClInclude Include="include\test_helper.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="include\Test_Matrix_Code.h" />
+    <ClInclude Include="include\Test_Vector_Code.h" />
+    <ClInclude Include="include\test.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="source">

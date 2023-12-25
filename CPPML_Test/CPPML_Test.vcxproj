@@ -34,8 +34,11 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
-    <ClInclude Include="pch.h" />
-    <ClInclude Include="test_helper.h" />
+    <ClInclude Include="include\pch.h" />
+    <ClInclude Include="include\test.h" />
+    <ClInclude Include="include\test_helper.h" />
+    <ClInclude Include="include\Test_Matrix_Code.h" />
+    <ClInclude Include="include\Test_Vector_Code.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -44,7 +47,9 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Test_Template.cpp" />
+    <ClCompile Include="source\implementation\matrix\Test_Matrix_Code.cpp" />
+    <ClCompile Include="source\implementation\vector\Test_Vector_Code.cpp" />
+    <ClCompile Include="source\vector\Test_VectorAdd.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ML\ML.vcxproj">
@@ -84,7 +89,7 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)ML_Test\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)CPPML_Test\include;$(SolutionDir)ML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -117,7 +122,7 @@
       <WarningLevel>Level3</WarningLevel>
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)ML_Test\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)CPPML_Test\include;$(SolutionDir)ML\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
