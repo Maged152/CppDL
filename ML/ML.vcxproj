@@ -89,6 +89,8 @@
     <ClCompile Include="source\matrix\MatrixElemWiseOp.cpp" />
     <ClCompile Include="source\matrix\MatrixTranspose.cpp" />
     <ClCompile Include="source\matrix\MatrixVectorOp.cpp" />
+    <ClCompile Include="source\panda\Panda.cpp" />
+    <ClCompile Include="source\panda\Read.cpp" />
     <ClCompile Include="source\statistics\statistics.cpp" />
     <ClCompile Include="source\vector\Vector.cpp" />
     <ClCompile Include="source\vector\VectorCorr.cpp" />

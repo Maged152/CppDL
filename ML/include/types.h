@@ -8,7 +8,8 @@ namespace qlm
 		FAIL,
 		INVALID_DIMENTIONS,
 		INVALID_UTILIZATION,
-		FILE_NOT_FOUND
+		FILE_NOT_FOUND,
+		EMPTY_FILE
 	};
 
 	enum class BroadCast

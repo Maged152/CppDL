@@ -44,22 +44,27 @@ namespace qlm
 		}
 
 		// read first line
-		std::getline(file, line);
+		if (!std::getline(file, line))
+		{
+			return Status::EMPTY_FILE;
+		}
 
 		// check if the input is float
-		auto is_float = [](std::string& str)
+		auto is_float = [](const std::string& str)
 		{
 			// erase trailing spaces
 			const std::string white_space = " \r\n\t\v\f";
-			str.erase(str.find_last_not_of(white_space) + 1);
+			std::string trimmed_str = str;
+
+			trimmed_str.erase(str.find_last_not_of(white_space) + 1);
 
 			bool result = false;
 
 			try 
 			{
 				size_t pos;
-				const float num = std::stof(str, &pos);
-				if (pos == str.size())
+				const float num = std::stof(trimmed_str, &pos);
+				if (pos == trimmed_str.size())
 				{
 					result = true;
 				}
@@ -72,7 +77,7 @@ namespace qlm
 		};
 
 		// deduce the data types
-		auto deduce_dtypes = [&](std::string& token, std::vector<std::string>& tokens)
+		auto deduce_dtypes = [&](const std::string& token, std::vector<std::string>& tokens)
 		{
 			if (is_float(token))
 			{
@@ -90,24 +95,25 @@ namespace qlm
 		cols = dtypes.size();
 
 		// set sizes of the vectors
-		categorical_data = std::vector<std::vector<std::string>>{ cols };
-		numerical_data = std::vector<qlm::Vector>{ cols };
-		max_len = std::vector<unsigned int>{ cols, 1 };
+		categorical_data.resize(cols);
+		numerical_data.resize(cols);
+		max_len.resize(cols);
 
-		// set headers to numbers if not exist
-		if (!header)
-		{
-			for (int i = 0; i < cols; i++)
-			{
-				headers.push_back(std::to_string(i));
-			}
-		}
-		else
+		if (header)
 		{
 			for (int i = 0; i < cols; i++)
 			{
 				max_len[i] = headers[i].size();
 			}
+		}
+		else
+		{
+			// set headers to numbers if not exist
+			for (int i = 0; i < cols; i++)
+			{
+				headers.push_back(std::to_string(i));
+			}
+			
 		}
 
 		// Read data, line by line

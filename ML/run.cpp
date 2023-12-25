@@ -6,10 +6,36 @@
 
 int main()
 {
+	qlm::Panda pd;
+	pd.Read("cars.csv");
 
-	//std::vector<int>l2{ 1000, 5000, 20000, 200000, 200000 };
-	//test::Test_VectorCorr(l2, 8);
-	auto res = test::Test_Vector();
+	auto h = pd.Headers();
+	auto dt = pd.DTypes();
+
+	std::cout << "Headers\n";
+	for (auto &i : h)
+	{
+		std::cout << i << ", ";
+	}
+
+	std::cout << "\nDTypes\n";
+	for (auto& i : dt)
+	{
+		std::cout << i << ", ";
+	}
+
+	int x = pd.Cols();
+
+	std::cout << x << "\n";
+	std::cout << pd.Rows() << "\n";
+	/*std::vector<int>l2{ 1000, 5000, 20000, 200000, 200000 };
+	test::Test_VectorMin(l2);
+	test::Test_VectorMax(l2);
+	test::Test_VectorMinMax(l2);*/
+
+	
+
+	/*auto res = test::Test_Vector();
 
 	if (res == true)
 	{
@@ -18,42 +44,7 @@ int main()
 	else
 	{
 		std::cout << "FAILED\n";
-	}
-
-	/*int v;
-	std::cin >> v;
-	std::cout << v << "\n";*/
-
-	/*qlm::Vector v1{ 10 };
-
-	for (int i = 0; i < 10; i++)
-	{
-		v1.Set(i, i);
-	}
-
-	qlm::ThreadPool p;
-	
-	float dst;
-	v1.Sum(dst, p);
-	v1.Print();
-	std::cout << "\n" << dst << "\n";*/
-	/*qlm::Vector v1{ 10 };
-	qlm::Matrix m1{ 10, 10 };
-	qlm::Matrix m2{ 10, 10 };
-
-	v1.RandomInit(0, 10);
-	m1.RandomInit(0, 10);
-
-	std::cout << "\nv1\n";
-	v1.Print();
-
-	std::cout << "\nm1\n";
-	m1.Print();
-
-	m1.Add(v1, m2);
-
-	std::cout << "\nm2\n";
-	m2.Print();*/
+	}*/
 
 }
 
