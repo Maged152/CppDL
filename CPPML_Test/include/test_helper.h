@@ -24,6 +24,15 @@
 
 namespace test
 {
+	// float to int
+	inline void Float2Int(qlm::Vector& in)
+	{
+		for (int i = 0; i < in.Length(); i++)
+		{
+			float element = static_cast<float>(static_cast<int>(in.Get(i)));
+			in.Set(i, element);
+		}
+	}
 	// print
 	template<typename T>
 	inline void PrintParameter(T parameter, const std::string& para_name)
