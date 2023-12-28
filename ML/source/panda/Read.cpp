@@ -99,21 +99,19 @@ namespace qlm
 		numerical_data.resize(cols);
 		max_len.resize(cols);
 
-		if (header)
+		// set headers to numbers if not exist
+		if (!header)
 		{
-			for (int i = 0; i < cols; i++)
-			{
-				max_len[i] = headers[i].size();
-			}
-		}
-		else
-		{
-			// set headers to numbers if not exist
 			for (int i = 0; i < cols; i++)
 			{
 				headers.push_back(std::to_string(i));
 			}
 			
+		}
+
+		for (int i = 0; i < cols; i++)
+		{
+			max_len[i] = headers[i].size();
 		}
 
 		// Read data, line by line
@@ -138,6 +136,7 @@ namespace qlm
 		} while (std::getline(file, line));
 
 		file.close();
+
 
 		return Status::SUCCESS;
 	}

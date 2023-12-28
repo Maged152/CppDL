@@ -33,7 +33,7 @@ namespace qlm
 		Status Read(const std::string& file_name, const bool header = true, const char& sep = ',');
 		Status Write(const std::string& file_name, const bool header = true, const char& sep = ',') const;
 
-		void Print(int num_row = 10) const;
+		void Print(unsigned int num_row = 10) const;
 
 		unsigned int Rows() const;
 		unsigned int Cols() const;
