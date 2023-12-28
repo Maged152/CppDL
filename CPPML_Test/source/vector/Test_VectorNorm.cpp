@@ -3,36 +3,31 @@
 
 
 // Define the test parameters types
-struct VectorSum : ::testing::TestWithParam<std::tuple<
+struct VectorNorm : ::testing::TestWithParam<std::tuple<
     int,   // length
     unsigned int,   // number of threads
     float, // min value
-    float  // max value
+    float, // max value
+    qlm::NORM // norm type
     >>
 {};
 
 
 // Define a parameterized test case
-TEST_P(VectorSum, Test_VectorSum)
+TEST_P(VectorNorm, Test_VectorNorm)
 {
     // extract the parameters
-    auto& [length, num_threads, min_val, max_val] = GetParam();
-    
-    // threshold
-    //const unsigned int thread_len = std::ceil(length / num_threads);
-    //const float epslon0 = std::pow(2.0f, -24.0f) * std::max(std::abs(max_val), std::abs(min_val));
-    //const float epslon1 = epslon0 * thread_len;
+    auto& [length, num_threads, min_val, max_val, norm] = GetParam();
 
-    //const float threshold1_0 = epslon0 * (thread_len * (thread_len - 1) / 2);
-    //const float threshold1_1 = epslon1 * (num_threads * (num_threads - 1) / 2);
-    //const float threshold = threshold1_1 + threshold1_0;
+    // threshold
     const float percentage_threshold = 0.07f;
-    
+
     // print the parameters
     test::PrintParameter(length, "length");
     test::PrintParameter(num_threads, "num_threads");
     test::PrintParameter(min_val, "min_val");
     test::PrintParameter(max_val, "max_val");
+    test::PrintParameter(norm, "norm");
 
     // initialize the function
     qlm::ThreadPool pool{ num_threads };
@@ -50,12 +45,12 @@ TEST_P(VectorSum, Test_VectorSum)
 
     // run test code
     ref.Start();
-    test::TestVectorSum(src, dst_ref);
+    test::TestVectorNorm(src, norm, dst_ref);
     ref.End();
 
     // run lib code
     lib.Start();
-    auto status = src.Sum(dst_lib, pool);
+    auto status = src.Norm(norm, dst_lib, pool);
     lib.End();
 
     // print time
@@ -70,10 +65,11 @@ TEST_P(VectorSum, Test_VectorSum)
 
 // Instantiate the test case with combinations of values
 INSTANTIATE_TEST_CASE_P(
-    Test_VectorSum, VectorSum,
+    Test_VectorNorm, VectorNorm,
     ::testing::Combine(
         ::testing::Values(7, 100, 5000, 20000, 200000, 2000000),
         ::testing::Values(1, 3, 8, 16),
         ::testing::Values(0.0f, -100.0f),
-        ::testing::Values(1.0f, 100.0f)
+        ::testing::Values(1.0f, 100.0f),
+        ::testing::Values(qlm::NORM::L1_NORM, qlm::NORM::L2_NORM, qlm::NORM::INF_NORM)
     ));
