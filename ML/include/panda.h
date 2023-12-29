@@ -12,7 +12,7 @@ namespace qlm
 		unsigned int rows;
 
 		std::vector<std::string> headers;
-		std::vector<std::string> dtypes;
+		std::vector<std::string> dtypes; // TODO :enum class 
 
 		std::vector<std::vector<std::string>> categorical_data;
 		std::vector<qlm::Vector> numerical_data;

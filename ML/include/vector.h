@@ -22,8 +22,8 @@ namespace qlm
         template<typename op>
         Status VectorElemOp(const float src, Vector& dst, ThreadPool& pool) const;
 
-        template<const float& (*op)(const float&, const float&)>
-        Status Vector_V_V_S(float& dst, ThreadPool& pool) const;
+        template<float (*op)(const float, const float)>
+        Status VectorProc_1Scalar_Out(float& dst, ThreadPool& pool) const;
 
     public:
         // Default constructor

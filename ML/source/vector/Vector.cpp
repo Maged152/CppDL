@@ -3,7 +3,7 @@
 #include <iostream>
 #include <iomanip>
 #include <functional>
-#include "common/VectorOp.h"
+#include "common/VectorProc_1Scalar_Out.h"
 
 namespace qlm
 {
@@ -59,24 +59,34 @@ namespace qlm
 
 	Status Vector::Min(float& dst, ThreadPool& pool) const
 	{
-		return this->Vector_V_V_S<std::min<float>>(dst, pool);
+		auto min_op = [](const float src, const float dst)
+		{
+			return src < dst ? src : dst;
+		};
+
+		return this->VectorProc_1Scalar_Out<min_op>(dst, pool);
 	}
 
 	Status Vector::Max(float& dst, ThreadPool& pool) const
 	{
-		return this->Vector_V_V_S<std::max<float>>(dst, pool);
+		auto max_op = [](const float src, const float dst)
+		{
+			return src > dst ? src : dst;
+		};
+
+		return this->VectorProc_1Scalar_Out<max_op>(dst, pool);
 	}
 
 	Status qlm::Vector::Norm(const NORM norm, float& dst, ThreadPool& pool) const
 	{
 		if (norm == qlm::NORM::L1_NORM)
 		{
-			auto l1_norm_lambda = [](const float& dst, const float& src) -> const float&
+			auto l1_norm_lambda = [](const float dst, const float src)
 			{
 				return dst + std::abs(src);
 			};
 
-			return this->Vector_V_V_S<l1_norm_lambda>(dst, pool);
+			return this->VectorProc_1Scalar_Out<l1_norm_lambda>(dst, pool);
 		}
 		else if (norm == qlm::NORM::L2_NORM)
 		{
@@ -87,6 +97,16 @@ namespace qlm
 			return this->Max(dst, pool);
 		}
 		return Status();
+	}
+
+	Status Vector::Sum(float& dst, ThreadPool& pool) const
+	{
+		auto sum_op = [](const float src, const float dst)
+		{
+			return src + dst;
+		};
+
+		return this->VectorProc_1Scalar_Out<sum_op>(dst, pool);
 	}
 
 	// Vector helper functions
