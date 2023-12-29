@@ -4,52 +4,54 @@
 #include <iomanip>
 #include <functional>
 #include "common/VectorProc_1Scalar_Out.h"
+#include "common/VectorProc_ElemWise.h"
+#include "common/Vector_Lambda.h"
 
 namespace qlm
 {
 	// Vector element wise operations +,-,*,/
 	Status Vector::Add(const Vector& src, Vector& dst, ThreadPool& pool) const
 	{
-		return this->VectorElemWiseOp<std::plus<float>>(src, dst, pool);
+		return this->VectorProc_ElemWise<plus>(src, dst, pool);
 	}
 
 	Status Vector::Sub(const Vector& src, Vector& dst, ThreadPool& pool) const
 	{
-		return this->VectorElemWiseOp<std::minus<float>>(src, dst, pool);
+		return this->VectorProc_ElemWise<minus>(src, dst, pool);
 	}
 
 	Status Vector::Mul(const Vector& src, Vector& dst, ThreadPool& pool) const
 	{
-		return this->VectorElemWiseOp<std::multiplies<float>>(src, dst, pool);
+		return this->VectorProc_ElemWise<multiplies>(src, dst, pool);
 	}
 
 	Status Vector::Div(const Vector& src, Vector& dst, ThreadPool& pool) const
 	{
-		return this->VectorElemWiseOp<std::divides<float>>(src, dst, pool);
+		return this->VectorProc_ElemWise<divides>(src, dst, pool);
 	}
 
 	// Vector scalar wise operations +,-,*,/
 	Status Vector::Add(const float src, Vector& dst, ThreadPool& pool) const
 	{
-		return this->VectorElemOp<std::plus<float>>(src, dst, pool);
+		return this->VectorProc_ElemWise<plus>(src, dst, pool);
 	}
 
 	Status Vector::Sub(const float src, Vector& dst, ThreadPool& pool) const
 	{
-		return this->VectorElemOp<std::minus<float>>(src, dst, pool);
+		return this->VectorProc_ElemWise<minus>(src, dst, pool);
 	}
 
 	Status Vector::Mul(const float src, Vector& dst, ThreadPool& pool) const
 	{
-		return this->VectorElemOp<std::multiplies<float>>(src, dst, pool);
+		return this->VectorProc_ElemWise<multiplies>(src, dst, pool);
 	}
 
 	Status Vector::Div(const float src, Vector& dst, ThreadPool& pool) const
 	{
-		return this->VectorElemOp<std::divides<float>>(src, dst, pool);
+		return this->VectorProc_ElemWise<divides>(src, dst, pool);
 	}
 	// vector operations
-	Status qlm::Vector::Mean(float& dst, ThreadPool& pool) const
+	Status Vector::Mean(float& dst, ThreadPool& pool) const
 	{
 		const auto status = this->Sum(dst, pool);
 		dst /= len;
@@ -59,33 +61,18 @@ namespace qlm
 
 	Status Vector::Min(float& dst, ThreadPool& pool) const
 	{
-		auto min_op = [](const float src, const float dst)
-		{
-			return src < dst ? src : dst;
-		};
-
-		return this->VectorProc_1Scalar_Out<min_op>(dst, pool);
+		return this->VectorProc_1Scalar_Out<min>(dst, pool);
 	}
 
 	Status Vector::Max(float& dst, ThreadPool& pool) const
 	{
-		auto max_op = [](const float src, const float dst)
-		{
-			return src > dst ? src : dst;
-		};
-
-		return this->VectorProc_1Scalar_Out<max_op>(dst, pool);
+		return this->VectorProc_1Scalar_Out<max>(dst, pool);
 	}
 
-	Status qlm::Vector::Norm(const NORM norm, float& dst, ThreadPool& pool) const
+	Status Vector::Norm(const NORM norm, float& dst, ThreadPool& pool) const
 	{
 		if (norm == qlm::NORM::L1_NORM)
 		{
-			auto l1_norm_lambda = [](const float dst, const float src)
-			{
-				return dst + std::abs(src);
-			};
-
 			return this->VectorProc_1Scalar_Out<l1_norm_lambda>(dst, pool);
 		}
 		else if (norm == qlm::NORM::L2_NORM)
@@ -101,12 +88,12 @@ namespace qlm
 
 	Status Vector::Sum(float& dst, ThreadPool& pool) const
 	{
-		auto sum_op = [](const float src, const float dst)
-		{
-			return src + dst;
-		};
-
 		return this->VectorProc_1Scalar_Out<sum_op>(dst, pool);
+	}
+
+	Status Vector::Dot(const Vector& src, float& dst, ThreadPool& pool) const
+	{
+		return VectorProc_1Scalar_Out<dot>(src, dst, pool);
 	}
 
 	// Vector helper functions

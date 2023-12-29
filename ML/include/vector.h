@@ -14,16 +14,23 @@ namespace qlm
         int len;
 
     private:
-        // naming for common precessing function
-        // Vector_input_lambda_output -> Vector_vv_vv_v
-        template<typename op>
-        Status VectorElemWiseOp(const Vector& src, Vector& dst, ThreadPool& pool) const;
-
         template<typename op>
         Status VectorElemOp(const float src, Vector& dst, ThreadPool& pool) const;
 
         template<float (*op)(const float, const float)>
         Status VectorProc_1Scalar_Out(float& dst, ThreadPool& pool) const;
+
+        template<float (*op)(const float, const float, const float)>
+        Status VectorProc_1Scalar_Out(const Vector& src, float& dst, ThreadPool& pool) const;
+
+        template <float (*op)(const float, const unsigned int, const float&, const unsigned int&)>
+        Status VectorProc_1ArgScalar_Out(unsigned int& dst, ThreadPool& pool) const;
+
+        template<float (*op)(const float, const float)>
+        Status VectorProc_ElemWise(const Vector& src, Vector& dst, ThreadPool& pool) const;
+
+        template<float (*op)(const float, const float)>
+        Status VectorProc_ElemWise(const float src, Vector& dst, ThreadPool& pool) const;
 
     public:
         // Default constructor
@@ -99,6 +106,12 @@ namespace qlm
         Status MinMax(float& dst_min, float& dst_max, ThreadPool& pool) const;
         // norm
         Status Norm(const NORM norm,float& dst, ThreadPool& pool) const;
+        // arg min 
+        Status ArgMin(unsigned int& dst, ThreadPool& pool) const;
+        // arg max 
+        Status ArgMax(unsigned int& dst, ThreadPool& pool) const;
+        // arg min max
+        Status ArgMinMax(unsigned int& dst_min, unsigned int& dst_max, ThreadPool& pool) const;
 
     public:
         // vector-vector operations
