@@ -91,13 +91,11 @@
     <ClCompile Include="source\matrix\MatrixVectorOp.cpp" />
     <ClCompile Include="source\panda\Panda.cpp" />
     <ClCompile Include="source\panda\Read.cpp" />
+    <ClCompile Include="source\panda\Write.cpp" />
     <ClCompile Include="source\statistics\statistics.cpp" />
     <ClCompile Include="source\vector\Vector.cpp" />
     <ClCompile Include="source\vector\VectorCorr.cpp" />
     <ClCompile Include="source\vector\VectorCov.cpp" />
-    <ClCompile Include="source\vector\VectorDot.cpp" />
-    <ClCompile Include="source\vector\VectorElemOp.cpp" />
-    <ClCompile Include="source\vector\VectorElemWiseOp.cpp" />
     <ClCompile Include="source\vector\VectorLA.cpp" />
     <ClCompile Include="source\vector\VectorMinMax.cpp" />
     <ClCompile Include="source\vector\VectorVar.cpp" />
@@ -149,7 +147,10 @@
     <ClInclude Include="include\thread_safe_queue.h" />
     <ClInclude Include="include\types.h" />
     <ClInclude Include="include\vector.h" />
+    <ClInclude Include="source\vector\common\VectorProc_1ArgScalar_Out.h" />
     <ClInclude Include="source\vector\common\VectorProc_1Scalar_Out.h" />
+    <ClInclude Include="source\vector\common\VectorProc_ElemWise.h" />
+    <ClInclude Include="source\vector\common\Vector_Lambda.h" />
     <ClInclude Include="test\include\Test_Matrix_Code.h" />
     <ClInclude Include="test\include\Test_Vector_Code.h" />
     <ClInclude Include="test\include\Test_Matrix.h" />

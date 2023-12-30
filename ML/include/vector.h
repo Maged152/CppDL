@@ -14,16 +14,13 @@ namespace qlm
         int len;
 
     private:
-        template<typename op>
-        Status VectorElemOp(const float src, Vector& dst, ThreadPool& pool) const;
-
         template<float (*op)(const float, const float)>
         Status VectorProc_1Scalar_Out(float& dst, ThreadPool& pool) const;
 
         template<float (*op)(const float, const float, const float)>
         Status VectorProc_1Scalar_Out(const Vector& src, float& dst, ThreadPool& pool) const;
 
-        template <float (*op)(const float, const unsigned int, const float&, const unsigned int&)>
+        template <void (*op)(const float, const unsigned int, float&, unsigned int&)>
         Status VectorProc_1ArgScalar_Out(unsigned int& dst, ThreadPool& pool) const;
 
         template<float (*op)(const float, const float)>
@@ -105,7 +102,7 @@ namespace qlm
         // min max
         Status MinMax(float& dst_min, float& dst_max, ThreadPool& pool) const;
         // norm
-        Status Norm(const NORM norm,float& dst, ThreadPool& pool) const;
+        Status Norm(const Norm norm,float& dst, ThreadPool& pool) const;
         // arg min 
         Status ArgMin(unsigned int& dst, ThreadPool& pool) const;
         // arg max 

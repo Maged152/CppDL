@@ -6,7 +6,7 @@
 
 namespace qlm
 {
-	template <float (*op)(const float, const unsigned int, const float&, const unsigned int&)>
+	template <void (*op)(const float, const unsigned int, float&, unsigned int&)>
 	inline Status Vector::VectorProc_1ArgScalar_Out(unsigned int& dst, ThreadPool& pool) const
 	{
 		if (pool.used_threads <= 0)
@@ -23,7 +23,7 @@ namespace qlm
 		const unsigned int num_used_threads = std::min(pool.used_threads, total_length);
 
 
-		auto op_vec = [](const float* const __restrict  src, const unsigned int start_idx, const unsigned int size)
+		auto op_vec = [](const float* const __restrict  src, const unsigned int start_idx, const unsigned int size) -> std::pair<float, unsigned int>
 		{
 			float dst = src[0];
 			unsigned int dst_idx = start_idx;
@@ -34,12 +34,12 @@ namespace qlm
 				op(src[i], start_idx + i, dst, dst_idx);
 			}
 
-			return std::make_pair<float, unsigned int>(dst, dst_idx);
+			return std::make_pair(dst, dst_idx);
 		};
 		// divide the vector among the threads
 		const unsigned int thread_length = total_length / num_used_threads;
 		const unsigned int thread_tail_length = total_length % num_used_threads;
-		std::vector<std::future<std::pair<float, unsigned int>> futures(num_used_threads);
+		std::vector<std::future<std::pair<float, unsigned int>>> futures(num_used_threads);
 		// launch the threads
 		unsigned int next_idx = 0;
 

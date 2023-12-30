@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <functional>
 #include "common/VectorProc_1Scalar_Out.h"
+#include "common/VectorProc_1ArgScalar_Out.h"
 #include "common/VectorProc_ElemWise.h"
 #include "common/Vector_Lambda.h"
 
@@ -69,13 +70,13 @@ namespace qlm
 		return this->VectorProc_1Scalar_Out<max>(dst, pool);
 	}
 
-	Status Vector::Norm(const NORM norm, float& dst, ThreadPool& pool) const
+	Status Vector::Norm(const qlm::Norm norm, float& dst, ThreadPool& pool) const
 	{
-		if (norm == qlm::NORM::L1_NORM)
+		if (norm == qlm::Norm::L1_NORM)
 		{
-			return this->VectorProc_1Scalar_Out<l1_norm_lambda>(dst, pool);
+			return this->VectorProc_1Scalar_Out<l1_norm>(dst, pool);
 		}
-		else if (norm == qlm::NORM::L2_NORM)
+		else if (norm == qlm::Norm::L2_NORM)
 		{
 			return this->Mag(dst, pool);
 		}
@@ -88,12 +89,22 @@ namespace qlm
 
 	Status Vector::Sum(float& dst, ThreadPool& pool) const
 	{
-		return this->VectorProc_1Scalar_Out<sum_op>(dst, pool);
+		return this->VectorProc_1Scalar_Out<sum>(dst, pool);
 	}
 
 	Status Vector::Dot(const Vector& src, float& dst, ThreadPool& pool) const
 	{
 		return VectorProc_1Scalar_Out<dot>(src, dst, pool);
+	}
+
+	Status Vector::ArgMin(unsigned int& dst, ThreadPool& pool) const
+	{
+		return this->VectorProc_1ArgScalar_Out<arg_min>(dst, pool);
+	}
+
+	Status Vector::ArgMax(unsigned int& dst, ThreadPool& pool) const
+	{
+		return this->VectorProc_1ArgScalar_Out<arg_max>(dst, pool);
 	}
 
 	// Vector helper functions

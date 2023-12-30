@@ -58,8 +58,8 @@ bool test::Test_VectorNorm(std::vector<int>& vec_len, unsigned int  num_threads,
 		// random initialization
 		src.RandomInit(min, max);
 
-		qlm::NORM norm = len % 3 == 0 ? NORM::L1_NORM :
-			             len % 3 == 1 ? NORM::L2_NORM : NORM::INF_NORM;
+		qlm::Norm norm = len % 3 == 0 ? Norm::L1_NORM :
+			             len % 3 == 1 ? Norm::L2_NORM : Norm::INF_NORM;
 		// test code
 		ref.Start();
 		TestVectorNorm(src, norm, dst_ref);

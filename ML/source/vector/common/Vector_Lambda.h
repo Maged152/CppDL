@@ -23,12 +23,12 @@ namespace qlm
 		return src1 / src2;
 	};
 	/************************************************************************************/
-	auto sum_op = [](const float src, const float dst)
+	auto sum = [](const float src, const float dst)
 	{
 		return src + dst;
 	};
 	/************************************************************************************/
-	auto l1_norm_lambda = [](const float dst, const float src)
+	auto l1_norm = [](const float dst, const float src)
 	{
 		return dst + std::abs(src);
 	};
@@ -48,7 +48,23 @@ namespace qlm
 		return src1 * src2 + dst;
 	};
 	/************************************************************************************/
+	auto arg_min = [](const float src, const unsigned int src_idx, float& dst, unsigned int& dst_idx)
+	{
+		if (src < dst)
+		{
+			dst = src;
+			dst_idx = src_idx;
+		}
+	};
 	/************************************************************************************/
+	auto arg_max = [](const float src, const unsigned int src_idx, float& dst, unsigned int& dst_idx)
+	{
+		if (src > dst)
+		{
+			dst = src;
+			dst_idx = src_idx;
+		}
+	};
 	/************************************************************************************/
 	/************************************************************************************/
 	/************************************************************************************/
