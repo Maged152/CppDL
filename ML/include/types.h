@@ -18,10 +18,16 @@ namespace qlm
 		BROAD_CAST_COLUMN
 	};
 
-	enum class NORM
+	enum class Norm
 	{
 		L1_NORM,
 		L2_NORM,
 		INF_NORM
+	};
+
+	enum class DataType
+	{
+		CATEGORICAL,
+		NUMERICAL
 	};
 }

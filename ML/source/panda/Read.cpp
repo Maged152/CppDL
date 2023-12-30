@@ -17,7 +17,7 @@ namespace qlm
 			return Status::FILE_NOT_FOUND;
 		}
 
-		auto parse = [&sep](const std::string& line, std::vector<std::string>& tokens, auto& fun)
+		auto parse = [&sep]<typename T>(const std::string& line, std::vector<T>& tokens, auto& fun)
 		{
 			std::stringstream ss(line);
 			std::string token;
@@ -77,15 +77,15 @@ namespace qlm
 		};
 
 		// deduce the data types
-		auto deduce_dtypes = [&](const std::string& token, std::vector<std::string>& tokens)
+		auto deduce_dtypes = [&](const std::string& token, std::vector<DataType>& tokens)
 		{
 			if (is_float(token))
 			{
-				tokens.push_back("numerical");
+				tokens.push_back(DataType::NUMERICAL);
 			}
 			else
 			{
-				tokens.push_back("categorical");
+				tokens.push_back(DataType::CATEGORICAL);
 			}
 
 		};

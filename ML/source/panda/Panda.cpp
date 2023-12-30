@@ -19,7 +19,7 @@ namespace qlm
 		return headers;
 	}
 
-	std::vector<std::string> Panda::DTypes() const
+	std::vector<DataType> Panda::DTypes() const
 	{
 		return dtypes;
 	}
@@ -70,9 +70,9 @@ namespace qlm
 		// print data
 		for (int r = 0; r < num_row; r++)
 		{
-			for (int i = 0; i < cols; i++)
+			for (int c = 0; c < cols; c++)
 			{
-				print_element(categorical_data[i][r], i);
+				print_element(categorical_data[c][r], c);
 			}
 			std::cout << "|\n";
 		}
