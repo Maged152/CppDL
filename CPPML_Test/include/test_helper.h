@@ -1,6 +1,8 @@
 #include <string>
 #include "shakhbat_ml.h"
+#include "print_types.h"
 #include <iostream>
+#include <cmath>
 
 #define ANSI_TXT_GRN "\033[0;32m"
 #define ANSI_TXT_RED "\033[0;31m"
@@ -107,6 +109,34 @@ namespace test
 	{
 		if (std::abs(src1 - src2) > threshold)
 		{
+			return false;
+		}
+
+		return true;
+	}
+
+	inline bool TestCompare_Percentage(const qlm::Vector& vec1, const qlm::Vector& vec2, const float threshold)
+	{
+		for (int i = 0; i < vec1.Length(); i++)
+		{
+			if (!TestCompare_Percentage(vec1.Get(i), vec2.Get(i), threshold))
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	inline bool TestCompare_Percentage(const float& src1, const float& src2, const float threshold)
+	{
+		const float percentage = (std::abs(src1 - src2) / (std::abs(src1 + src2) / 2.0f)) * 100.0f;
+		
+		if (percentage > threshold)
+		{
+			std::cout << "percentage = " << percentage 
+				      << " ,threshold = " << threshold << "\n";
+
 			return false;
 		}
 

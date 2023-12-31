@@ -3,31 +3,27 @@
 
 
 // Define the test parameters types
-struct VectorNorm : ::testing::TestWithParam<std::tuple<
+struct VectorArgMax : ::testing::TestWithParam<std::tuple<
     int,   // length
     unsigned int,   // number of threads
     float, // min value
-    float, // max value
-    qlm::Norm // norm type
+    float  // max value
     >>
 {};
 
 
 // Define a parameterized test case
-TEST_P(VectorNorm, Test_VectorNorm)
+TEST_P(VectorArgMax, Test_VectorArgMax)
 {
+    constexpr float threshold = 0.0f;
     // extract the parameters
-    auto& [length, num_threads, min_val, max_val, norm] = GetParam();
-
-    // threshold
-    const float percentage_threshold = 0.07f;
+    auto& [length, num_threads, min_val, max_val] = GetParam();
 
     // print the parameters
     test::PrintParameter(length, "length");
     test::PrintParameter(num_threads, "num_threads");
     test::PrintParameter(min_val, "min_val");
     test::PrintParameter(max_val, "max_val");
-    test::PrintParameter(norm, "norm");
 
     // initialize the function
     qlm::ThreadPool pool{ num_threads };
@@ -37,39 +33,36 @@ TEST_P(VectorNorm, Test_VectorNorm)
 
     qlm::Vector src{ length };
 
-    float dst_ref;
-    float dst_lib;
+    unsigned int dst_ref;
+    unsigned int dst_lib;
 
     // random initialization
     src.RandomInit(min_val, max_val);
 
     // run test code
     ref.Start();
-    test::TestVectorNorm(src, norm, dst_ref);
+    test::TestVectorArgMax(src, dst_ref);
     ref.End();
 
     // run lib code
     lib.Start();
-    auto status = src.Norm(norm, dst_lib, pool);
+    auto status = src.ArgMax(dst_lib, pool);
     lib.End();
 
     // print time
     test::PrintTime(ref, lib);
 
     // compare the results
-    bool res = test::TestCompare_Percentage(dst_lib, dst_ref, percentage_threshold);
-
-    EXPECT_EQ(res, true);
+    EXPECT_EQ(dst_lib, dst_ref);
 }
 
 
 // Instantiate the test case with combinations of values
 INSTANTIATE_TEST_CASE_P(
-    Test_VectorNorm, VectorNorm,
+    Test_VectorArgMax, VectorArgMax,
     ::testing::Combine(
         ::testing::Values(7, 100, 5000, 20000, 200000, 2000000),
         ::testing::Values(1, 3, 8, 16),
         ::testing::Values(0.0f, -100.0f),
-        ::testing::Values(1.0f, 100.0f),
-        ::testing::Values(qlm::Norm::L1_NORM, qlm::Norm::L2_NORM, qlm::Norm::INF_NORM)
+        ::testing::Values(1.0f, 100.0f)
     ));

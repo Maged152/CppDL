@@ -45,12 +45,12 @@ namespace test
 	///////////////////////////////////////////////////////////////////////////
 	void TestVectorMinMax(const qlm::Vector& src, float& min, float& max);
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorNorm(const qlm::Vector& src, qlm::NORM norm, float& dst);
+	void TestVectorNorm(const qlm::Vector& src, qlm::Norm norm, float& dst);
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorArgMin(const qlm::Vector& src, int& dst);
+	void TestVectorArgMin(const qlm::Vector& src, unsigned int& dst);
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorArgMax(const qlm::Vector& src, int& dst);
+	void TestVectorArgMax(const qlm::Vector& src, unsigned int& dst);
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorArgMinMax(const qlm::Vector& src, int& min, int& max);
+	void TestVectorArgMinMax(const qlm::Vector& src, unsigned int& min, unsigned int& max);
 	///////////////////////////////////////////////////////////////////////////
 }

@@ -26,12 +26,12 @@ namespace test
 		angle = std::acosf(dot / (mag1 * mag2)) * 180.0f / std::numbers::pi;
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorArgMax(const qlm::Vector& src, int& dst)
+	void TestVectorArgMax(const qlm::Vector& src, unsigned int& dst)
 	{
 		float max_val = src.Get(0);
 		dst = 0;
 
-		for (int i = 1; i < src.Length(); i++)
+		for (unsigned int i = 1; i < src.Length(); i++)
 		{
 			if (src.Get(i) > max_val)
 			{
@@ -41,12 +41,12 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorArgMin(const qlm::Vector& src, int& dst)
+	void TestVectorArgMin(const qlm::Vector& src, unsigned int& dst)
 	{
 		float min_val = src.Get(0);
 		dst = 0;
 
-		for (int i = 1; i < src.Length(); i++)
+		for (unsigned i = 1; i < src.Length(); i++)
 		{
 			if (src.Get(i) < min_val)
 			{
@@ -56,7 +56,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorArgMinMax(const qlm::Vector& src, int& min, int& max)
+	void TestVectorArgMinMax(const qlm::Vector& src, unsigned int& min, unsigned& max)
 	{
 		TestVectorArgMin(src, min);
 		TestVectorArgMax(src, max);
@@ -154,9 +154,9 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorNorm(const qlm::Vector& src, qlm::NORM norm, float& dst)
+	void TestVectorNorm(const qlm::Vector& src, qlm::Norm norm, float& dst)
 	{
-		if (norm == qlm::NORM::L1_NORM)
+		if (norm == qlm::Norm::L1_NORM)
 		{
 			dst = 0;
 			for (int l = 0; l < src.Length(); l++)
@@ -164,7 +164,7 @@ namespace test
 				dst += std::abs(src.Get(l));
 			}
 		}
-		else if (norm == qlm::NORM::L2_NORM)
+		else if (norm == qlm::Norm::L2_NORM)
 		{
 			TestVectorMag(src, dst);
 		}
