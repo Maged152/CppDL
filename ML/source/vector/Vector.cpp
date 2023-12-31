@@ -110,6 +110,11 @@ namespace qlm
 		return this->VectorProc_1ArgScalar_Out<arg_max>(dst, pool);
 	}
 
+	Status Vector::ArgMinMax(unsigned int& dst_min, unsigned int& dst_max, ThreadPool& pool) const
+	{
+		return VectorProc_2ArgScalar_Out<arg_min_max>(dst_min, dst_max, pool);
+	}
+
 	// Vector helper functions
 	void Vector::RandomInit(const float min_value, const float max_value)
 	{

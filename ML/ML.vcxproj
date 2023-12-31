@@ -149,6 +149,7 @@
     <ClInclude Include="source\vector\common\VectorPcoc.h" />
     <ClInclude Include="source\vector\common\VectorProc_1ArgScalar_Out.h" />
     <ClInclude Include="source\vector\common\VectorProc_1Scalar_Out.h" />
+    <ClInclude Include="source\vector\common\VectorProc_2ArgScalar_Out.h" />
     <ClInclude Include="source\vector\common\VectorProc_2Scalar_Out.h" />
     <ClInclude Include="source\vector\common\VectorProc_ElemWise.h" />
     <ClInclude Include="source\vector\common\Vector_Lambda.h" />

@@ -78,6 +78,21 @@ namespace qlm
 		}
 	};
 	/************************************************************************************/
+	auto arg_min_max = [](const float src, const unsigned int src_idx,
+		                        float& dst_min, unsigned int& dst_min_idx,
+		                        float& dst_max, unsigned int& dst_max_idx)
+	{
+		if (src > dst_max)
+		{
+			dst_max = src;
+			dst_max_idx = src_idx;
+		}
+		else if (src < dst_min)
+		{
+			dst_min = src;
+			dst_min_idx = src_idx;
+		}
+	};
 	/************************************************************************************/
 	/************************************************************************************/
 	/************************************************************************************/
