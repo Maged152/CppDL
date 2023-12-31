@@ -29,6 +29,7 @@
     <ClCompile Include="source\vector\Test_VectorAngle.cpp" />
     <ClCompile Include="source\vector\Test_VectorArgMax.cpp" />
     <ClCompile Include="source\vector\Test_VectorArgMin.cpp" />
+    <ClCompile Include="source\vector\Test_VectorArgMinMax.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\pch.h" />
