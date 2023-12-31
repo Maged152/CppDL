@@ -1,3 +1,5 @@
+#pragma once
+
 #include "vector.h"
 #include <vector>
 #include <omp.h>
@@ -6,9 +8,11 @@
 #include <cmath>
 #include <algorithm>
 
+
 namespace qlm
 {
-	Status qlm::Vector::MinMax(float& dst_min, float& dst_max, ThreadPool& pool) const
+	template <void (*op)(const float, float&, float&)>
+	inline Status Vector::VectorProc_2Scalar_Out(float& dst0, float& dst1, ThreadPool& pool) const
 	{
 		if (pool.used_threads <= 0)
 		{
@@ -26,17 +30,16 @@ namespace qlm
 
 		auto op_vec = [](const float* const __restrict  src, const unsigned int size)
 		{
-			std::pair<float, float> dst{ src[0], src[0] };
-
+			float dst0 = src[0];
+			float dst1 = src[0];
 
 #pragma omp simd
 			for (unsigned int i = 1; i < size; i++)
 			{
-				dst.first = std::min(dst.first, src[i]);
-				dst.second = std::max(dst.second, src[i]);
+				op(src[i], dst0, dst1);
 			}
 
-			return dst;
+			return std::make_pair(dst0, dst1);
 		};
 		// divide the matrix among the threads
 		const unsigned int thread_length = total_length / num_used_threads;
@@ -60,17 +63,16 @@ namespace qlm
 		}
 
 		auto dst = futures[0].get();
-		dst_min = dst.first;
-		dst_max = dst.second;
+		dst0 = dst.first;
+		dst1 = dst.second;
 
 		// wait for the threads to finish
 #pragma omp unroll full
 		for (unsigned int i = 1; i < num_used_threads; i++)
 		{
 			auto dst_th = futures[i].get();
-			dst_min= std::min(dst_min, dst_th.first);
-			dst_max = std::max(dst_max , dst_th.second);
-
+			op(dst_th.first, dst0, dst1);
+			op(dst_th.second, dst0, dst1);
 		}
 
 		return Status::SUCCESS;

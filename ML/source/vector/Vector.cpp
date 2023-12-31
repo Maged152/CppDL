@@ -3,10 +3,8 @@
 #include <iostream>
 #include <iomanip>
 #include <functional>
-#include "common/VectorProc_1Scalar_Out.h"
-#include "common/VectorProc_1ArgScalar_Out.h"
-#include "common/VectorProc_ElemWise.h"
-#include "common/Vector_Lambda.h"
+#include "common/VectorPcoc.h"
+
 
 namespace qlm
 {
@@ -63,6 +61,11 @@ namespace qlm
 	Status Vector::Min(float& dst, ThreadPool& pool) const
 	{
 		return this->VectorProc_1Scalar_Out<min>(dst, pool);
+	}
+
+	Status Vector::MinMax(float& dst_min, float& dst_max, ThreadPool& pool) const
+	{
+		return this->VectorProc_2Scalar_Out<min_max>(dst_min, dst_max, pool);
 	}
 
 	Status Vector::Max(float& dst, ThreadPool& pool) const

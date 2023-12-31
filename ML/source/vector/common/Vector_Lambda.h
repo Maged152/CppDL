@@ -43,6 +43,18 @@ namespace qlm
 		return src < dst ? src : dst;
 	};
 	/************************************************************************************/
+	auto min_max = [](const float src, float& dst_min, float& dst_max)
+	{
+		if (src < dst_min)
+		{
+			dst_min = src;
+		}
+		else if (src > dst_max)
+		{
+			dst_max = src;
+		}
+	};
+	/************************************************************************************/
 	auto dot = [](const float src1, const float src2, const float dst)
 	{
 		return src1 * src2 + dst;

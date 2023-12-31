@@ -97,7 +97,6 @@
     <ClCompile Include="source\vector\VectorCorr.cpp" />
     <ClCompile Include="source\vector\VectorCov.cpp" />
     <ClCompile Include="source\vector\VectorLA.cpp" />
-    <ClCompile Include="source\vector\VectorMinMax.cpp" />
     <ClCompile Include="source\vector\VectorVar.cpp" />
     <ClCompile Include="test\source\implementation\matrix\Test_Matrix_Code.cpp" />
     <ClCompile Include="test\source\implementation\vector\Test_Vector_Code.cpp" />
@@ -147,8 +146,10 @@
     <ClInclude Include="include\thread_safe_queue.h" />
     <ClInclude Include="include\types.h" />
     <ClInclude Include="include\vector.h" />
+    <ClInclude Include="source\vector\common\VectorPcoc.h" />
     <ClInclude Include="source\vector\common\VectorProc_1ArgScalar_Out.h" />
     <ClInclude Include="source\vector\common\VectorProc_1Scalar_Out.h" />
+    <ClInclude Include="source\vector\common\VectorProc_2Scalar_Out.h" />
     <ClInclude Include="source\vector\common\VectorProc_ElemWise.h" />
     <ClInclude Include="source\vector\common\Vector_Lambda.h" />
     <ClInclude Include="test\include\Test_Matrix_Code.h" />

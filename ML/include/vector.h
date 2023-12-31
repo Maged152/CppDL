@@ -20,6 +20,9 @@ namespace qlm
         template<float (*op)(const float, const float, const float)>
         Status VectorProc_1Scalar_Out(const Vector& src, float& dst, ThreadPool& pool) const;
 
+        template <void (*op)(const float, float&, float&)>
+        Status VectorProc_2Scalar_Out(float& dst0, float& dst1, ThreadPool& pool) const;
+        
         template <void (*op)(const float, const unsigned int, float&, unsigned int&)>
         Status VectorProc_1ArgScalar_Out(unsigned int& dst, ThreadPool& pool) const;
 
