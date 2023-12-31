@@ -57,13 +57,16 @@ namespace qlm
 			next_idx += thread_length;
 		}
 
-		float dst_val = futures[0].get().first;
-		dst = futures[0].get().second;
+		auto result = futures[0].get();
+		float dst_val = result.first;
+		dst = result.second;
+
 		// wait for the threads to finish
 #pragma omp unroll full
 		for (unsigned int i = 1; i < num_used_threads; i++)
 		{
-			op(futures[i].get().first, futures[i].get().second, dst_val, dst);
+			auto result = futures[i].get();
+			op(result.first, result.second, dst_val, dst);
 		}
 
 		return Status::SUCCESS;
