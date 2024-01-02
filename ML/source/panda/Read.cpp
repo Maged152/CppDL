@@ -92,22 +92,26 @@ namespace qlm
 		
 		parse(line, dtypes, deduce_dtypes);
 
-		cols = dtypes.size();
+		// first row must be full
+		if (header)
+		{
+			cols = headers.size();
+		}
+		else
+		{
+			// set headers to numbers if not exist
+			for (int i = 0; i < cols; i++)
+			{
+				headers.push_back(std::to_string(i));
+			}
+
+			cols = dtypes.size();
+		}
 
 		// set sizes of the vectors
 		categorical_data.resize(cols);
 		numerical_data.resize(cols);
 		max_len.resize(cols);
-
-		// set headers to numbers if not exist
-		if (!header)
-		{
-			for (int i = 0; i < cols; i++)
-			{
-				headers.push_back(std::to_string(i));
-			}
-			
-		}
 
 		for (int i = 0; i < cols; i++)
 		{
@@ -129,8 +133,20 @@ namespace qlm
 				unsigned int len = token.size();
 				max_len[idx] = std::max(len, max_len[idx]);
 
-				categorical_data[idx++].push_back(token);
+				if (len == 0)
+				{
+					categorical_data[idx++].push_back("NaN");
+				}
+				else
+				{
+					categorical_data[idx++].push_back(token);
+				}
+			}
 
+			// last value is missing
+			if (idx == cols - 1)
+			{
+				categorical_data[idx++].push_back("NaN");
 			}
 
 		} while (std::getline(file, line));
