@@ -139,6 +139,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\matrix.h" />
+    <ClInclude Include="include\nn\activation_functions.h" />
     <ClInclude Include="include\panda.h" />
     <ClInclude Include="include\shakhbat_ml.h" />
     <ClInclude Include="include\statistics.h" />

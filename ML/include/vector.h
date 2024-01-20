@@ -13,7 +13,7 @@ namespace qlm
         float* data;
         int len;
 
-    private:
+    public:
         template<float (*op)(const float, const float)>
         Status VectorProc_1Scalar_Out(float& dst, ThreadPool& pool) const;
 
@@ -28,6 +28,9 @@ namespace qlm
 
         template <void (*op)(const float, const unsigned int, float&, unsigned int&, float&, unsigned int&)>
         Status VectorProc_2ArgScalar_Out(unsigned int& dst0, unsigned int& dst1, ThreadPool& pool) const;
+
+        template<float (*op)(const float)>
+        Status VectorProc_ElemWise(Vector& dst, ThreadPool& pool) const;
 
         template<float (*op)(const float, const float)>
         Status VectorProc_ElemWise(const Vector& src, Vector& dst, ThreadPool& pool) const;
