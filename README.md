@@ -1,2 +1,2 @@
-# CppML
-machine learing in C++
+# Deep learning in C++
+
