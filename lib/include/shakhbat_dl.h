@@ -7,4 +7,4 @@
 #include "panda.h"
 #include "thread_pool.h"
 #include "statistics.h"
-#include "nn/activation_functions.h"
+#include "nn/nn.h"
