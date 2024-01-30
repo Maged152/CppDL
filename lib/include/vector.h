@@ -29,14 +29,11 @@ namespace qlm
         template <void (*op)(const float, const unsigned int, float&, unsigned int&, float&, unsigned int&)>
         Status VectorProc_2ArgScalar_Out(unsigned int& dst0, unsigned int& dst1, ThreadPool& pool) const;
 
-        template<float (*op)(const float)>
-        Status VectorProc_ElemWise(Vector& dst, ThreadPool& pool) const;
+        template<auto op, typename... Args>
+        Status VectorProc_ElemWise(Vector& dst, ThreadPool& pool, Args... args) const;
 
-        template<float (*op)(const float, const float)>
-        Status VectorProc_ElemWise(const Vector& src, Vector& dst, ThreadPool& pool) const;
-
-        template<float (*op)(const float, const float)>
-        Status VectorProc_ElemWise(const float src, Vector& dst, ThreadPool& pool) const;
+        template<auto op, typename... Args>
+        Status VectorProc_ElemWise(const Vector& src, Vector& dst, ThreadPool& pool, Args... args) const;
 
     public:
         // Default constructor
@@ -83,6 +80,17 @@ namespace qlm
         {
             return len;
         }
+        // allocate memory
+        void Alloc(const unsigned int l)
+        {
+            if (data != nullptr)
+            {
+                delete[] data;
+            }
+
+            data = new float[l];
+            len = l;
+        }
     public:
         // print matrix
         void Print() const;
@@ -118,6 +126,8 @@ namespace qlm
         Status ArgMax(unsigned int& dst, ThreadPool& pool) const;
         // arg min max
         Status ArgMinMax(unsigned int& dst_min, unsigned int& dst_max, ThreadPool& pool) const;
+        // weighted sum + bias
+        Status WeightedSum(const Vector& weights, const float bias, float& dst, ThreadPool& pool) const;
 
     public:
         // vector-vector operations

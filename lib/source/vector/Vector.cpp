@@ -32,22 +32,22 @@ namespace qlm
 	// Vector scalar wise operations +,-,*,/
 	Status Vector::Add(const float src, Vector& dst, ThreadPool& pool) const
 	{
-		return this->VectorProc_ElemWise<plus>(src, dst, pool);
+		return this->VectorProc_ElemWise<plus>(dst, pool, src);
 	}
 
 	Status Vector::Sub(const float src, Vector& dst, ThreadPool& pool) const
 	{
-		return this->VectorProc_ElemWise<minus>(src, dst, pool);
+		return this->VectorProc_ElemWise<minus>(dst, pool, src);
 	}
 
 	Status Vector::Mul(const float src, Vector& dst, ThreadPool& pool) const
 	{
-		return this->VectorProc_ElemWise<multiplies>(src, dst, pool);
+		return this->VectorProc_ElemWise<multiplies>(dst, pool, src);
 	}
 
 	Status Vector::Div(const float src, Vector& dst, ThreadPool& pool) const
 	{
-		return this->VectorProc_ElemWise<divides>(src, dst, pool);
+		return this->VectorProc_ElemWise<divides>(dst, pool, src);
 	}
 	// vector operations
 	Status Vector::Mean(float& dst, ThreadPool& pool) const
@@ -113,6 +113,14 @@ namespace qlm
 	Status Vector::ArgMinMax(unsigned int& dst_min, unsigned int& dst_max, ThreadPool& pool) const
 	{
 		return VectorProc_2ArgScalar_Out<arg_min_max>(dst_min, dst_max, pool);
+	}
+
+	Status Vector::WeightedSum(const Vector& weights, const float bias, float& dst, ThreadPool& pool) const
+	{
+		auto status = Dot(weights, dst, pool);
+		dst += bias;
+
+		return status;
 	}
 
 	// Vector helper functions
