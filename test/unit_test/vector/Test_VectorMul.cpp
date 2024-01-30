@@ -43,7 +43,7 @@ TEST_P(VectorMul, Test_VectorMul)
 
     // run test code
     ref.Start();
-    test::TestVectorMul(src1, src2, dst_ref);
+    test::Mul(src1, src2, dst_ref);
     ref.End();
 
     // run lib code

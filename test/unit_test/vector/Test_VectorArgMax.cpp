@@ -41,7 +41,7 @@ TEST_P(VectorArgMax, Test_VectorArgMax)
 
     // run test code
     ref.Start();
-    test::TestVectorArgMax(src, dst_ref);
+    test::ArgMax(src, dst_ref);
     ref.End();
 
     // run lib code

@@ -43,7 +43,7 @@ TEST_P(VectorDiv, Test_VectorDiv)
 
     // run test code
     ref.Start();
-    test::TestVectorDiv(src1, src2, dst_ref);
+    test::Div(src1, src2, dst_ref);
     ref.End();
 
     // run lib code

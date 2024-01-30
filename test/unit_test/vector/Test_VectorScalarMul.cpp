@@ -43,7 +43,7 @@ TEST_P(VectorScalarMul, Test_VectorScalarMul)
 
     // run test code
     ref.Start();
-    test::TestVectorScalarMul(src, value, dst_ref);
+    test::ScalarMul(src, value, dst_ref);
     ref.End();
 
     // run lib code

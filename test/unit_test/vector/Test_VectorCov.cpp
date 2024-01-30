@@ -45,7 +45,7 @@ TEST_P(VectorCov, Test_VectorCov)
 
     // run test code
     ref.Start();
-    test::TestVectorCov(src1, src2, dst_ref);
+    test::Cov(src1, src2, dst_ref);
     ref.End();
 
     // run lib code

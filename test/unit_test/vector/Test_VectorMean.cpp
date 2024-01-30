@@ -43,7 +43,7 @@ TEST_P(VectorMean, Test_VectorMean)
 
     // run test code
     ref.Start();
-    test::TestVectorMean(src, dst_ref);
+    test::Mean(src, dst_ref);
     ref.End();
 
     // run lib code

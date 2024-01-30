@@ -4,7 +4,7 @@
 
 namespace test
 {
-	void TestVectorAdd(const qlm::Vector& src1, const qlm::Vector& src2, qlm::Vector& dst)
+	void Add(const qlm::Vector& src1, const qlm::Vector& src2, qlm::Vector& dst)
 	{
 		for (int l = 0; l < src1.Length(); l++)
 		{
@@ -13,22 +13,22 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorAngle(const qlm::Vector& src1, const qlm::Vector& src2, float& angle)
+	void Angle(const qlm::Vector& src1, const qlm::Vector& src2, float& angle)
 	{
 		// mag for src1
 		float mag1 = 0;
-		TestVectorMag(src1, mag1);
+		Mag(src1, mag1);
 		// mag for src2
 		float mag2 = 0;
-		TestVectorMag(src2, mag2);
+		Mag(src2, mag2);
 		// dot product
 		float dot = 0;
-		TestVectorDot(src1, src2, dot);
+		Dot(src1, src2, dot);
 
 		angle = std::acos(dot / (mag1 * mag2)) * 180.0f / std::numbers::pi;
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorArgMax(const qlm::Vector& src, unsigned int& dst)
+	void ArgMax(const qlm::Vector& src, unsigned int& dst)
 	{
 		float max_val = src.Get(0);
 		dst = 0;
@@ -43,7 +43,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorArgMin(const qlm::Vector& src, unsigned int& dst)
+	void ArgMin(const qlm::Vector& src, unsigned int& dst)
 	{
 		float min_val = src.Get(0);
 		dst = 0;
@@ -58,28 +58,28 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorArgMinMax(const qlm::Vector& src, unsigned int& min, unsigned& max)
+	void ArgMinMax(const qlm::Vector& src, unsigned int& min, unsigned& max)
 	{
-		TestVectorArgMin(src, min);
-		TestVectorArgMax(src, max);
+		ArgMin(src, min);
+		ArgMax(src, max);
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorCorr(const qlm::Vector& src1, const qlm::Vector& src2, float& dst)
+	void Corr(const qlm::Vector& src1, const qlm::Vector& src2, float& dst)
 	{
 		float cov, var1, var2;
 
-		TestVectorCov(src1, src2, cov);
-		TestVectorVar(src1, var1);
-		TestVectorVar(src2, var2);
+		Cov(src1, src2, cov);
+		Var(src1, var1);
+		Var(src2, var2);
 
 		dst = cov / std::sqrt(var1 * var2);
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorCov(const qlm::Vector& src1, const qlm::Vector& src2, float& dst)
+	void Cov(const qlm::Vector& src1, const qlm::Vector& src2, float& dst)
 	{
 		float mean1, mean2;
-		TestVectorMean(src1, mean1);
-		TestVectorMean(src2, mean2);
+		Mean(src1, mean1);
+		Mean(src2, mean2);
 
 		dst = 0;
 		for (int i = 0; i < src1.Length(); i++)
@@ -90,7 +90,7 @@ namespace test
 		dst = dst / (src1.Length() - 1);
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorDiv(const qlm::Vector& src1, const qlm::Vector& src2, qlm::Vector& dst)
+	void Div(const qlm::Vector& src1, const qlm::Vector& src2, qlm::Vector& dst)
 	{
 		for (int l = 0; l < src1.Length(); l++)
 		{
@@ -99,7 +99,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorDot(const qlm::Vector& src1, const qlm::Vector& src2, float& dst)
+	void Dot(const qlm::Vector& src1, const qlm::Vector& src2, float& dst)
 	{
 		dst = 0;
 		for (int l = 0; l < src1.Length(); l++)
@@ -108,14 +108,14 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorMag(const qlm::Vector& src, float& dst)
+	void Mag(const qlm::Vector& src, float& dst)
 	{
 		dst = 0;
-		TestVectorDot(src, src, dst);
+		Dot(src, src, dst);
 		dst = std::sqrt(dst);
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorMax(const qlm::Vector& src, float& dst)
+	void Max(const qlm::Vector& src, float& dst)
 	{
 		dst = src.Get(0);
 
@@ -125,13 +125,13 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorMean(const qlm::Vector& src, float& dst)
+	void Mean(const qlm::Vector& src, float& dst)
 	{
-		TestVectorSum(src, dst);
+		Sum(src, dst);
 		dst /= src.Length();
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorMin(const qlm::Vector& src, float& dst)
+	void Min(const qlm::Vector& src, float& dst)
 	{
 		dst = src.Get(0);
 
@@ -141,13 +141,13 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorMinMax(const qlm::Vector& src, float& min, float& max)
+	void MinMax(const qlm::Vector& src, float& min, float& max)
 	{
-		TestVectorMin(src, min);
-		TestVectorMax(src, max);
+		Min(src, min);
+		Max(src, max);
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorMul(const qlm::Vector& src1, const qlm::Vector& src2, qlm::Vector& dst)
+	void Mul(const qlm::Vector& src1, const qlm::Vector& src2, qlm::Vector& dst)
 	{
 		for (int l = 0; l < src1.Length(); l++)
 		{
@@ -156,7 +156,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorNorm(const qlm::Vector& src, qlm::Norm norm, float& dst)
+	void Norm(const qlm::Vector& src, qlm::Norm norm, float& dst)
 	{
 		if (norm == qlm::Norm::L1_NORM)
 		{
@@ -168,15 +168,15 @@ namespace test
 		}
 		else if (norm == qlm::Norm::L2_NORM)
 		{
-			TestVectorMag(src, dst);
+			Mag(src, dst);
 		}
 		else
 		{
-			TestVectorMax(src, dst);
+			Max(src, dst);
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorScalarAdd(const qlm::Vector& src1, const float val, qlm::Vector& dst)
+	void ScalarAdd(const qlm::Vector& src1, const float val, qlm::Vector& dst)
 	{
 		for (int l = 0; l < src1.Length(); l++)
 		{
@@ -185,7 +185,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorScalarDiv(const qlm::Vector& src1, const float val, qlm::Vector& dst)
+	void ScalarDiv(const qlm::Vector& src1, const float val, qlm::Vector& dst)
 	{
 		for (int l = 0; l < src1.Length(); l++)
 		{
@@ -194,7 +194,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorScalarMul(const qlm::Vector& src1, const float val, qlm::Vector& dst)
+	void ScalarMul(const qlm::Vector& src1, const float val, qlm::Vector& dst)
 	{
 		for (int l = 0; l < src1.Length(); l++)
 		{
@@ -203,7 +203,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorScalarSub(const qlm::Vector& src1, const float val, qlm::Vector& dst)
+	void ScalarSub(const qlm::Vector& src1, const float val, qlm::Vector& dst)
 	{
 		for (int l = 0; l < src1.Length(); l++)
 		{
@@ -212,7 +212,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorSub(const qlm::Vector& src1, const qlm::Vector& src2, qlm::Vector& dst)
+	void Sub(const qlm::Vector& src1, const qlm::Vector& src2, qlm::Vector& dst)
 	{
 		for (int l = 0; l < src1.Length(); l++)
 		{
@@ -221,7 +221,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorSum(const qlm::Vector& src, float& dst)
+	void Sum(const qlm::Vector& src, float& dst)
 	{
 		dst = 0;
 		for (int l = 0; l < src.Length(); l++)
@@ -230,10 +230,10 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorUnit(const qlm::Vector& src, qlm::Vector& dst)
+	void Unit(const qlm::Vector& src, qlm::Vector& dst)
 	{
 		float mag = 0;
-		TestVectorMag(src, mag);
+		Mag(src, mag);
 
 		for (int l = 0; l < src.Length(); l++)
 		{
@@ -242,10 +242,10 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestVectorVar(const qlm::Vector& src, float& dst)
+	void Var(const qlm::Vector& src, float& dst)
 	{
 		float mean;
-		TestVectorMean(src, mean);
+		Mean(src, mean);
 		dst = 0;
 		for (int l = 0; l < src.Length(); l++)
 		{
@@ -255,6 +255,11 @@ namespace test
 		dst = dst / (src.Length() - 1);
 	}
 	///////////////////////////////////////////////////////////////////////////
+	void WeightedSum(const qlm::Vector& src, const qlm::Vector& weights, const float bias, float& dst)
+	{
+		Dot(src, weights, dst);
+		dst += bias;
+	}
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////
 	///////////////////////////////////////////////////////////////////////////

@@ -41,7 +41,7 @@ TEST_P(VectorArgMin, Test_VectorArgMin)
 
     // run test code
     ref.Start();
-    test::TestVectorArgMin(src, dst_ref);
+    test::ArgMin(src, dst_ref);
     ref.End();
 
     // run lib code

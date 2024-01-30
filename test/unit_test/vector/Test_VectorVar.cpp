@@ -43,7 +43,7 @@ TEST_P(VectorVar, Test_VectorVar)
 
     // run test code
     ref.Start();
-    test::TestVectorVar(src, dst_ref);
+    test::Var(src, dst_ref);
     ref.End();
 
     // run lib code

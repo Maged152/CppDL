@@ -43,7 +43,7 @@ TEST_P(VectorScalarDiv, Test_VectorScalarDiv)
 
     // run test code
     ref.Start();
-    test::TestVectorScalarDiv(src, value, dst_ref);
+    test::ScalarDiv(src, value, dst_ref);
     ref.End();
 
     // run lib code

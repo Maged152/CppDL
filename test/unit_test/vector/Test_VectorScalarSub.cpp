@@ -43,7 +43,7 @@ TEST_P(VectorScalarSub, Test_VectorScalarSub)
 
     // run test code
     ref.Start();
-    test::TestVectorScalarSub(src, value, dst_ref);
+    test::ScalarSub(src, value, dst_ref);
     ref.End();
 
     // run lib code

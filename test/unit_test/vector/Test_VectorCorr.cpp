@@ -45,7 +45,7 @@ TEST_P(VectorCorr, Test_VectorCorr)
 
     // run test code
     ref.Start();
-    test::TestVectorCorr(src1, src2, dst_ref);
+    test::Corr(src1, src2, dst_ref);
     ref.End();
 
     // run lib code

@@ -50,7 +50,7 @@ TEST_P(VectorSum, Test_VectorSum)
 
     // run test code
     ref.Start();
-    test::TestVectorSum(src, dst_ref);
+    test::Sum(src, dst_ref);
     ref.End();
 
     // run lib code

@@ -44,7 +44,7 @@ TEST_P(VectorMinMax, Test_VectorMinMax)
 
     // run test code
     ref.Start();
-    test::TestVectorMinMax(src, dst_min_ref, dst_max_ref);
+    test::MinMax(src, dst_min_ref, dst_max_ref);
     ref.End();
 
     // run lib code

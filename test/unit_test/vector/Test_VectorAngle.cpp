@@ -45,7 +45,7 @@ TEST_P(VectorAngle, Test_VectorAngle)
 
     // run test code
     ref.Start();
-    test::TestVectorAngle(src1, src2, dst_ref);
+    test::Angle(src1, src2, dst_ref);
     ref.End();
 
     // run lib code

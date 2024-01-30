@@ -43,7 +43,7 @@ TEST_P(VectorAdd, Test_VectorAdd)
 
     // run test code
     ref.Start();
-    test::TestVectorAdd(src1, src2, dst_ref);
+    test::Add(src1, src2, dst_ref);
     ref.End();
 
     // run lib code

@@ -43,7 +43,7 @@ TEST_P(VectorSub, Test_VectorSub)
 
     // run test code
     ref.Start();
-    test::TestVectorSub(src1, src2, dst_ref);
+    test::Sub(src1, src2, dst_ref);
     ref.End();
 
     // run lib code

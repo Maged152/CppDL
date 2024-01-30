@@ -43,7 +43,7 @@ TEST_P(VectorMag, Test_VectorMag)
 
     // run test code
     ref.Start();
-    test::TestVectorMag(src, dst_ref);
+    test::Mag(src, dst_ref);
     ref.End();
 
     // run lib code

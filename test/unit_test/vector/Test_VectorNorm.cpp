@@ -45,7 +45,7 @@ TEST_P(VectorNorm, Test_VectorNorm)
 
     // run test code
     ref.Start();
-    test::TestVectorNorm(src, norm, dst_ref);
+    test::Norm(src, norm, dst_ref);
     ref.End();
 
     // run lib code

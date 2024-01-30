@@ -45,7 +45,7 @@ TEST_P(VectorDot, Test_VectorDot)
 
     // run test code
     ref.Start();
-    test::TestVectorDot(src1, src2, dst_ref);
+    test::Dot(src1, src2, dst_ref);
     ref.End();
 
     // run lib code

@@ -43,7 +43,7 @@ TEST_P(VectorUnit, Test_VectorUnit)
 
     // run test code
     ref.Start();
-    test::TestVectorUnit(src, dst_ref);
+    test::Unit(src, dst_ref);
     ref.End();
 
     // run lib code
