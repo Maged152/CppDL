@@ -1,7 +1,7 @@
 #pragma once
 
 #include "vector.h"
-#include "activation_functions.h"
+#include <utility>
 
 namespace qlm
 {
@@ -10,22 +10,21 @@ namespace qlm
     {
         private:
         Vector weights;
-        const Vector& input;
-        float& output;
         float bias;
 
         public:
-        Neuron(const Vector& input, float& output, const float min_value = 0.0f, const float max_value = 1.0f) : input(input), output(output), bias(0), weights(input.Length())
+        Neuron(const size_t length, const float min_value = 0.0f, const float max_value = 1.0f) : bias(0), weights(length)
         {
             weights.RandomInit(min_value, max_value);
         }
 
         public:
-        Status Forward(ThreadPool& pool)
+        std::pair<Status, float> Forward(const Vector& input, ThreadPool& pool)
         {
+            float output {0};
             auto status = input.WeightedSum(weights, bias, output, pool);
             output = AF(output);
-            return status;
+            return std::make_pair(status, output);
         }
     };
 

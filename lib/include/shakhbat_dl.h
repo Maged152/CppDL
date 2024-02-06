@@ -7,4 +7,4 @@
 #include "panda.h"
 #include "thread_pool.h"
 #include "statistics.h"
-#include "nn/nn.h"
+#include "neural_network/neural_network.h"
