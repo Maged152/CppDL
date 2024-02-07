@@ -26,6 +26,8 @@ namespace qlm
             output = AF(output);
             return std::make_pair(status, output);
         }
+
+        void Print() const;
     };
 
 }
