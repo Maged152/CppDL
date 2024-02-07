@@ -16,7 +16,7 @@ namespace qlm
 
 		if (src.Length() != dst.Length() || src.Length() != len)
 		{
-			return Status::INVALID_DIMENTIONS;
+			return Status::INVALID_DIMENSIONS;
 		}
 
 		const unsigned int total_length = len;
@@ -71,7 +71,7 @@ namespace qlm
 
 		if (dst.Length() != len)
 		{
-			return Status::INVALID_DIMENTIONS;
+			return Status::INVALID_DIMENSIONS;
 		}
 
 		const unsigned int total_length = len;

@@ -15,7 +15,7 @@ namespace qlm
 
 		if (this->Columns() != dst.Rows() || this->Rows() != dst.Columns())
 		{
-			return Status::INVALID_DIMENTIONS;
+			return Status::INVALID_DIMENSIONS;
 		}
 
 		unsigned int num_used_threads = pool.used_threads;
