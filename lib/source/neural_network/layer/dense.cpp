@@ -1,13 +1,20 @@
 #include "neural_network/layer.h"
-
+#include <cmath>
+#include <iostream>
 namespace qlm
 {
-    template<auto AF>
-    Dense<AF>::Dense(const size_t input_len, const size_t num_neurons, const float min_value, const float max_value) 
-            : neurons(num_neurons, Neuron<AF>(input_len, min_value, max_value)), output(num_neurons), input_len(input_len) {}
+    
+    Dense::Dense(const size_t input_len, const size_t num_neurons, std::function<float(const float)> af, const float min_value, const float max_value) 
+    : output(num_neurons), input_len(input_len) 
+    {
+        for (size_t i = 0; i < num_neurons; ++i) 
+        {
+            neurons.push_back(Neuron(input_len, af, min_value, max_value));
+        }
+    }
 
-    template<auto AF>
-    Status Dense<AF>::Forward(const Vector& input, ThreadPool& pool)
+
+    Status Dense::Forward(const Vector& input, ThreadPool& pool)
     {
         Status ret_status = Status::SUCCESS;
 
@@ -39,7 +46,7 @@ namespace qlm
 			
             if (status != Status::SUCCESS)
             {
-                ret_status = status
+                ret_status = status;
             }
 
             output.Set(i, output_neuron);
@@ -49,9 +56,18 @@ namespace qlm
         return ret_status;
     }
 
-    template<auto AF>
-    Vector& Dense<AF>::Output() const
+    
+    Vector& Dense::Output()
     {
         return output;
+    }
+
+    void Dense::Print() const
+    {
+        for (int i = 0; i < neurons.size(); i++)
+		{
+			std::cout << "neuron " << i << " :\n";
+            neurons[i].Print();
+		}
     }
 }
