@@ -9,6 +9,62 @@
 
 namespace qlm
 {
+	// Default constructor
+	Vector::Vector() : data(nullptr), len(0)
+	{}
+	// Parameterized constructor
+	Vector::Vector(int l) : len(l)
+	{
+		data = new float[l];
+	}
+	// Copy constructor
+	Vector::Vector(const Vector& other) : len(other.len)
+	{
+		data = new float[len];
+		for (int i = 0; i < len; ++i) {
+			data[i] = other.data[i];
+		}
+	}
+	// Destructor
+	Vector::~Vector()
+	{
+		if (data != nullptr)
+			delete[] data;
+	}
+
+	// Setter for individual element
+	void Vector::Set(int i, float value) {
+		if (i >= 0 && i < len)
+		{
+			data[i] = value;
+		}
+	}
+	// Getter for individual element
+	float Vector::Get(int i) const
+	{
+		if (i >= 0 && i <len)
+		{
+			return data[i];
+		}
+		return std::numeric_limits<float>::signaling_NaN();
+	}
+	// Getter for length
+	int Vector::Length() const
+	{
+		return len;
+	}
+	// allocate memory
+	void Vector::Alloc(const size_t l)
+	{
+		if (data != nullptr)
+		{
+			delete[] data;
+		}
+
+		data = new float[l];
+		len = l;
+	}
+
 	// Vector element wise operations +,-,*,/
 	Status Vector::Add(const Vector& src, Vector& dst, ThreadPool& pool) const
 	{

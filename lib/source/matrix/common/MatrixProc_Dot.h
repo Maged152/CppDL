@@ -1,13 +1,17 @@
+#pragma once
+
 #include "matrix.h"
+#include "vector.h"
 #include <vector>
 #include <omp.h>
 #include <future>
 
 namespace qlm
 {
-	Status Matrix::Dot(const Matrix& src, Matrix& dst, ThreadPool& pool)
-	{
-		if (pool.used_threads <= 0)
+    template<auto op, typename... Args>
+    Status Matrix::MatrixProc_Dot(const Matrix& src, Matrix& dst,ThreadPool& pool, Args... args) const
+    {
+        if (pool.used_threads <= 0)
 		{
 			return Status::INVALID_UTILIZATION;
 		}
@@ -21,7 +25,7 @@ namespace qlm
 		const size_t total_rows = rows;
 		num_used_threads = total_rows < num_used_threads ? total_rows : num_used_threads;
 
-		auto dot_mat = [](const int num_rows, const int start_r, const float* const __restrict  p_src1, 
+		auto dot_mat = [&](const int num_rows, const int start_r, const float* const __restrict  p_src1, 
 			             const float* const __restrict  p_src2, const int in_r, const int in_c,
 			             float* __restrict  const p_dst)
 		{
@@ -33,8 +37,7 @@ namespace qlm
 					#pragma omp simd reduction(+:sum)
 					for (int e = 0; e < in_r; e++)
 					{
-						sum += p_src1[r * in_r + e] * p_src2[e * in_c + c];
-						
+						sum = op(p_src1[r * in_r + e], p_src2[e * in_c + c], sum, args...);	
 					}
 					p_dst[r * in_c + c] =  sum;
 				}
@@ -69,7 +72,6 @@ namespace qlm
 		}
 
 		return Status::SUCCESS;
-	}
-
+    }
 
 }

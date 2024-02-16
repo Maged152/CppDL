@@ -6,7 +6,7 @@
 
 namespace qlm
 {
-	Status Matrix::Transpose(Matrix& dst, ThreadPool& pool)
+	Status Matrix::Transpose(Matrix& dst, ThreadPool& pool) const 
 	{
 		if (pool.used_threads <= 0)
 		{

@@ -5,6 +5,7 @@
 #include <functional>
 #include "lambda.h"
 #include "common/MatrixPcoc.h"
+
 namespace qlm
 {
 	// Default constructor
@@ -82,68 +83,73 @@ namespace qlm
 	}
 
 	// matrix element wise operations
-	Status Matrix::Add(const Matrix& src, Matrix& dst, ThreadPool& pool)
+	Status Matrix::Add(const Matrix& src, Matrix& dst, ThreadPool& pool) const 
 	{
 		return this->MatrixProc_ElemWise<plus>(src, dst, pool);
 	}
 
-	Status Matrix::Sub(const Matrix& src, Matrix& dst, ThreadPool& pool)
+	Status Matrix::Sub(const Matrix& src, Matrix& dst, ThreadPool& pool) const 
 	{
 		return this->MatrixProc_ElemWise<minus>(src, dst, pool);
 	}
 
-	Status Matrix::Mul(const Matrix& src, Matrix& dst, ThreadPool& pool)
+	Status Matrix::Mul(const Matrix& src, Matrix& dst, ThreadPool& pool) const 
 	{
 		return this->MatrixProc_ElemWise<multiplies>(src, dst, pool);
 	}
 
-	Status Matrix::Div(const Matrix& src, Matrix& dst, ThreadPool& pool)
+	Status Matrix::Div(const Matrix& src, Matrix& dst, ThreadPool& pool) const 
 	{
 		return this->MatrixProc_ElemWise<divides>(src, dst, pool);
 	}
 
 	// matrix scalar wise operations
-	Status Matrix::Add(const float src, Matrix& dst, ThreadPool& pool)
+	Status Matrix::Add(const float src, Matrix& dst, ThreadPool& pool) const 
 	{
 		return this->MatrixProc_ElemWise<plus>(dst, pool, src);
 	}
 
-	Status Matrix::Sub(const float src, Matrix& dst, ThreadPool& pool)
+	Status Matrix::Sub(const float src, Matrix& dst, ThreadPool& pool) const 
 	{
 		return this->MatrixProc_ElemWise<minus>(dst, pool, src);
 	}
 
-	Status Matrix::Mul(const float src, Matrix& dst, ThreadPool& pool)
+	Status Matrix::Mul(const float src, Matrix& dst, ThreadPool& pool) const 
 	{
 		return this->MatrixProc_ElemWise<multiplies>(dst, pool, src);
 	}
 
-	Status Matrix::Div(const float src, Matrix& dst, ThreadPool& pool)
+	Status Matrix::Div(const float src, Matrix& dst, ThreadPool& pool) const 
 	{
 		return this->MatrixProc_ElemWise<divides>(dst, pool, src);
 	}
 
 	// matrix vector  operations 
-	Status Matrix::Add(const Vector& src, Matrix& dst, const BroadCast& broad_cast, ThreadPool& pool)
+	Status Matrix::Add(const Vector& src, Matrix& dst, const BroadCast& broad_cast, ThreadPool& pool) const 
 	{
-		return this->MatrixVectorOp<std::plus<float>>(src, dst, broad_cast, pool);
+		return this->MatrixProc_ElemWise<plus>(src, dst, broad_cast, pool);
 	}
 
-	Status Matrix::Sub(const Vector& src, Matrix& dst, const BroadCast& broad_cast, ThreadPool& pool)
+	Status Matrix::Sub(const Vector& src, Matrix& dst, const BroadCast& broad_cast, ThreadPool& pool) const 
 	{
-		return this->MatrixVectorOp<std::minus<float>>(src, dst, broad_cast, pool);
+		return this->MatrixProc_ElemWise<minus>(src, dst, broad_cast, pool);
 	}
 
-	Status Matrix::Mul(const Vector& src, Matrix& dst, const BroadCast& broad_cast, ThreadPool& pool)
+	Status Matrix::Mul(const Vector& src, Matrix& dst, const BroadCast& broad_cast, ThreadPool& pool) const 
 	{
-		return this->MatrixVectorOp<std::multiplies<float>>(src, dst, broad_cast, pool);
+		return this->MatrixProc_ElemWise<multiplies>(src, dst, broad_cast, pool);
 	}
 
-	Status Matrix::Div(const Vector& src, Matrix& dst, const BroadCast& broad_cast, ThreadPool& pool)
+	Status Matrix::Div(const Vector& src, Matrix& dst, const BroadCast& broad_cast, ThreadPool& pool) const 
 	{
-		return this->MatrixVectorOp<std::divides<float>>(src, dst, broad_cast, pool);
+		return this->MatrixProc_ElemWise<divides>(src, dst, broad_cast, pool);
 	}
 
+	// matrix dot product
+	Status Matrix::Dot(const Matrix& src, Matrix& dst,ThreadPool& pool) const 
+	{
+		return this->MatrixProc_Dot<dot>(src, dst, pool);
+	}
 	// general matrix functions
 	void Matrix::RandomInit(const float min_value, const float max_value)
 	{
@@ -157,7 +163,7 @@ namespace qlm
 		}
 	}
 
-	void Matrix::Print()
+	void Matrix::Print() const 
 	{
 		for (int r = 0; r < rows; r++)
 		{

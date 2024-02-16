@@ -36,61 +36,17 @@ namespace qlm
         Status VectorProc_ElemWise(const Vector& src, Vector& dst, ThreadPool& pool, Args... args) const;
 
     public:
-        // Default constructor
-        Vector() : data(nullptr), len(0)
-        {}
-        // Parameterized constructor
-        Vector(int l) : len(l)
-        {
-            data = new float[l];
-        }
-        // Copy constructor
-        Vector(const Vector& other) : len(other.len)
-        {
-            data = new float[len];
-            for (int i = 0; i < len; ++i) {
-                data[i] = other.data[i];
-            }
-        }
-        // Destructor
-        ~Vector()
-        {
-            if (data != nullptr)
-                delete[] data;
-        }
+        Vector();
+        Vector(int l);
+        Vector(const Vector& other);
+        ~Vector();
+        
     public:
-        // Setter for individual element
-        void Set(int i, float value) {
-            if (i >= 0 && i < len)
-            {
-                data[i] = value;
-            }
-        }
-        // Getter for individual element
-        float Get(int i) const
-        {
-            if (i >= 0 && i <len)
-            {
-                return data[i];
-            }
-            return std::numeric_limits<float>::signaling_NaN();
-        }
-        // Getter for length
-        int Length() const
-        {
-            return len;
-        }
-        // allocate memory
-        void Alloc(const size_t l)
-        {
-            if (data != nullptr)
-            {
-                delete[] data;
-            }
+        void Set(int i, float value);
+        float Get(int i) const;
+        int Length() const;
+        void Alloc(const size_t l);
 
-            data = new float[l];
-            len = l;
-        }
     public:
         // print matrix
         void Print() const;

@@ -3,47 +3,47 @@
 namespace qlm
 {
 	/************************************************************************************/
-	auto plus = [](const float src1, const float src2)
+	inline auto plus = [](const float src1, const float src2)
 	{
 		return src1 + src2;
 	};
 	/************************************************************************************/
-	auto minus = [](const float src1, const float src2)
+	inline auto minus = [](const float src1, const float src2)
 	{
 		return src1 - src2;
 	};
 	/************************************************************************************/
-	auto multiplies = [](const float src1, const float src2)
+	inline auto multiplies = [](const float src1, const float src2)
 	{
 		return src1 * src2;
 	};
 	/************************************************************************************/
-	auto divides = [](const float src1, const float src2)
+	inline auto divides = [](const float src1, const float src2)
 	{
 		return src1 / src2;
 	};
 	/************************************************************************************/
-	auto sum = [](const float src, const float dst)
+	inline auto sum = [](const float src, const float dst)
 	{
 		return src + dst;
 	};
 	/************************************************************************************/
-	auto l1_norm = [](const float dst, const float src)
+	inline auto l1_norm = [](const float dst, const float src)
 	{
 		return dst + std::abs(src);
 	};
 	/************************************************************************************/
-	auto max = [](const float src, const float dst)
+	inline auto max = [](const float src, const float dst)
 	{
 		return src > dst ? src : dst;
 	};
 	/************************************************************************************/
-	auto min = [](const float src, const float dst)
+	inline auto min = [](const float src, const float dst)
 	{
 		return src < dst ? src : dst;
 	};
 	/************************************************************************************/
-	auto min_max = [](const float src, float& dst_min, float& dst_max)
+	inline auto min_max = [](const float src, float& dst_min, float& dst_max)
 	{
 		if (src < dst_min)
 		{
@@ -55,12 +55,12 @@ namespace qlm
 		}
 	};
 	/************************************************************************************/
-	auto dot = [](const float src1, const float src2, const float dst)
+	inline auto dot = [](const float src1, const float src2, const float dst)
 	{
 		return src1 * src2 + dst;
 	};
 	/************************************************************************************/
-	auto arg_min = [](const float src, const size_t src_idx, float& dst, size_t& dst_idx)
+	inline auto arg_min = [](const float src, const size_t src_idx, float& dst, size_t& dst_idx)
 	{
 		if (src < dst)
 		{
@@ -69,7 +69,7 @@ namespace qlm
 		}
 	};
 	/************************************************************************************/
-	auto arg_max = [](const float src, const size_t src_idx, float& dst, size_t& dst_idx)
+	inline auto arg_max = [](const float src, const size_t src_idx, float& dst, size_t& dst_idx)
 	{
 		if (src > dst)
 		{
@@ -78,7 +78,7 @@ namespace qlm
 		}
 	};
 	/************************************************************************************/
-	auto arg_min_max = [](const float src, const size_t src_idx,
+	inline auto arg_min_max = [](const float src, const size_t src_idx,
 		                        float& dst_min, size_t& dst_min_idx,
 		                        float& dst_max, size_t& dst_max_idx)
 	{
@@ -93,7 +93,6 @@ namespace qlm
 			dst_min_idx = src_idx;
 		}
 	};
-	/************************************************************************************/
 	/************************************************************************************/
 	/************************************************************************************/
 	/************************************************************************************/
