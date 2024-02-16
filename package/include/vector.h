@@ -23,11 +23,11 @@ namespace qlm
         template <void (*op)(const float, float&, float&)>
         Status VectorProc_2Scalar_Out(float& dst0, float& dst1, ThreadPool& pool) const;
         
-        template <void (*op)(const float, const unsigned int, float&, unsigned int&)>
-        Status VectorProc_1ArgScalar_Out(unsigned int& dst, ThreadPool& pool) const;
+        template <void (*op)(const float, const size_t, float&, size_t&)>
+        Status VectorProc_1ArgScalar_Out(size_t& dst, ThreadPool& pool) const;
 
-        template <void (*op)(const float, const unsigned int, float&, unsigned int&, float&, unsigned int&)>
-        Status VectorProc_2ArgScalar_Out(unsigned int& dst0, unsigned int& dst1, ThreadPool& pool) const;
+        template <void (*op)(const float, const size_t, float&, size_t&, float&, size_t&)>
+        Status VectorProc_2ArgScalar_Out(size_t& dst0, size_t& dst1, ThreadPool& pool) const;
 
         template<float (*op)(const float)>
         Status VectorProc_ElemWise(Vector& dst, ThreadPool& pool) const;
@@ -113,11 +113,11 @@ namespace qlm
         // norm
         Status Norm(const Norm norm,float& dst, ThreadPool& pool) const;
         // arg min 
-        Status ArgMin(unsigned int& dst, ThreadPool& pool) const;
+        Status ArgMin(size_t& dst, ThreadPool& pool) const;
         // arg max 
-        Status ArgMax(unsigned int& dst, ThreadPool& pool) const;
+        Status ArgMax(size_t& dst, ThreadPool& pool) const;
         // arg min max
-        Status ArgMinMax(unsigned int& dst_min, unsigned int& dst_max, ThreadPool& pool) const;
+        Status ArgMinMax(size_t& dst_min, size_t& dst_max, ThreadPool& pool) const;
 
     public:
         // vector-vector operations

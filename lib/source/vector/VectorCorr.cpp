@@ -37,16 +37,16 @@ namespace qlm
 			pool.used_threads = old_pool_size;
 		}
 
-		const unsigned int num_used_threads = pool.used_threads;
-		const unsigned int total_length = this->Length();
+		const size_t num_used_threads = pool.used_threads;
+		const size_t total_length = this->Length();
 
 		auto corr_op = [](const float* const __restrict  src1, const float mean1,
 			              const float* const __restrict  src2, const float mean2,
-			              const unsigned int size)
+			              const size_t size)
 		{
 			float var1{0}, var2 {0}, cov {0};
 			#pragma omp simd reduction (+:cov) (+:var1) (+:var1)
-			for (unsigned int i = 0; i < size; i++)
+			for (size_t i = 0; i < size; i++)
 			{
 				cov  += (src1[i] - mean1) * (src2[i] - mean2);
 				var1 += (src1[i] - mean1) * (src1[i] - mean1);
@@ -55,21 +55,21 @@ namespace qlm
 			return std::make_tuple(cov, var1, var2);
 		};
 		// divide the matrix among the threads
-		const unsigned int thread_length = total_length / num_used_threads;
-		const unsigned int thread_tail_length = total_length % num_used_threads;
+		const size_t thread_length = total_length / num_used_threads;
+		const size_t thread_tail_length = total_length % num_used_threads;
 		std::vector<std::future<std::tuple<float,float,float>>> futures(num_used_threads);
 		// launch the threads
 		int next_idx = 0;
 
 #pragma omp unroll full
-		for (unsigned int i = 0; i < thread_tail_length; i++)
+		for (size_t i = 0; i < thread_tail_length; i++)
 		{
 			futures[i] = pool.Submit(corr_op, &data[next_idx], mean1, &src.data[next_idx], mean2, thread_length + 1);
 			next_idx += thread_length + 1;
 		}
 
 #pragma omp unroll full
-		for (unsigned int i = thread_tail_length; i < num_used_threads; i++)
+		for (size_t i = thread_tail_length; i < num_used_threads; i++)
 		{
 			futures[i] = pool.Submit(corr_op, &data[next_idx], mean1, &src.data[next_idx], mean2, thread_length);
 			next_idx += thread_length;
@@ -78,7 +78,7 @@ namespace qlm
 		float var1{ 0 }, var2{ 0 }, cov{ 0 };
 		// wait for the threads to finish
 #pragma omp unroll full
-		for (unsigned int i = 0; i < num_used_threads; i++)
+		for (size_t i = 0; i < num_used_threads; i++)
 		{
 			auto [th_cov, th_var1, th_var2] = futures[i].get();
 			cov += th_cov;

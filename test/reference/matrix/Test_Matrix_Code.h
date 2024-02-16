@@ -6,33 +6,33 @@
 namespace test
 {
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixAdd(const qlm::Matrix& src1, const qlm::Matrix& src2, qlm::Matrix& dst);
+	void Add(const qlm::Matrix& src1, const qlm::Matrix& src2, qlm::Matrix& dst);
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixDiv(const qlm::Matrix& src1, const qlm::Matrix& src2, qlm::Matrix& dst);
+	void Div(const qlm::Matrix& src1, const qlm::Matrix& src2, qlm::Matrix& dst);
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixDot(const qlm::Matrix& src1, const qlm::Matrix& src2, qlm::Matrix& dst);
+	void Dot(const qlm::Matrix& src1, const qlm::Matrix& src2, qlm::Matrix& dst);
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixMul(const qlm::Matrix& src1, const qlm::Matrix& src2, qlm::Matrix& dst);
+	void Mul(const qlm::Matrix& src1, const qlm::Matrix& src2, qlm::Matrix& dst);
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixAdd(const qlm::Matrix& src1, const float val, qlm::Matrix& dst);
+	void Add(const qlm::Matrix& src1, const float val, qlm::Matrix& dst);
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixDiv(const qlm::Matrix& src1, const float val, qlm::Matrix& dst);
+	void Div(const qlm::Matrix& src1, const float val, qlm::Matrix& dst);
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixMul(const qlm::Matrix& src1, const float val, qlm::Matrix& dst);
+	void Mul(const qlm::Matrix& src1, const float val, qlm::Matrix& dst);
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixSub(const qlm::Matrix& src1, const float val, qlm::Matrix& dst);
+	void Sub(const qlm::Matrix& src1, const float val, qlm::Matrix& dst);
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixSub(const qlm::Matrix& src1, const qlm::Matrix& src2, qlm::Matrix& dst);
+	void Sub(const qlm::Matrix& src1, const qlm::Matrix& src2, qlm::Matrix& dst);
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixAdd(const qlm::Matrix& src, qlm::Matrix& dst);
+	void Add(const qlm::Matrix& src, qlm::Matrix& dst);
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixVectorAdd_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst);
+	void VectorAdd_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst);
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixVectorDiv_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst);
+	void VectorDiv_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst);
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixVectorMul_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst);
+	void VectorMul_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst);
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixVectorSub_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst);
+	void VectorSub_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst);
 	///////////////////////////////////////////////////////////////////////////
 
 	///////////////////////////////////////////////////////////////////////////

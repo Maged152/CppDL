@@ -18,7 +18,7 @@ namespace qlm
 			return Status::INVALID_DIMENSIONS;
 		}
 
-		unsigned int num_used_threads = pool.used_threads;
+		size_t num_used_threads = pool.used_threads;
 		int dim_1, dim_2;
 		std::function<void(const int, const int, const float* const, const int, const int, float* const)> transpose_mat;
 
@@ -63,21 +63,21 @@ namespace qlm
 
 		
 		// divide the matrix among the threads
-		const unsigned int dim_1_per_thread = dim_1 / num_used_threads;
-		const unsigned int thread_tail = dim_1 % num_used_threads;
+		const size_t dim_1_per_thread = dim_1 / num_used_threads;
+		const size_t thread_tail = dim_1 % num_used_threads;
 		std::vector<std::future<void>> futures(num_used_threads);
 		// launch the threads
 		int next_dim_1 = 0;
 
 		#pragma omp unroll full
-		for (unsigned int i = 0; i < thread_tail; i++)
+		for (size_t i = 0; i < thread_tail; i++)
 		{
 			futures[i] = pool.Submit(transpose_mat, dim_1_per_thread + 1, next_dim_1, data, dim_1, dim_2, dst.data);
 			next_dim_1 += dim_1_per_thread + 1;
 		}
 
 		#pragma omp unroll full
-		for (unsigned int i = thread_tail; i < num_used_threads; i++)
+		for (size_t i = thread_tail; i < num_used_threads; i++)
 		{
 			futures[i] = pool.Submit(transpose_mat, dim_1_per_thread, next_dim_1, data, dim_1, dim_2, dst.data);
 			next_dim_1 += dim_1_per_thread;
@@ -85,7 +85,7 @@ namespace qlm
 
 		// wait for the threads to finish
 		#pragma omp unroll full
-		for (unsigned int i = 0; i < num_used_threads; i++)
+		for (size_t i = 0; i < num_used_threads; i++)
 		{
 			futures[i].wait();
 		}

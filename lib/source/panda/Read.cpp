@@ -130,7 +130,7 @@ namespace qlm
 
 			while (std::getline(ss, token, sep))
 			{
-				unsigned int len = token.size();
+				size_t len = token.size();
 				max_len[idx] = std::max(len, max_len[idx]);
 
 				if (len == 0)

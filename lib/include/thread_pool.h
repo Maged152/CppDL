@@ -21,9 +21,9 @@ namespace qlm
 		mutable std::mutex mut;
 		std::condition_variable cv;
 		
-		unsigned int thread_count;
+		size_t thread_count;
 	public:
-		 unsigned int used_threads;
+		 size_t used_threads;
 		
 	private:
 		void WorkerThread();
@@ -34,12 +34,12 @@ namespace qlm
 		ThreadPool& operator=(const ThreadPool&) = delete;
 		ThreadPool& operator=(ThreadPool&&) = delete;
 
-		ThreadPool(const unsigned int thread_count = std::thread::hardware_concurrency());
+		ThreadPool(const size_t thread_count = std::thread::hardware_concurrency());
 
 		~ThreadPool();
 	public:
 		// number of working threads
-		unsigned int Size() const;
+		size_t Size() const;
 		// are the threads active
 		bool Running() const;
 		// stop and process all delegated tasks
@@ -72,7 +72,7 @@ namespace qlm
 		}
 	}
 
-	inline ThreadPool::ThreadPool(const unsigned int thread_count) : thread_count(thread_count), used_threads(thread_count), workers(thread_count), kill(false), stop(false)
+	inline ThreadPool::ThreadPool(const size_t thread_count) : thread_count(thread_count), used_threads(thread_count), workers(thread_count), kill(false), stop(false)
 	{
 		for (int i = 0; i < thread_count; i++) 
 		{
@@ -130,7 +130,7 @@ namespace qlm
 		cv.notify_all();
 	}
 
-	inline unsigned int qlm::ThreadPool::Size() const
+	inline size_t qlm::ThreadPool::Size() const
 	{
 		return thread_count;
 	}

@@ -5,7 +5,7 @@
 // Define the test parameters types
 struct VectorScalarSub : ::testing::TestWithParam<std::tuple<
     int,   // length
-    unsigned int,   // number of threads
+    size_t,   // number of threads
     float, // scalar value
     float, // min value
     float  // max value

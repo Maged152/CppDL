@@ -28,12 +28,12 @@ namespace test
 		angle = std::acos(dot / (mag1 * mag2)) * 180.0f / std::numbers::pi;
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void ArgMax(const qlm::Vector& src, unsigned int& dst)
+	void ArgMax(const qlm::Vector& src, size_t& dst)
 	{
 		float max_val = src.Get(0);
 		dst = 0;
 
-		for (unsigned int i = 1; i < src.Length(); i++)
+		for (size_t i = 1; i < src.Length(); i++)
 		{
 			if (src.Get(i) > max_val)
 			{
@@ -43,12 +43,12 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void ArgMin(const qlm::Vector& src, unsigned int& dst)
+	void ArgMin(const qlm::Vector& src, size_t& dst)
 	{
 		float min_val = src.Get(0);
 		dst = 0;
 
-		for (unsigned i = 1; i < src.Length(); i++)
+		for (size_t i = 1; i < src.Length(); i++)
 		{
 			if (src.Get(i) < min_val)
 			{
@@ -58,7 +58,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void ArgMinMax(const qlm::Vector& src, unsigned int& min, unsigned& max)
+	void ArgMinMax(const qlm::Vector& src, size_t& min, size_t& max)
 	{
 		ArgMin(src, min);
 		ArgMax(src, max);

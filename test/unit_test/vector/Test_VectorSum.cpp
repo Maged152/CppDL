@@ -5,7 +5,7 @@
 // Define the test parameters types
 struct VectorSum : ::testing::TestWithParam<std::tuple<
     int,   // length
-    unsigned int,   // number of threads
+    size_t,   // number of threads
     float, // min value
     float  // max value
     >>
@@ -19,7 +19,7 @@ TEST_P(VectorSum, Test_VectorSum)
     auto& [length, num_threads, min_val, max_val] = GetParam();
     
     // threshold
-    //const unsigned int thread_len = std::ceil(length / num_threads);
+    //const size_t thread_len = std::ceil(length / num_threads);
     //const float epslon0 = std::pow(2.0f, -24.0f) * std::max(std::abs(max_val), std::abs(min_val));
     //const float epslon1 = epslon0 * thread_len;
 

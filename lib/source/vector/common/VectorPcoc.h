@@ -5,4 +5,3 @@
 #include "VectorProc_1ArgScalar_Out.h"
 #include "VectorProc_2ArgScalar_Out.h"
 #include "VectorProc_ElemWise.h"
-#include "Vector_Lambda.h"

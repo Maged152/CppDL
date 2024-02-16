@@ -13,83 +13,30 @@ namespace qlm
         int columns;
         int rows;
 
-    private:
-        template<typename op>
-        Status MatrixElemWiseOp(const Matrix& src, Matrix& dst,ThreadPool& pool);
-
-        template<typename op>
-        Status MatrixElemOp(const float src, Matrix& dst,ThreadPool& pool);
-
+    public:
         template<typename op>
         Status MatrixVectorOp(const Vector& src, Matrix& dst, const BroadCast& broad_cast,ThreadPool& pool);
 
+        template<auto op, typename... Args>
+        Status MatrixProc_ElemWise(Matrix& dst, ThreadPool& pool, Args... args) const;
+
+        template<auto op, typename... Args>
+        Status MatrixProc_ElemWise(const Matrix& src, Matrix& dst, ThreadPool& pool, Args... args) const;
+
     public:
-        // Default constructor
-        Matrix() : data(nullptr), columns(0), rows(0)
-        {}
-        // Parameterized constructor
-        Matrix(int r, int c) : columns(c), rows(r) 
-        {
-            data = new float[columns * rows];
-        }
-        // Copy constructor
-        Matrix(const Matrix& other) : columns(other.columns), rows(other.rows) 
-        {
-            data = new float[columns * rows];
-            for (int i = 0; i < columns * rows; ++i) {
-                data[i] = other.data[i];
-            }
-        }
-        // Destructor
-        ~Matrix() 
-        {
-            rows = columns = 0;
-            if (data != nullptr)
-                delete[] data;
-        }
+        Matrix();
+        Matrix(int r, int c);
+        Matrix(const Matrix& other);
+        ~Matrix();
         // move and = operator
     public:
-        // Setter for individual element
-        void Set(int row, int col, float value) 
-        {
-            if (row >= 0 && row < rows && col >= 0 && col < columns)
-            {
-                data[row * columns + col] = value;
-            }
-        }
-        void Set(int i, float value) {
-            if (i >= 0 && i < columns * rows)
-            {
-                data[i] = value;
-            }
-        }
-        // Getter for individual element
-        float Get(int row, int col) const 
-        {
-            if (row >= 0 && row < rows && col >= 0 && col < columns)
-            {
-                return data[row * columns + col];
-            }
-            return std::numeric_limits<float>::signaling_NaN();
-        }
-        float Get(int i) const
-        {
-            if (i >= 0 && i < columns * rows)
-            {
-                return data[i];
-            }
-            return std::numeric_limits<float>::signaling_NaN();
-        }
-        // Getter for columns
-        int Columns() const
-        {
-            return columns;
-        }
-        // Getter for rows
-        int Rows() const
-        {
-            return rows;
-        }
+        void Set(int row, int col, float value);
+        void Set(int i, float value);
+        float Get(int row, int col) const;
+        float Get(int i) const;
+        int Columns() const;
+        int Rows() const;
+
     public:
         // print matrix
         void Print();
@@ -129,6 +76,5 @@ namespace qlm
         Status Mul(const float src, Matrix& dst,ThreadPool& pool);
         // element wise division
         Status Div(const float src, Matrix& dst,ThreadPool& pool);
-
     };
 }

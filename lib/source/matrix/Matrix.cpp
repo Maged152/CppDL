@@ -3,49 +3,124 @@
 #include <iostream>
 #include <iomanip>
 #include <functional>
-
+#include "lambda.h"
+#include "common/MatrixPcoc.h"
 namespace qlm
 {
-	// matrix element wise operations +,-,*,/
+	// Default constructor
+	Matrix::Matrix() : data(nullptr), columns(0), rows(0)
+	{}
+
+	// Parameterized constructor
+	Matrix::Matrix(int r, int c) : columns(c), rows(r) 
+	{
+		data = new float[columns * rows];
+	}
+
+	// Copy constructor
+	Matrix::Matrix(const Matrix& other) : columns(other.columns), rows(other.rows) 
+	{
+		data = new float[columns * rows];
+		for (int i = 0; i < columns * rows; ++i) {
+			data[i] = other.data[i];
+		}
+	}
+
+	// Destructor
+	Matrix::~Matrix() 
+	{
+		rows = columns = 0;
+		if (data != nullptr)
+			delete[] data;
+	}
+
+	// Setter for individual element
+	void Matrix::Set(int row, int col, float value) 
+	{
+		if (row >= 0 && row < rows && col >= 0 && col < columns)
+		{
+			data[row * columns + col] = value;
+		}
+	}
+
+	void Matrix::Set(int i, float value) {
+		if (i >= 0 && i < columns * rows)
+		{
+			data[i] = value;
+		}
+	}
+
+	// Getter for individual element
+	float Matrix::Get(int row, int col) const 
+	{
+		if (row >= 0 && row < rows && col >= 0 && col < columns)
+		{
+			return data[row * columns + col];
+		}
+		return std::numeric_limits<float>::signaling_NaN();
+	}
+
+	float Matrix::Get(int i) const
+	{
+		if (i >= 0 && i < columns * rows)
+		{
+			return data[i];
+		}
+		return std::numeric_limits<float>::signaling_NaN();
+	}
+
+	// Getter for columns
+	int Matrix::Columns() const
+	{
+		return columns;
+	}
+
+	// Getter for rows
+	int Matrix::Rows() const
+	{
+		return rows;
+	}
+
+	// matrix element wise operations
 	Status Matrix::Add(const Matrix& src, Matrix& dst, ThreadPool& pool)
 	{
-		return this->MatrixElemWiseOp<std::plus<float>>(src, dst, pool);
+		return this->MatrixProc_ElemWise<plus>(src, dst, pool);
 	}
 
 	Status Matrix::Sub(const Matrix& src, Matrix& dst, ThreadPool& pool)
 	{
-		return this->MatrixElemWiseOp<std::minus<float>>(src, dst, pool);
+		return this->MatrixProc_ElemWise<minus>(src, dst, pool);
 	}
 
 	Status Matrix::Mul(const Matrix& src, Matrix& dst, ThreadPool& pool)
 	{
-		return this->MatrixElemWiseOp<std::multiplies<float>>(src, dst, pool);
+		return this->MatrixProc_ElemWise<multiplies>(src, dst, pool);
 	}
 
 	Status Matrix::Div(const Matrix& src, Matrix& dst, ThreadPool& pool)
 	{
-		return this->MatrixElemWiseOp<std::divides<float>>(src, dst, pool);
+		return this->MatrixProc_ElemWise<divides>(src, dst, pool);
 	}
 
-	// matrix scalar wise operations +,-,*,/
+	// matrix scalar wise operations
 	Status Matrix::Add(const float src, Matrix& dst, ThreadPool& pool)
 	{
-		return this->MatrixElemOp<std::plus<float>>(src, dst, pool);
+		return this->MatrixProc_ElemWise<plus>(dst, pool, src);
 	}
 
 	Status Matrix::Sub(const float src, Matrix& dst, ThreadPool& pool)
 	{
-		return this->MatrixElemOp<std::minus<float>>(src, dst, pool);
+		return this->MatrixProc_ElemWise<minus>(dst, pool, src);
 	}
 
 	Status Matrix::Mul(const float src, Matrix& dst, ThreadPool& pool)
 	{
-		return this->MatrixElemOp<std::multiplies<float>>(src, dst, pool);
+		return this->MatrixProc_ElemWise<multiplies>(dst, pool, src);
 	}
 
 	Status Matrix::Div(const float src, Matrix& dst, ThreadPool& pool)
 	{
-		return this->MatrixElemOp<std::divides<float>>(src, dst, pool);
+		return this->MatrixProc_ElemWise<divides>(dst, pool, src);
 	}
 
 	// matrix vector  operations 

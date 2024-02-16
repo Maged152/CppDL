@@ -4,12 +4,12 @@
 
 namespace qlm
 {
-	unsigned int Panda::Rows() const
+	size_t Panda::Rows() const
 	{
 		return rows;
 	}
 
-	unsigned int Panda::Cols() const
+	size_t Panda::Cols() const
 	{
 		return cols;
 	}
@@ -24,12 +24,12 @@ namespace qlm
 		return dtypes;
 	}
 
-	void Panda::Print(unsigned int num_row) const
+	void Panda::Print(size_t num_row) const
 	{
 		num_row = std::min(num_row, rows);
 
-		const unsigned int mum_sep = cols + 1; // separators between columns
-		unsigned int width{ mum_sep };
+		const size_t mum_sep = cols + 1; // separators between columns
+		size_t width{ mum_sep };
 
 		for (int i = 0; i < cols; i++)
 		{

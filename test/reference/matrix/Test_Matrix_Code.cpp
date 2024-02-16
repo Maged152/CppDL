@@ -3,7 +3,7 @@
 namespace test
 {
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixAdd(const qlm::Matrix& src1, const qlm::Matrix& src2, qlm::Matrix& dst)
+	void Add(const qlm::Matrix& src1, const qlm::Matrix& src2, qlm::Matrix& dst)
 	{
 		for (int r = 0; r < src1.Rows(); r++)
 		{
@@ -15,7 +15,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixDiv(const qlm::Matrix& src1, const qlm::Matrix& src2, qlm::Matrix& dst)
+	void Div(const qlm::Matrix& src1, const qlm::Matrix& src2, qlm::Matrix& dst)
 	{
 		for (int r = 0; r < src1.Rows(); r++)
 		{
@@ -27,7 +27,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixDot(const qlm::Matrix& src1, const qlm::Matrix& src2, qlm::Matrix& dst)
+	void Dot(const qlm::Matrix& src1, const qlm::Matrix& src2, qlm::Matrix& dst)
 	{
 		for (int r = 0; r < src1.Rows(); r++)
 		{
@@ -45,7 +45,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixMul(const qlm::Matrix& src1, const qlm::Matrix& src2, qlm::Matrix& dst)
+	void Mul(const qlm::Matrix& src1, const qlm::Matrix& src2, qlm::Matrix& dst)
 	{
 		for (int r = 0; r < src1.Rows(); r++)
 		{
@@ -57,7 +57,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixAdd(const qlm::Matrix& src1, const float val, qlm::Matrix& dst)
+	void Add(const qlm::Matrix& src1, const float val, qlm::Matrix& dst)
 	{
 		for (int r = 0; r < src1.Rows(); r++)
 		{
@@ -69,7 +69,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixDiv(const qlm::Matrix& src1, const float val, qlm::Matrix& dst)
+	void Div(const qlm::Matrix& src1, const float val, qlm::Matrix& dst)
 	{
 		for (int r = 0; r < src1.Rows(); r++)
 		{
@@ -81,7 +81,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixMul(const qlm::Matrix& src1, const float val, qlm::Matrix& dst)
+	void Mul(const qlm::Matrix& src1, const float val, qlm::Matrix& dst)
 	{
 		for (int r = 0; r < src1.Rows(); r++)
 		{
@@ -93,7 +93,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixSub(const qlm::Matrix& src1, const float val, qlm::Matrix& dst)
+	void Sub(const qlm::Matrix& src1, const float val, qlm::Matrix& dst)
 	{
 		for (int r = 0; r < src1.Rows(); r++)
 		{
@@ -105,7 +105,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixSub(const qlm::Matrix& src1, const qlm::Matrix& src2, qlm::Matrix& dst)
+	void Sub(const qlm::Matrix& src1, const qlm::Matrix& src2, qlm::Matrix& dst)
 	{
 		for (int r = 0; r < src1.Rows(); r++)
 		{
@@ -117,7 +117,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixAdd(const qlm::Matrix& src, qlm::Matrix& dst)
+	void Add(const qlm::Matrix& src, qlm::Matrix& dst)
 	{
 		for (int r = 0; r < src.Rows(); r++)
 		{
@@ -129,7 +129,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixVectorAdd_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst)
+	void VectorAdd_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst)
 	{
 		for (int c = 0; c < src1.Columns(); c++)
 		{
@@ -141,7 +141,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixVectorDiv_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst)
+	void VectorDiv_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst)
 	{
 		for (int c = 0; c < src1.Columns(); c++)
 		{
@@ -153,7 +153,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixVectorMul_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst)
+	void VectorMul_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst)
 	{
 		for (int c = 0; c < src1.Columns(); c++)
 		{
@@ -165,7 +165,7 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void TestMatrixVectorSub_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst)
+	void VectorSub_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst)
 	{
 		for (int c = 0; c < src1.Columns(); c++)
 		{

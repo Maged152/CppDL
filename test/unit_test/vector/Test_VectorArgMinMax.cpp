@@ -5,7 +5,7 @@
 // Define the test parameters types
 struct VectorArgMinMax : ::testing::TestWithParam<std::tuple<
     int,   // length
-    unsigned int,   // number of threads
+    size_t,   // number of threads
     float, // min value
     float  // max value
     >>
@@ -33,11 +33,11 @@ TEST_P(VectorArgMinMax, Test_VectorArgMinMax)
 
     qlm::Vector src{ length };
 
-    unsigned int dst_min_ref;
-    unsigned int dst_max_ref;
+    size_t dst_min_ref;
+    size_t dst_max_ref;
 
-    unsigned int dst_min_lib;
-    unsigned int dst_max_lib;
+    size_t dst_min_lib;
+    size_t dst_max_lib;
 
     // random initialization
     src.RandomInit(min_val, max_val);

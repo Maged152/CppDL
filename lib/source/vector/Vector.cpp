@@ -4,6 +4,7 @@
 #include <iomanip>
 #include <functional>
 #include "common/VectorPcoc.h"
+#include "lambda.h"
 
 
 namespace qlm
@@ -100,17 +101,17 @@ namespace qlm
 		return VectorProc_1Scalar_Out<dot>(src, dst, pool);
 	}
 
-	Status Vector::ArgMin(unsigned int& dst, ThreadPool& pool) const
+	Status Vector::ArgMin(size_t& dst, ThreadPool& pool) const
 	{
 		return this->VectorProc_1ArgScalar_Out<arg_min>(dst, pool);
 	}
 
-	Status Vector::ArgMax(unsigned int& dst, ThreadPool& pool) const
+	Status Vector::ArgMax(size_t& dst, ThreadPool& pool) const
 	{
 		return this->VectorProc_1ArgScalar_Out<arg_max>(dst, pool);
 	}
 
-	Status Vector::ArgMinMax(unsigned int& dst_min, unsigned int& dst_max, ThreadPool& pool) const
+	Status Vector::ArgMinMax(size_t& dst_min, size_t& dst_max, ThreadPool& pool) const
 	{
 		return VectorProc_2ArgScalar_Out<arg_min_max>(dst_min, dst_max, pool);
 	}

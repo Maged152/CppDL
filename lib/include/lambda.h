@@ -60,7 +60,7 @@ namespace qlm
 		return src1 * src2 + dst;
 	};
 	/************************************************************************************/
-	auto arg_min = [](const float src, const unsigned int src_idx, float& dst, unsigned int& dst_idx)
+	auto arg_min = [](const float src, const size_t src_idx, float& dst, size_t& dst_idx)
 	{
 		if (src < dst)
 		{
@@ -69,7 +69,7 @@ namespace qlm
 		}
 	};
 	/************************************************************************************/
-	auto arg_max = [](const float src, const unsigned int src_idx, float& dst, unsigned int& dst_idx)
+	auto arg_max = [](const float src, const size_t src_idx, float& dst, size_t& dst_idx)
 	{
 		if (src > dst)
 		{
@@ -78,9 +78,9 @@ namespace qlm
 		}
 	};
 	/************************************************************************************/
-	auto arg_min_max = [](const float src, const unsigned int src_idx,
-		                        float& dst_min, unsigned int& dst_min_idx,
-		                        float& dst_max, unsigned int& dst_max_idx)
+	auto arg_min_max = [](const float src, const size_t src_idx,
+		                        float& dst_min, size_t& dst_min_idx,
+		                        float& dst_max, size_t& dst_max_idx)
 	{
 		if (src > dst_max)
 		{
