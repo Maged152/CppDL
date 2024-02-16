@@ -129,55 +129,121 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void VectorAdd_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst)
+	void Add(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst, const qlm::BroadCast bc)
 	{
-		for (int c = 0; c < src1.Columns(); c++)
+		if (bc == qlm::BroadCast::BROAD_CAST_ROW)
+		{
+			for (int c = 0; c < src1.Columns(); c++)
+			{
+				for (int r = 0; r < src1.Rows(); r++)
+				{
+					float res = src1.Get(r, c) + src2.Get(r);
+					dst.Set(r, c, res);
+				}
+			}
+		}
+		else
 		{
 			for (int r = 0; r < src1.Rows(); r++)
 			{
-				float res = src1.Get(r, c) + src2.Get(r);
-				dst.Set(r, c, res);
+				for (int c = 0; c < src1.Columns(); c++)
+				{
+					float res = src1.Get(r, c) + src2.Get(c);
+					dst.Set(r, c, res);
+				}
 			}
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void VectorDiv_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst)
+	void Div(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst, const qlm::BroadCast bc)
 	{
-		for (int c = 0; c < src1.Columns(); c++)
+		if (bc == qlm::BroadCast::BROAD_CAST_ROW)
+		{
+			for (int c = 0; c < src1.Columns(); c++)
+			{
+				for (int r = 0; r < src1.Rows(); r++)
+				{
+					float res = src1.Get(r, c) / src2.Get(r);
+					dst.Set(r, c, res);
+				}
+			}
+		}
+		else
 		{
 			for (int r = 0; r < src1.Rows(); r++)
 			{
-				float res = src1.Get(r, c) / src2.Get(r);
-				dst.Set(r, c, res);
+				for (int c = 0; c < src1.Columns(); c++)
+				{
+					float res = src1.Get(r, c) / src2.Get(c);
+					dst.Set(r, c, res);
+				}
 			}
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void VectorMul_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst)
+	void Mul(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst, const qlm::BroadCast bc)
 	{
-		for (int c = 0; c < src1.Columns(); c++)
+		if (bc == qlm::BroadCast::BROAD_CAST_ROW)
+		{
+			for (int c = 0; c < src1.Columns(); c++)
+			{
+				for (int r = 0; r < src1.Rows(); r++)
+				{
+					float res = src1.Get(r, c) * src2.Get(r);
+					dst.Set(r, c, res);
+				}
+			}
+		}
+		else
 		{
 			for (int r = 0; r < src1.Rows(); r++)
 			{
-				float res = src1.Get(r, c) * src2.Get(r);
-				dst.Set(r, c, res);
+				for (int c = 0; c < src1.Columns(); c++)
+				{
+					float res = src1.Get(r, c) * src2.Get(c);
+					dst.Set(r, c, res);
+				}
 			}
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-	void VectorSub_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst)
+	void Sub(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst, const qlm::BroadCast bc)
 	{
-		for (int c = 0; c < src1.Columns(); c++)
+		if (bc == qlm::BroadCast::BROAD_CAST_ROW)
+		{
+			for (int c = 0; c < src1.Columns(); c++)
+			{
+				for (int r = 0; r < src1.Rows(); r++)
+				{
+					float res = src1.Get(r, c) - src2.Get(r);
+					dst.Set(r, c, res);
+				}
+			}
+		}
+		else
 		{
 			for (int r = 0; r < src1.Rows(); r++)
 			{
-				float res = src1.Get(r, c) - src2.Get(r);
-				dst.Set(r, c, res);
+				for (int c = 0; c < src1.Columns(); c++)
+				{
+					float res = src1.Get(r, c) - src2.Get(c);
+					dst.Set(r, c, res);
+				}
 			}
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-
+	void Transpose(const qlm::Matrix& src, qlm::Matrix& dst)
+	{
+		for (int r = 0; r < src.Rows(); r++)
+		{
+			for (int c = 0; c < src.Columns(); c++)
+			{
+				float res = src.Get(r, c);
+				dst.Set(c, r, res);
+			}
+		}
+	}
 	///////////////////////////////////////////////////////////////////////////
 
 	///////////////////////////////////////////////////////////////////////////

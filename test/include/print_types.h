@@ -20,3 +20,17 @@ inline std::ostream& operator << (std::ostream& out, const qlm::Norm& norm)
 
     return out;
 }
+
+inline std::ostream& operator << (std::ostream& out, const qlm::BroadCast& bc)
+{
+    if (bc == qlm::BroadCast::BROAD_CAST_ROW)
+    {
+        out << "BROAD_CAST_ROW";
+    }
+    else
+    {
+        out << "BROAD_CAST_COLUMN";
+    }
+
+    return out;
+}

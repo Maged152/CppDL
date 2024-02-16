@@ -26,15 +26,15 @@ namespace test
 	///////////////////////////////////////////////////////////////////////////
 	void Add(const qlm::Matrix& src, qlm::Matrix& dst);
 	///////////////////////////////////////////////////////////////////////////
-	void VectorAdd_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst);
+	void Add(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst, const qlm::BroadCast bc);
 	///////////////////////////////////////////////////////////////////////////
-	void VectorDiv_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst);
+	void Div(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst, const qlm::BroadCast bc);
 	///////////////////////////////////////////////////////////////////////////
-	void VectorMul_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst);
+	void Mul(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst, const qlm::BroadCast bc);
 	///////////////////////////////////////////////////////////////////////////
-	void VectorSub_Row(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst);
+	void Sub(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Matrix& dst, const qlm::BroadCast bc);
 	///////////////////////////////////////////////////////////////////////////
-
+	void Transpose(const qlm::Matrix& src, qlm::Matrix& dst);
 	///////////////////////////////////////////////////////////////////////////
 
 	///////////////////////////////////////////////////////////////////////////
