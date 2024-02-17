@@ -145,6 +145,11 @@ namespace qlm
 		return this->MatrixProc_ElemWise<divides>(src, dst, broad_cast, pool);
 	}
 
+	Status Matrix::Dot(const Vector& src, Vector& dst, ThreadPool& pool) const
+	{
+		return this->MatrixProc_Dot<dot>(src, dst, pool);
+	}
+
 	// matrix dot product
 	Status Matrix::Dot(const Matrix& src, Matrix& dst,ThreadPool& pool) const 
 	{

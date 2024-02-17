@@ -27,7 +27,7 @@ namespace qlm
         Status MatrixProc_Dot(const Matrix& src, Matrix& dst,ThreadPool& pool, Args... args) const;
 
         template<auto op, typename... Args>
-        Status MatrixProc_Dot(const Vector& src, Matrix& dst,ThreadPool& pool, Args... args) const;
+        Status MatrixProc_Dot(const Vector& src, Vector& dst,ThreadPool& pool, Args... args) const;
 
     public:
         Matrix();
@@ -72,6 +72,8 @@ namespace qlm
         Status Mul(const Vector& src, Matrix& dst, const BroadCast& broad_cast, ThreadPool& pool) const;
         // division
         Status Div(const Vector& src, Matrix& dst, const BroadCast& broad_cast, ThreadPool& pool) const;
+        // dot
+        Status Dot(const Vector& src, Vector& dst, ThreadPool& pool) const;
     public:
         // matrix-scalar operations
         // addition

@@ -245,7 +245,18 @@ namespace test
 		}
 	}
 	///////////////////////////////////////////////////////////////////////////
-
+	void Dot(const qlm::Matrix& src1, const qlm::Vector& src2, qlm::Vector& dst)
+	{
+		for (int r = 0; r < src1.Rows(); r++)
+		{
+			float sum = 0.0f; // Initialize a variable to store the sum of products
+			for (int c = 0; c < src1.Columns(); c++)
+			{
+				sum += src1.Get(r, c) * src2.Get(c);
+			}
+			dst.Set(r, sum); 
+		}
+	}
 	///////////////////////////////////////////////////////////////////////////
 
 	///////////////////////////////////////////////////////////////////////////
