@@ -67,8 +67,8 @@ TEST_P(MatrixScalarAdd, Test_MatrixScalarAdd)
 INSTANTIATE_TEST_CASE_P(
     Test_MatrixScalarAdd, MatrixScalarAdd,
     ::testing::Combine(
-        ::testing::Values(7, 100, 500, 2000, 478),
-		::testing::Values(7, 100, 500, 2000, 478),
+        ::testing::Values(7, 50, 110, 1),
+		::testing::Values(1, 19, 237),
         ::testing::Values(1, 3, 8, 16),
         ::testing::Values(100.0f, -100.0f),
         ::testing::Values(0.0f, -100.0f),

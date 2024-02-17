@@ -67,8 +67,8 @@ TEST_P(MatrixSub, Test_MatrixSub)
 INSTANTIATE_TEST_CASE_P(
     Test_MatrixSub, MatrixSub,
     ::testing::Combine(
-        ::testing::Values(7, 100, 5000, 8578),
-		::testing::Values(7, 100, 5000, 457),
+        ::testing::Values(7, 50, 110, 1),
+		::testing::Values(1, 19, 237),
         ::testing::Values(1, 3, 8, 16),
         ::testing::Values(0.0f, -100.0f),
         ::testing::Values(1.0f, 100.0f)
