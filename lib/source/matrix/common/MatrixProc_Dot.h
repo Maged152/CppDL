@@ -83,7 +83,7 @@ namespace qlm
 			return Status::INVALID_UTILIZATION;
 		}
 
-		if (this->Columns() != this->Rows() || this->Columns() != src.Length() || src.Length() != dst.Length())
+		if (dst.Length() != this->Rows() || this->Columns() != src.Length())
 		{
 			return Status::INVALID_DIMENSIONS;
 		}
