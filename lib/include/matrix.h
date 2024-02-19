@@ -6,7 +6,7 @@
 namespace qlm
 {
     class Vector;
-
+    class Neuron;
     class Matrix {
     private:
         float* data;
@@ -84,5 +84,7 @@ namespace qlm
         Status Mul(const float src, Matrix& dst, ThreadPool& pool) const;
         // element wise division
         Status Div(const float src, Matrix& dst, ThreadPool& pool) const;
+
+        friend class Neuron;
     };
 }

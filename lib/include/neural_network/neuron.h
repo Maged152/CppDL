@@ -19,6 +19,7 @@ namespace qlm
 
         public:
         std::pair<Status, float> Forward(const Vector& input, ThreadPool& pool);
+        Status Forward(const Matrix& input, Vector& output, ThreadPool& pool);
 
         void Print() const;
     };

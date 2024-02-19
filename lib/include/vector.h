@@ -7,6 +7,7 @@
 namespace qlm
 {
     class Matrix;
+    class Neuron;
 
     class Vector {
     private:
@@ -112,5 +113,6 @@ namespace qlm
 
         //--------------------------------------------------------------//
         friend class Matrix;
+        friend class Neuron;
     };
 }
